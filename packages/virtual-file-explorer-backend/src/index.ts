@@ -1,2 +1,2 @@
-export * from './file';
-export * from './folder';
+export * from './file.ts';
+export * from './folder.ts';

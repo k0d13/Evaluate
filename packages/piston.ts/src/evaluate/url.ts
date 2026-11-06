@@ -1,10 +1,6 @@
-import {
-  type CodeOptions,
-  ExecuteOptions,
-  type FilesOptions,
-} from '../execute.js';
-import type { Runtime } from '../runtimes.js';
-import { compress } from './compress.js';
+import { type CodeOptions, ExecuteOptions, type FilesOptions } from '../execute.ts';
+import type { Runtime } from '../runtimes.ts';
+import { compress } from './compress.ts';
 
 export function makePickRuntimePathname(
   options: typeof CodeOptions._input | typeof FilesOptions._input,

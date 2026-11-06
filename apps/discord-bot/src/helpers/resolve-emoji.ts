@@ -20,16 +20,18 @@ type IsAnimated<T extends string> = T extends `${string}:a` ? true : false;
 
 /**
  * Resolve a string to an emoji.
- * @param name the name of the emoji
- * @returns the emoji
+ *
+ * @param name The name of the emoji
+ * @returns The emoji
  */
 export function resolveEmoji<TName extends string>(name: TName): `:${TName}:`;
 
 /**
  * Resolve a string to a custom emoji.
- * @param name the name of the emoji
- * @param returnApi whether to return the api representation of the emoji
- * @returns the emoji
+ *
+ * @param name The name of the emoji
+ * @param returnApi Whether to return the api representation of the emoji
+ * @returns The emoji
  */
 export function resolveEmoji<
   TName extends keyof typeof CustomEmojis,
@@ -42,24 +44,23 @@ export function resolveEmoji<
 
 /**
  * Resolve a string to a custom emoji.
- * @param name the name of the emoji
- * @param returnApi whether to return the api representation of the emoji
- * @returns the emoji
+ *
+ * @param name The name of the emoji
+ * @param returnApi Whether to return the api representation of the emoji
+ * @returns The emoji
  */
 export function resolveEmoji<
   TName extends keyof typeof CustomEmojis,
   TValue extends (typeof CustomEmojis)[TName],
   TId extends Snowflake = ExtractId<TValue>,
->(
-  name: TName,
-  returnApi: true,
-): { id: TId; name: TName; animated: IsAnimated<TValue> };
+>(name: TName, returnApi: true): { id: TId; name: TName; animated: IsAnimated<TValue> };
 
 /**
  * Resolve a string to a unicode emoji.
- * @param name the name of the emoji
- * @param returnApi whether to return the api representation of the emoji
- * @returns the emoji
+ *
+ * @param name The name of the emoji
+ * @param returnApi Whether to return the api representation of the emoji
+ * @returns The emoji
  */
 export function resolveEmoji<
   TName extends keyof typeof UnicodeEmojis,
@@ -68,9 +69,10 @@ export function resolveEmoji<
 
 /**
  * Resolve a string to a unicode emoji.
- * @param name the name of the emoji
- * @param returnApi whether to return the api representation of the emoji
- * @returns the emoji
+ *
+ * @param name The name of the emoji
+ * @param returnApi Whether to return the api representation of the emoji
+ * @returns The emoji
  */
 export function resolveEmoji<
   TName extends keyof typeof UnicodeEmojis,

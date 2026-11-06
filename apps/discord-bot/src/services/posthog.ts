@@ -1,7 +1,6 @@
 import createLogger from '@evaluate/logger';
 import { merge } from 'es-toolkit/object';
 import { PostHog } from 'posthog-node';
-import env from '~/env';
 
 export const captureLog = createLogger({
   badge: 'posthog capture',
@@ -10,14 +9,14 @@ export const captureLog = createLogger({
 
 export function isAvailable() {
   return Boolean(
-    env.POSTHOG_KEY, // has a posthog key
+    process.env.POSTHOG_KEY, // has a posthog key
   );
 }
 
 export function initPostHog() {
   if (!isAvailable()) return;
 
-  const posthog = new PostHog(env.POSTHOG_KEY!, {
+  const posthog = new PostHog(process.env.POSTHOG_KEY!, {
     host: 'https://us.i.posthog.com/',
     flushAt: 1,
     flushInterval: 0,

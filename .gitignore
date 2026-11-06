@@ -1,10 +1,7 @@
 node_modules/
-.nx/
 .turbo/
-.million/
-.ignore/
 dist/
 .next/
 .env*.local
-messages.json
-sitemap.xml
+apps/*/src/locales/*.js
+apps/browser-extension/_locales/*/*.js

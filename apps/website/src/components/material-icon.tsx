@@ -1,7 +1,7 @@
 'use client';
 
 import { useTheme } from 'next-themes';
-import { getIconForFile, getIconForFolder, makeIconUrl } from './languages';
+import { getIconForFile, getIconForFolder, makeIconUrl } from '#/lib/languages.ts';
 
 export function MaterialIcon(p: {
   type: 'file' | 'folder';
@@ -19,7 +19,7 @@ export function MaterialIcon(p: {
 
   return (
     <div className="mr-1 flex size-4 items-center justify-center">
-      {/** biome-ignore lint/performance/noImgElement: Want to use img */}
+      {/** Biome-ignore lint/performance/noImgElement: Want to use img */}
       <img src={makeIconUrl(icon)} alt={p.name} title={p.name} />
     </div>
   );

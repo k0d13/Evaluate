@@ -1,6 +1,5 @@
 import createLogger from '@evaluate/logger';
 import posthog from 'posthog-js';
-import env from '~/env';
 
 export const captureLog = createLogger({
   badge: 'posthog capture',
@@ -10,15 +9,15 @@ export const captureLog = createLogger({
 export function isAvailable() {
   return Boolean(
     typeof window !== 'undefined' && // client only
-      !window.location.origin.endsWith('.vercel.app') && // not hosted on vercel
-      env.NEXT_PUBLIC_POSTHOG_KEY, // has a posthog key
+    !window.location.origin.endsWith('.vercel.app') && // not hosted on vercel
+    process.env.NEXT_PUBLIC_POSTHOG_KEY, // has a posthog key
   );
 }
 
 export function initPostHog() {
   if (!isAvailable()) return;
 
-  posthog.init(env.NEXT_PUBLIC_POSTHOG_KEY!, {
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
     api_host: '/api/journal',
     ui_host: 'https://us.posthog.com/',
 

@@ -1,34 +1,51 @@
-export async function betterFetch(input: RequestInfo, init?: RequestInit) {
-  let attempts = 0;
+const MAX_RETRIES = 3;
+const TIMEOUT = 10_000;
+const MAX_DELAY = 10_000;
 
-  while (true) {
-    const [error, response] = await fetch(input, init)
-      .then((response) => [null, response] as const)
-      .catch((error: Error) => [error, null] as const);
+export class PistonError extends Error {
+  override name = 'PistonError';
+  /** HTTP status, or `null` when no response was received. */
+  status: number | null;
 
-    if (error) {
-      console.error(error);
-      throw new Error('An unknown error occurred', { cause: error });
+  constructor(message: string, status: number | null, options?: ErrorOptions) {
+    super(message, options);
+    this.status = status;
+  }
+}
+
+function retryDelay(response: Response, attempt: number) {
+  const seconds = Number(response.headers.get('retry-after'));
+  const delay = seconds > 0 ? seconds * 1000 : 2 ** (attempt + 1) * 1000;
+  return Math.min(delay, MAX_DELAY);
+}
+
+async function errorMessage(response: Response) {
+  const body = await response.json().catch(() => null);
+  const detail = typeof body?.message === 'string' ? `: ${body.message}` : '';
+  return `Piston responded with ${response.status}${detail}`;
+}
+
+/** Fetch with a per-attempt timeout, rate limit retries and typed errors. */
+export async function betterFetch(input: string, init?: RequestInit) {
+  for (let attempt = 0; ; attempt++) {
+    let response: Response;
+    try {
+      response = await fetch(input, { ...init, signal: AbortSignal.timeout(TIMEOUT) });
+    } catch (error) {
+      const timedOut = error instanceof Error && error.name === 'TimeoutError';
+      const message = timedOut ? 'Piston took too long to respond' : 'Could not reach Piston';
+      throw new PistonError(message, null, { cause: error });
     }
 
-    if (response.ok) {
-      return response as Response & { ok: true };
-    }
+    if (response.ok) return response;
 
     if (response.status === 429) {
-      if (attempts >= 3)
-        throw new Error('Too many requests', { cause: response });
-
-      attempts++;
-      const delay = 2 ** attempts * 1000;
-      console.warn(
-        `Request was rate limited, retrying in ${delay}ms (attempt ${attempts})`,
-        { input, init },
-      );
-      await new Promise((r) => setTimeout(r, delay));
+      if (attempt >= MAX_RETRIES)
+        throw new PistonError('Too many requests', 429, { cause: response });
+      await new Promise((r) => setTimeout(r, retryDelay(response, attempt)));
       continue;
     }
 
-    throw new Error('An unknown error occurred', { cause: response });
+    throw new PistonError(await errorMessage(response), response.status, { cause: response });
   }
 }

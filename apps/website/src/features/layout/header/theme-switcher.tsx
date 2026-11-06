@@ -1,0 +1,30 @@
+'use client';
+
+import { Button } from '@evaluate/components/button';
+import { Say } from '@saykit/react';
+import { MoonIcon, SunIcon } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import { useCallback } from 'react';
+
+export function ThemeSwitcher() {
+  const { resolvedTheme, setTheme } = useTheme();
+
+  const toggleTheme = useCallback(() => {
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
+  }, [setTheme, resolvedTheme]);
+
+  return (
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={toggleTheme}
+      className="no-ph-capture aspect-square"
+    >
+      <SunIcon className="size-4 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+      <MoonIcon className="absolute size-4 scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+      <span className="sr-only">
+        <Say>Toggle Theme</Say>
+      </span>
+    </Button>
+  );
+}

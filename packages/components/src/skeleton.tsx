@@ -1,4 +1,4 @@
-import { twMerge as cn } from 'tailwind-merge';
+import { cn } from 'cn';
 
 function Skeleton({ className, ...props }: React.ComponentProps<'div'>) {
   return (

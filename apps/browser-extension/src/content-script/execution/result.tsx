@@ -1,14 +1,11 @@
 import { Button } from '@evaluate/components/button';
 import { Label } from '@evaluate/components/label';
 import { Textarea } from '@evaluate/components/textarea';
+import { cn } from 'cn';
 import { ExternalLinkIcon } from 'lucide-react';
 import type { ExecuteResult, Runtime } from 'piston.ts';
-import {
-  makeEditCodePathname,
-  makePickRuntimePathname,
-} from 'piston.ts/evaluate';
-import { twMerge as cn } from 'tailwind-merge';
-import env from '~/env.js';
+import { makeEditCodePathname, makePickRuntimePathname } from 'piston.ts/evaluate';
+import { say } from '#/i18n.ts';
 
 export function ResultDialog({
   runtime,
@@ -21,21 +18,19 @@ export function ResultDialog({
 }) {
   let output = result.output;
   if (result.compile?.expired)
-    output =
-      'Your code compilation exceeded the allotted time and was terminated. Consider optimising your code for faster compilation.';
+    output = say`Your code compilation exceeded the allotted time and was terminated. Consider optimising your code for faster compilation.`;
   else if (result.run.expired)
-    output =
-      'Your code execution exceeded the allotted time and was terminated. Consider optimising it for better performance.';
+    output = say`Your code execution exceeded the allotted time and was terminated. Consider optimising it for better performance.`;
 
   return (
     <div className="space-y-2">
       <div>
-        <Label htmlFor="output">Output</Label>
+        <Label htmlFor="output">{say`Output`}</Label>
         <Textarea
           readOnly
           name="output"
           value={output}
-          placeholder="Your code executed successfully; however, it did not generate any output for the console."
+          placeholder={say`Your code executed successfully; however, it did not generate any output for the console.`}
           className={cn(
             'min-h-[40vh] w-full resize-none border-2',
             !result.success && 'border-destructive',
@@ -52,10 +47,10 @@ export function ResultDialog({
               rel="noreferrer noopener"
               href={new URL(
                 makePickRuntimePathname(options),
-                env.VITE_PUBLIC_WEBSITE_URL,
+                import.meta.env.VITE_PUBLIC_WEBSITE_URL,
               ).toString()}
             >
-              <span>Change Runtime</span>
+              <span>{say`Change Runtime`}</span>
               <ExternalLinkIcon size={16} className="ml-1" />
             </a>
           </Button>
@@ -68,10 +63,10 @@ export function ResultDialog({
               rel="noreferrer noopener"
               href={new URL(
                 makeEditCodePathname(runtime, options),
-                env.VITE_PUBLIC_WEBSITE_URL,
+                import.meta.env.VITE_PUBLIC_WEBSITE_URL,
               ).toString()}
             >
-              <span>Edit Code</span>
+              <span>{say`Edit Code`}</span>
               <ExternalLinkIcon size={16} className="ml-1" />
             </a>
           </Button>

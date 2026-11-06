@@ -1,5 +1,5 @@
 import crypto from 'node:crypto';
-import { type APIInteraction, type APIUser, User } from '@buape/carbon';
+import { type APIInteraction, type APIUser, type BrandedAPIInteraction, User } from '@buape/carbon';
 import { format, subHours } from 'date-fns';
 
 function hashSessionId(sessionId: string) {
@@ -7,7 +7,7 @@ function hashSessionId(sessionId: string) {
 }
 
 export function getInteractionContext(
-  interaction: Exclude<APIInteraction, { type: 1 }>,
+  interaction: Readonly<BrandedAPIInteraction<Exclude<APIInteraction, { type: 1 }>>>,
 ) {
   const user = interaction.member?.user ?? interaction.user!;
   const channel = interaction.channel;

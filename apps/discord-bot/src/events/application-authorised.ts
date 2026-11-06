@@ -1,9 +1,6 @@
-import {
-  ApplicationAuthorizedListener,
-  type ListenerEventData,
-} from '@buape/carbon';
-import { getUserContext } from '~/helpers/session-context';
-import { captureEvent } from '~/services/posthog';
+import { ApplicationAuthorizedListener, type ListenerEventData } from '@buape/carbon';
+import { getUserContext } from '#/helpers/session-context.ts';
+import { captureEvent } from '#/services/posthog.ts';
 
 export class ApplicationAuthorisedListener extends ApplicationAuthorizedListener {
   async handle(data: ListenerEventData[this['type']]) {

@@ -1,14 +1,13 @@
 import { LinkButton } from '@buape/carbon';
-import { sayable } from '@sayable/carbon';
-import type { Sayable } from 'sayable';
-import env from '~/env';
-import { resolveEmoji } from '~/helpers/resolve-emoji';
+import type { View } from 'saykit';
+import { resolveEmoji } from '#/helpers/resolve-emoji.ts';
+import { withSay } from '#/i18n.ts';
 
-export class OpenEvaluationButton extends sayable(LinkButton) {
-  public constructor(say: Sayable, url?: string) {
+export class OpenEvaluationButton extends withSay(LinkButton) {
+  public constructor(say: View, url?: string) {
     super({ label: say`Open Evaluation` });
     if (url) this.url = url;
   }
-  url = `${env.WEBSITE_URL}`;
+  url = process.env.WEBSITE_URL!;
   emoji = resolveEmoji('globe', true);
 }

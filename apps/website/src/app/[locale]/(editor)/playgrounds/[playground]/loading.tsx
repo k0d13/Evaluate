@@ -1,4 +1,4 @@
-import { EditorWrapperSkeleton } from './wrapper/skeleton';
+import { EditorWrapperSkeleton } from '#/features/playground/skeleton.tsx';
 
 export default function EditorLoadingPage() {
   return (

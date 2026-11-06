@@ -9,14 +9,13 @@ import {
   Row,
 } from '@buape/carbon';
 import { makeEditCodePathname } from 'piston.ts/evaluate';
-import { EditEvaluationButton } from '~/components/edit-evaluation-button.js';
-import { OpenEvaluationButton } from '~/components/open-evaluation-button.js';
-import env from '~/env.js';
-import { codeBlock } from '~/helpers/discord-formatting.js';
-import { resolveEmoji } from '~/helpers/resolve-emoji.js';
-import { getInteractionContext } from '~/helpers/session-context.js';
-import piston from '~/services/piston.js';
-import { captureEvent } from '~/services/posthog.js';
+import { EditEvaluationButton } from '#/components/edit-evaluation-button.ts';
+import { OpenEvaluationButton } from '#/components/open-evaluation-button.ts';
+import { codeBlock } from '#/helpers/discord-formatting.ts';
+import { resolveEmoji } from '#/helpers/resolve-emoji.ts';
+import { getInteractionContext } from '#/helpers/session-context.ts';
+import piston from '#/services/piston.ts';
+import { captureEvent } from '#/services/posthog.ts';
 
 //
 
@@ -52,17 +51,14 @@ export async function handleEvaluating(
   // HACK: If trying to edit an existing evaluation owned by another user, create new instead
   if (
     interaction.rawData.message &&
-    interaction.rawData.message.interaction_metadata?.user.id !==
-      interaction.user?.id
+    interaction.rawData.message.interaction_metadata?.user.id !== interaction.user?.id
   )
     Reflect.set(interaction.rawData.data, 'custom_id', 'evaluate,new');
 
   if (isNew(interaction)) await interaction.defer();
   if (isEdit(interaction)) await interaction.acknowledge();
 
-  const runtime = await piston.runtimes
-    .search(runtimeResolvable)
-    .then((r) => r[0]);
+  const runtime = await piston.runtimes.search(runtimeResolvable).then((r) => r[0]);
   if (!runtime) {
     const message = interaction.say`I was unable to find the runtime you were looking for, try again with another name.`;
     if (isNew(interaction))
@@ -78,10 +74,7 @@ export async function handleEvaluating(
     throw new Error(message);
   }
 
-  const [executeResult, executeOptions] = await piston.execute(
-    runtime,
-    options,
-  );
+  const [executeResult, executeOptions] = await piston.execute(runtime, options);
 
   captureEvent(getInteractionContext(interaction.rawData), 'executed_code', {
     runtime_id: runtime.id,
@@ -99,21 +92,12 @@ export async function handleEvaluating(
   else if (!output)
     output = interaction.say`Your code executed successfully; however, it did not generate any output for the console.`;
   else if (output.length > 900) {
-    const url = new URL(
-      makeEditCodePathname(runtime, executeOptions),
-      env.WEBSITE_URL,
-    );
+    const url = new URL(makeEditCodePathname(runtime, executeOptions), process.env.WEBSITE_URL!);
     output = interaction.say`Output was too large to display, [click here to view the full output](${url}).`;
   } else output = codeBlock(output, 1000);
 
   return interaction.reply(
-    createEvaluationPayload(
-      interaction,
-      runtime,
-      executeOptions,
-      executeResult,
-      output,
-    ),
+    createEvaluationPayload(interaction, runtime, executeOptions, executeResult, output),
   );
 }
 
@@ -161,10 +145,7 @@ export function createEvaluationPayload(
         new EditEvaluationButton(interaction.say),
         new OpenEvaluationButton(
           interaction.say,
-          new URL(
-            makeEditCodePathname(runtime, options),
-            env.WEBSITE_URL,
-          ).toString(),
+          new URL(makeEditCodePathname(runtime, options), process.env.WEBSITE_URL!).toString(),
         ),
       ]),
     ],

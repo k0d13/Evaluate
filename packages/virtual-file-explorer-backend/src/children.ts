@@ -1,31 +1,16 @@
-import type { File } from './file';
-import type { Folder } from './folder';
+import type { File } from './file.ts';
+import type { Folder } from './folder.ts';
 
-export class Children<
-  Of extends Folder | File = Folder | File,
-> extends Array<Of> {
-  public remove(...items: Of[]) {
-    for (const item of items) {
-      if (typeof item === 'function') {
-        for (const i of this.filter(item)) this.remove(i);
-      } else {
-        const index = this.indexOf(item);
-        if (index !== -1) this.splice(index, 1);
-      }
-    }
+export class Children<Of extends Folder | File = Folder | File> extends Array<Of> {
+  public remove(item: Of) {
+    const index = this.indexOf(item);
+    if (index !== -1) this.splice(index, 1);
   }
 
-  public where(
-    predicate: Parameters<Array<Of>['filter']>[0],
-    callback: Parameters<Array<Of>['map']>[0],
-  ) {
-    return this.filter(predicate).map(callback);
-  }
-
+  /** Sorts in place, folders first and then alphabetically. */
   public override sort() {
     return super.sort((a, b) => {
-      if (a.type === 'folder' && b.type === 'file') return -1;
-      if (a.type === 'file' && b.type === 'folder') return 1;
+      if (a.type !== b.type) return a.type === 'folder' ? -1 : 1;
       return a.name.localeCompare(b.name);
     });
   }

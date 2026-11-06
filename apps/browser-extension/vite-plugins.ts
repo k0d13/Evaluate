@@ -1,17 +1,19 @@
 import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
-import generate_ from '@babel/generator';
+import generate from '@babel/generator';
 import { parse } from '@babel/parser';
-import traverse_ from '@babel/traverse';
+import traverse from '@babel/traverse';
 import * as t from '@babel/types';
 import type { Plugin } from 'vite';
 
-const generate = Reflect.get(generate_, 'default') as typeof generate_;
-const traverse = Reflect.get(traverse_, 'default') as typeof traverse_;
+/** Babel's source map type is looser than the one rolldown accepts. */
+function toResult({ code, map }: ReturnType<typeof generate>) {
+  return { code, map: map as never };
+}
 
 /**
- * Vite plugin to remove the external script loading from posthog-js.
- * This is required because chrome extensions do not allow loading external scripts due to security reasons.
+ * Vite plugin to remove the external script loading from posthog-js. This is required because
+ * chrome extensions do not allow loading external scripts due to security reasons.
  */
 export function removeExternalScriptLoading(): Plugin {
   return {
@@ -39,14 +41,12 @@ export function removeExternalScriptLoading(): Plugin {
         },
       });
 
-      return generate(ast);
+      return toResult(generate(ast));
     },
   };
 }
 
-/**
- * Vite plugin to inline JSON imports with attributes as const declarations.
- */
+/** Vite plugin to inline JSON imports with attributes as const declarations. */
 export function replaceJsonImports(): Plugin {
   return {
     name: 'replace-json-imports',
@@ -56,7 +56,7 @@ export function replaceJsonImports(): Plugin {
 
       const ast = parse(code, {
         sourceType: 'module',
-        plugins: ['importAttributes', 'typescript', 'jsx'],
+        plugins: ['typescript', 'jsx'],
       });
 
       traverse(ast, {
@@ -64,23 +64,20 @@ export function replaceJsonImports(): Plugin {
           const importNode = path.node;
 
           if (importNode.source.value.endsWith('.json')) {
-            const varName = importNode.specifiers[0].local.name;
+            const varName = importNode.specifiers[0]!.local.name;
             const jsonPath = resolve(dirname(id), importNode.source.value);
             const jsonContent = JSON.parse(readFileSync(jsonPath, 'utf8'));
 
             path.replaceWith(
               t.variableDeclaration('const', [
-                t.variableDeclarator(
-                  t.identifier(varName),
-                  t.valueToNode(jsonContent),
-                ),
+                t.variableDeclarator(t.identifier(varName), t.valueToNode(jsonContent)),
               ]),
             );
           }
         },
       });
 
-      return generate(ast);
+      return toResult(generate(ast));
     },
   };
 }

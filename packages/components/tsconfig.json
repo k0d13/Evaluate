@@ -1,1 +1,14 @@
-{ "extends": "../../tsconfig.react.json" }
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "allowImportingTsExtensions": true,
+    "skipLibCheck": true,
+    "types": ["node"],
+    "noEmit": true
+  }
+}

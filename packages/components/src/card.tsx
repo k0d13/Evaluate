@@ -1,4 +1,4 @@
-import { twMerge as cn } from 'tailwind-merge';
+import { cn } from 'cn';
 
 function Card({ className, ...props }: React.ComponentProps<'div'>) {
   return (
@@ -29,50 +29,27 @@ function CardTitle({
   ...props
 }: React.ComponentProps<'h3'> & { level?: 1 | 2 | 3 | 4 }) {
   const Comp = `h${level}` as const;
-  return (
-    <Comp
-      data-slot="card-title"
-      className={cn('font-semibold', className)}
-      {...props}
-    />
-  );
+  return <Comp data-slot="card-title" className={cn('font-semibold', className)} {...props} />;
 }
 
 function CardDescription({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="card-description"
-      className={cn('text-muted-foreground text-sm', className)}
+      className={cn('text-sm text-muted-foreground', className)}
       {...props}
     />
   );
 }
 
 function CardContent({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot="card-content"
-      className={cn('px-6', className)}
-      {...props}
-    />
-  );
+  return <div data-slot="card-content" className={cn('px-6', className)} {...props} />;
 }
 
 function CardFooter({ className, ...props }: React.ComponentProps<'div'>) {
   return (
-    <div
-      data-slot="card-footer"
-      className={cn('flex items-center px-6', className)}
-      {...props}
-    />
+    <div data-slot="card-footer" className={cn('flex items-center px-6', className)} {...props} />
   );
 }
 
-export {
-  Card,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardDescription,
-  CardContent,
-};
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };

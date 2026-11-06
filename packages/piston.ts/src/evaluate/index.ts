@@ -1,2 +1,2 @@
-export * from './compress.js';
-export * from './url.js';
+export * from './compress.ts';
+export * from './url.ts';

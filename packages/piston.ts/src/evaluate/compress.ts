@@ -1,25 +1,33 @@
 // pako needed for support in browser
-import pako from 'pako';
+import { deflate, inflate } from 'pako';
 
 export type Compressed<T> = string & { as: T };
 
+/** Spreading a large array into `fromCharCode` overflows the call stack, so go in chunks. */
+function toBase64(bytes: Uint8Array) {
+  let binary = '';
+  for (let i = 0; i < bytes.length; i += 0x8000)
+    binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+  return btoa(binary);
+}
+
 /**
  * Compresses data to a string.
+ *
  * @param data Data to compress.
  * @returns Branded compressed string.
  */
 export function compress<T>(data: T): Compressed<T> {
-  const u8 = pako.deflate(JSON.stringify(data));
-  const b64 = btoa(String.fromCharCode(...u8));
-  return b64.replaceAll('=', '') as Compressed<T>;
+  return toBase64(deflate(JSON.stringify(data))).replaceAll('=', '') as Compressed<T>;
 }
 
 /**
  * Decompresses a string to its original data.
+ *
  * @param compressed Compressed string, preferably branded.
  * @returns Original data.
  */
 export function decompress<T>(compressed: Compressed<T> | string): T {
   const u8 = Uint8Array.from(atob(compressed), (c) => c.charCodeAt(0));
-  return JSON.parse(pako.inflate(u8, { to: 'string' })) as T;
+  return JSON.parse(inflate(u8, { toText: true })) as T;
 }

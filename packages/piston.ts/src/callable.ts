@@ -1,5 +1,4 @@
-// biome-ignore-all format: i do
-// biome-ignore-all lint: what i want
+// oxlint-disable typescript/no-unsafe-declaration-merging
 
 export interface Callable<Fn extends (...args: any[]) => any> {
   (...args: Parameters<Fn>): ReturnType<Fn>;

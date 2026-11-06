@@ -1,13 +1,14 @@
 import { notFound } from 'next/navigation';
-import { generateBaseMetadata } from '~/app/[locale]/metadata';
-import { Editor } from '~/components/editor';
-import { Explorer } from '~/components/explorer';
-import { ExplorerProvider } from '~/components/explorer/use';
-import { Terminal } from '~/components/terminal';
-import { TerminalProvider } from '~/components/terminal/use';
-import say from '~/i18n';
-import piston from '~/services/piston';
-import { EditorWrapper } from './wrapper';
+import { Editor } from '#/features/editor/index.tsx';
+import { Explorer } from '#/features/explorer/index.tsx';
+import { ExplorerProvider } from '#/features/explorer/use.tsx';
+import { EditorWrapper } from '#/features/playground/index.tsx';
+import { breadcrumbs, JsonLd } from '#/features/seo/json-ld.tsx';
+import { Terminal } from '#/features/terminal/index.tsx';
+import { TerminalProvider } from '#/features/terminal/use.tsx';
+import { localeOf, withSay } from '#/i18n.ts';
+import { generateBaseMetadata, localisedPath } from '#/lib/metadata.ts';
+import piston from '#/services/piston.ts';
 
 export async function generateStaticParams() {
   const runtimes = await piston.runtimes();
@@ -22,27 +23,32 @@ export async function generateMetadata({
   if (!runtime) notFound();
 
   return generateBaseMetadata(
-    say.activate(locale),
+    locale,
     `/playgrounds/${playground}`,
     (say) => ({
       title: say`${runtime.name} Online Playground on Evaluate`,
       description: say`Run ${runtime.name} and more code snippets online in your browser with Evaluate's code playground.`,
-      keywords: [runtime.name, ...runtime.aliases, ...runtime.tags].map((k) =>
-        k.toLowerCase(),
-      ),
+      keywords: [runtime.name, ...runtime.aliases, ...runtime.tags].map((k) => k.toLowerCase()),
     }),
+    { defaultImage: false },
   );
 }
 
-export default async function EditorPage({
-  params,
-}: PageProps<'/[locale]/playgrounds/[playground]'>) {
-  const { playground } = await params;
+async function EditorPage({ params }: PageProps<'/[locale]/playgrounds/[playground]'>) {
+  const { locale, playground } = await params;
   const runtime = await piston.runtimes.get(decodeURIComponent(playground));
   if (!runtime) notFound();
+  const url = (path: `/${string}`) =>
+    new URL(localisedPath(locale, path), process.env.WEBSITE_URL!).href;
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbs([
+          { name: 'Evaluate', url: url('/playgrounds') },
+          { name: runtime.name, url: url(`/playgrounds/${playground}`) },
+        ])}
+      />
       <style>{`
         body{overflow-y:hidden!important;}
         body[data-scroll-locked]{margin-right:0px!important;}
@@ -61,3 +67,5 @@ export default async function EditorPage({
     </>
   );
 }
+
+export default withSay(EditorPage, localeOf);

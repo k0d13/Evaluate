@@ -1,24 +1,63 @@
 {
-  "cSpell.language": "en-AU",
+  // Editor
+  "editor.formatOnSave": true,
+  "editor.insertSpaces": true,
+  "editor.rulers": [100],
+  "editor.tabSize": 2,
+
+  // Explorer
   "explorer.compactFolders": true,
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
-    ".env": "*.env, .env.*",
-    "package.json": "pnpm-lock.yaml, pnpm-workspace.yaml",
-    "*.js": "$(capture).js.map, $(capture).d.ts",
+    ".env.schema": ".env.*",
+    "package.json": "pnpm-lock.yaml, pnpm-workspace.yaml, mise.toml, lefthook.yml, .npmrc",
+    "*.js": "$(capture).js.map, $(capture).d.ts, $(capture).d.ts.map, $(capture).cjs",
     "*.jsx": "$(capture).jsx.map, $(capture).d.ts",
-    "*.d.ts": "$(capture).d.ts.map"
+    "*.d.ts": "$(capture).d.ts.map",
+    "messages.json": "messages.js, messages.d.ts",
+    "tsconfig.json": "*-env.d.ts"
   },
-  "editor.formatOnSave": true,
-  "editor.insertSpaces": true,
-  "editor.tabSize": 2,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports.biome": "explicit"
+
+  // Files
+  "files.eol": "\n",
+  "files.watcherExclude": {
+    "**/.turbo": true,
+    "**/dist": true,
+    "**/.next": true
   },
   "files.associations": {
     "*.css": "tailwindcss",
-    ".ffignore": "ignore"
+    ".ffignore": "ignore",
+    ".env.schema": "env"
   },
+  "search.exclude": {
+    "**/.turbo": true,
+    "**/dist": true,
+    "**/.next": true
+  },
+
+  // TypeScript
+  "js/ts.experimental.useTsgo": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.codeActionsOnSave": { "source.fixAll.oxc": "explicit" }
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.codeActionsOnSave": { "source.fixAll.oxc": "explicit" }
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.codeActionsOnSave": { "source.fixAll.oxc": "explicit" }
+  },
+  "[json]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+
+  // Icons
   "material-icon-theme.folders.associations": {
     "shapes": "middleware",
     ".ffignore": "ignore"
@@ -27,49 +66,71 @@
     "vite.config.chrome.ts": "vite",
     "vite.config.firefox.ts": "vite"
   },
-  "typescript.preferences.importModuleSpecifierEnding": "js",
-  "cSpell.words": ["color", "posthog", "Resolvables"],
-  "todo-tree.general.tags": ["=====", "NOTE", "IDEA", "TODO", "FIX", "HACK"],
-  "todo-tree.highlights.customHighlight": {
+
+  // Tailwind CSS
+  "tailwindCSS.classAttributes": ["class", "className"],
+  "tailwindCSS.classFunctions": ["cn", "cva"],
+
+  // Better TODO Tree
+  "better-todo-tree.general.tags": ["=====", "NOTE", "IDEA", "TODO", "FIX", "HACK"],
+  "better-todo-tree.highlights.customHighlight": {
     "=====": {
       "type": "whole-line",
       "icon": "bookmark",
+      "background": "#00000000",
       "foreground": "#dadada",
+      "iconColour": "#dadada",
       "gutterIcon": true,
       "hideFromTree": true
     },
     "NOTE": {
       "type": "whole-line",
       "icon": "note",
+      "background": "#00000000",
       "foreground": "#8df7ff",
+      "iconColour": "#8df7ff",
       "gutterIcon": true,
       "hideFromTree": true
     },
     "IDEA": {
       "type": "whole-line",
       "icon": "light-bulb",
+      "background": "#00000000",
       "foreground": "#458efc",
+      "iconColour": "#458efc",
       "gutterIcon": true
     },
     "TODO": {
       "type": "whole-line",
       "icon": "check",
+      "background": "#00000000",
       "foreground": "#ff9900",
+      "iconColour": "#ff9900",
       "gutterIcon": true
     },
     "FIX": {
       "type": "whole-line",
       "icon": "bug",
+      "background": "#00000000",
       "foreground": "#e63d00",
+      "iconColour": "#e63d00",
       "gutterIcon": true
     },
     "HACK": {
       "type": "whole-line",
       "icon": "tools",
+      "background": "#00000000",
       "foreground": "#45da20",
+      "iconColour": "#45da20",
       "gutterIcon": true
     }
   },
+
+  // Code Spell Checker
+  "cSpell.language": "en,en-AU",
+  "cSpell.words": ["color", "posthog", "Resolvables", "saykit"],
+
+  // Workspace colours
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#2fc186",
     "activityBar.background": "#2fc186",

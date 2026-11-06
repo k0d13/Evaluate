@@ -1,12 +1,10 @@
 'use client';
 
-import useEmblaCarousel, {
-  type UseEmblaCarouselType,
-} from 'embla-carousel-react';
+import { cn } from 'cn';
+import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import * as React from 'react';
-import { twMerge as cn } from 'tailwind-merge';
-import { Button } from './button.jsx';
+import { Button } from './button.tsx';
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -109,8 +107,7 @@ function Carousel({
         carouselRef,
         api: api,
         opts,
-        orientation:
-          orientation || (opts?.axis === 'y' ? 'vertical' : 'horizontal'),
+        orientation: orientation || (opts?.axis === 'y' ? 'vertical' : 'horizontal'),
         scrollPrev,
         scrollNext,
         canScrollPrev,
@@ -135,17 +132,9 @@ function CarouselContent({ className, ...props }: React.ComponentProps<'div'>) {
   const { carouselRef, orientation } = useCarousel();
 
   return (
-    <div
-      ref={carouselRef}
-      className="overflow-hidden"
-      data-slot="carousel-content"
-    >
+    <div ref={carouselRef} className="overflow-hidden" data-slot="carousel-content">
       <div
-        className={cn(
-          'flex',
-          orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col',
-          className,
-        )}
+        className={cn('flex', orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col', className)}
         {...props}
       />
     </div>
@@ -186,8 +175,8 @@ function CarouselPrevious({
       className={cn(
         'absolute size-8 rounded-full',
         orientation === 'horizontal'
-          ? '-left-12 -translate-y-1/2 top-1/2'
-          : '-top-12 -translate-x-1/2 left-1/2 rotate-90',
+          ? 'top-1/2 -left-12 -translate-y-1/2'
+          : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
         className,
       )}
       disabled={!canScrollPrev}
@@ -216,8 +205,8 @@ function CarouselNext({
       className={cn(
         'absolute size-8 rounded-full',
         orientation === 'horizontal'
-          ? '-right-12 -translate-y-1/2 top-1/2'
-          : '-bottom-12 -translate-x-1/2 left-1/2 rotate-90',
+          ? 'top-1/2 -right-12 -translate-y-1/2'
+          : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
         className,
       )}
       disabled={!canScrollNext}

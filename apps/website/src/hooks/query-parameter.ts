@@ -4,23 +4,18 @@ import { useEffect, useState } from 'react';
 
 /**
  * Hook to get and set a query parameter in the URL.
- * @param key the key of the query parameter
- * @param defaultValue the default value to use if the query parameter is empty
- * @returns a tuple containing the current query parameter and a function to set it
+ *
+ * @param key The key of the query parameter
+ * @param defaultValue The default value to use if the query parameter is empty
+ * @returns A tuple containing the current query parameter and a function to set it
  */
 export function useQueryParameter(
   key: string,
-): [
-  query: string | undefined,
-  setQuery: React.Dispatch<React.SetStateAction<string | undefined>>,
-];
+): [query: string | undefined, setQuery: React.Dispatch<React.SetStateAction<string | undefined>>];
 export function useQueryParameter<T extends string = string>(
   key: string,
   defaultValue: T | (string & {}),
-): [
-  query: T | (string & {}),
-  setQuery: React.Dispatch<React.SetStateAction<string | undefined>>,
-];
+): [query: T | (string & {}), setQuery: React.Dispatch<React.SetStateAction<string | undefined>>];
 
 export function useQueryParameter(key: string, defaultValue?: string) {
   const [value, setValue] = useState(() => {

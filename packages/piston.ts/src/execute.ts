@@ -1,9 +1,9 @@
 import z from 'zod';
-import { parseArguments } from './arguments.js';
-import { Callable } from './callable.js';
-import { type Client, FETCH } from './client.js';
-import { decodeRuntimeId, getRuntimeDefaultFileName } from './getters.js';
-import type { Runtime } from './runtimes.js';
+import { parseArguments } from './arguments.ts';
+import { Callable } from './callable.ts';
+import { type Client, FETCH } from './client.ts';
+import { getRuntimeDefaultFileName } from './getters.ts';
+import type { Runtime } from './runtimes.ts';
 
 // export const CodeOptions = type({
 //   code: 'string',
@@ -38,16 +38,14 @@ export const ExecuteOptions = Object.assign(
       error: 'Focused file does not exist',
     })
     .transform((o) => {
-      const [length, lines] = Object.values(o.files).reduce(
-        ([r, c], f) => [r + f.length, c + f.split('\n').length],
-        [0, 0],
-      );
+      // Only count code, not the args and input pseudo files
+      const [length, lines] = Object.entries(o.files)
+        .filter(([name]) => !name.startsWith('::'))
+        .reduce(([r, c], [, f]) => [r + f.length, c + f.split('\n').length], [0, 0]);
       return { ...o, lines, length, focused: o.focused ?? o.entry };
     }),
   {
-    fromOptions(
-      value: typeof CodeOptions._output | typeof FilesOptions._output,
-    ) {
+    fromOptions(value: typeof CodeOptions._output | typeof FilesOptions._output) {
       if ('code' in value) {
         return ExecuteOptions.parse({
           files: {
@@ -97,13 +95,11 @@ export class Execute extends Callable<
     runtime: typeof Runtime._output,
     options: typeof CodeOptions._input | typeof FilesOptions._input,
   ) => Promise<
-    [typeof ExecuteResult._output, typeof ExecuteOptions._output] &
-      typeof ExecuteResult._output
+    [typeof ExecuteResult._output, typeof ExecuteOptions._output] & typeof ExecuteResult._output
   >
 > {
   constructor(client: Client) {
     super(async (runtime, options_) => {
-      const [language] = decodeRuntimeId(runtime.id)!;
       const options = ExecuteOptions.fromOptions(options_);
 
       if ('file.code' in options.files) {
@@ -115,33 +111,30 @@ export class Execute extends Callable<
         }
       }
 
+      // Piston treats the first file as the entry point
+      const files = Object.entries(options.files)
+        .filter(([name]) => !name.startsWith('::'))
+        .map(([name, content]) => ({ name, content }));
+      const entry = files.findIndex((f) => f.name === options.entry);
+      if (entry > 0) files.unshift(...files.splice(entry, 1));
+
       const body = {
-        language,
+        language: runtime.language,
         version: runtime.version,
-        files: Object.entries(options.files)
-          .filter(([name]) => !name.startsWith('::'))
-          .map(([n, c]) => ({ name: n, content: c }))
-          .sort((a) => (options.entry === a.name ? -1 : 1)),
+        files,
         stdin: options.files['::input::'],
         args: parseArguments(options.files['::args::']),
       };
 
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 10000);
-
       const response = await client[FETCH]('/execute', {
-        signal: controller.signal,
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
-      }).finally(() => clearTimeout(timeout));
+      });
       const json = await response.json();
 
       const result = ExecuteResult.parse(json);
-      return Object.assign(
-        [result, options] satisfies [unknown, unknown],
-        result,
-      );
+      return Object.assign([result, options] satisfies [unknown, unknown], result);
     });
   }
 }

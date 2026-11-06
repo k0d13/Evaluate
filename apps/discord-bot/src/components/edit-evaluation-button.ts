@@ -1,15 +1,15 @@
 import { Button, type ButtonInteraction, ButtonStyle } from '@buape/carbon';
-import { sayable } from '@sayable/carbon';
-import type { Sayable } from 'sayable';
-import { getEvaluateOptions } from '~/helpers/evaluate-helpers';
-import { resolveEmoji } from '~/helpers/resolve-emoji';
-import { getInteractionContext } from '~/helpers/session-context';
-import { captureEvent } from '~/services/posthog';
+import type { View } from 'saykit';
+import { getEvaluateOptions } from '#/helpers/evaluate-helpers.ts';
+import { resolveEmoji } from '#/helpers/resolve-emoji.ts';
+import { getInteractionContext } from '#/helpers/session-context.ts';
+import { withSay } from '#/i18n.ts';
+import { captureEvent } from '#/services/posthog.ts';
 import { EvaluateModalEdit } from './evaluate-modal';
 
-export class EditEvaluationButton extends sayable(Button) {
+export class EditEvaluationButton extends withSay(Button) {
   customId = 'evaluate,edit';
-  constructor(say: Sayable) {
+  constructor(say: View) {
     super({
       label: say`Edit`,
     });
@@ -24,8 +24,6 @@ export class EditEvaluationButton extends sayable(Button) {
 
     const embed = interaction.embeds?.[0];
     const options = embed && getEvaluateOptions(embed);
-    return interaction.showModal(
-      new EvaluateModalEdit(interaction.say, options),
-    );
+    return interaction.showModal(new EvaluateModalEdit(interaction.say, options));
   }
 }

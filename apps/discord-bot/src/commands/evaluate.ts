@@ -4,17 +4,16 @@ import {
   Command,
   type CommandInteraction,
 } from '@buape/carbon';
-import { sayable } from '@sayable/carbon';
-import type { Sayable } from 'sayable';
-import { EvaluateModal } from '~/components/evaluate-modal';
-import { handleEvaluating } from '~/handlers/evaluate';
-import { getInteractionContext } from '~/helpers/session-context';
-import piston from '~/services/piston.js';
-import { captureEvent } from '~/services/posthog';
+import { EvaluateModal } from '#/components/evaluate-modal.ts';
+import { handleEvaluating } from '#/handlers/evaluate.ts';
+import { getInteractionContext } from '#/helpers/session-context.ts';
+import { withSay } from '#/i18n.ts';
+import piston from '#/services/piston.ts';
+import { captureEvent } from '#/services/posthog.ts';
 
-export class EvaluateCommand extends sayable(Command) {
-  constructor(say: Sayable) {
-    super(say, (say) => ({
+export class EvaluateCommand extends withSay(Command) {
+  constructor() {
+    super((say) => ({
       name: say`evaluate`,
       description: say`Evaluate any piece of code in any runtime with optional input and command line arguments.`,
       options: [
@@ -52,14 +51,10 @@ export class EvaluateCommand extends sayable(Command) {
 
     if (runtime) {
       const runtimes = await piston.runtimes.search(runtime);
-      return interaction.respond(
-        runtimes.slice(0, 25).map((r) => ({ name: r.name, value: r.id })),
-      );
+      return interaction.respond(runtimes.slice(0, 25).map((r) => ({ name: r.name, value: r.id })));
     } else {
       const runtimes = await piston.runtimes();
-      return interaction.respond(
-        runtimes.slice(0, 25).map((r) => ({ name: r.name, value: r.id })),
-      );
+      return interaction.respond(runtimes.slice(0, 25).map((r) => ({ name: r.name, value: r.id })));
     }
   }
 

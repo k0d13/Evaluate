@@ -1,20 +1,16 @@
 'use client';
 
-import { useEventListener } from '@evaluate/hooks/event-listener';
 import { useCallback, useState } from 'react';
+import { useEventListener } from '#/hooks/event-listener.ts';
 
 /**
  * Hook to get and set the hash fragment of the URL.
- * @param defaultValue the default value to use if the hash fragment is empty
- * @returns a tuple containing the current hash fragment and a function to set it
+ *
+ * @param defaultValue The default value to use if the hash fragment is empty
+ * @returns A tuple containing the current hash fragment and a function to set it
  */
-export function useHashFragment(): [
-  string | undefined,
-  (value?: string) => void,
-];
-export function useHashFragment(
-  defaultValue: string,
-): [string, (value?: string) => void];
+export function useHashFragment(): [string | undefined, (value?: string) => void];
+export function useHashFragment(defaultValue: string): [string, (value?: string) => void];
 
 export function useHashFragment(defaultValue?: string) {
   const getHash = useCallback(() => {

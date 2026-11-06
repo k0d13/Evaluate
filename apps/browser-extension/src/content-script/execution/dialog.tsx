@@ -5,15 +5,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@evaluate/components/dialog';
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@evaluate/components/tabs';
+import { Logo } from '@evaluate/components/logo';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@evaluate/components/tabs';
 import type { ExecuteResult, Runtime } from 'piston.ts';
-import browser from 'webextension-polyfill';
-import env from '~/env';
 import { ResultDialog } from './result';
 
 export function ExecutionDialog({
@@ -37,17 +31,12 @@ export function ExecutionDialog({
     <Dialog open={open} onOpenChange={onClose}>
       <DialogBody portalProps={{ container: portal }} className="border-2">
         <DialogHeader className="flex-row">
-          <img
-            src={browser.runtime.getURL('images/icon.png')}
-            alt="Evaluate logo"
-            width={36}
-            height={36}
-          />
+          <Logo className="size-9 text-primary" />
           <DialogTitle className="text-primary" asChild>
             <a
               target="_blank"
               rel="noreferrer noopener"
-              href={`${env.VITE_PUBLIC_WEBSITE_URL}`}
+              href={import.meta.env.VITE_PUBLIC_WEBSITE_URL}
             >
               Evaluate
             </a>
@@ -67,11 +56,7 @@ export function ExecutionDialog({
 
               {runtimes.map((runtime, i) => (
                 <TabsContent key={runtime.id} value={runtime.id}>
-                  <ResultDialog
-                    options={{ code }}
-                    runtime={runtime}
-                    result={results[i]!}
-                  />
+                  <ResultDialog options={{ code }} runtime={runtime} result={results[i]!} />
                 </TabsContent>
               ))}
             </Tabs>

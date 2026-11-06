@@ -1,124 +1,46 @@
-import EventEmitter2 from 'eventemitter2';
-import { Children } from './children';
+import { Children } from './children.ts';
+import type { File } from './file.ts';
+import { Item } from './item.ts';
 
-export class Folder<Root extends boolean = boolean> {
+export class Folder extends Item {
   public readonly type = 'folder';
-  public readonly changes = new EventEmitter2({
-    wildcard: true,
-    delimiter: ':',
-  });
-  /** @internal */
-  public _emit(event: string) {
-    this.changes.emit(event);
-    for (const a of this.ancestors) {
-      if (a === this.parent) a.changes.emit(`child:${event}`);
-      a.changes.emit(`descendant:${event}`);
-    }
-    for (const d of this.descendants) {
-      if (d.parent === this) d.changes.emit(`parent:${event}`);
-      d.changes.emit(`ancestor:${event}`);
+
+  public override _emit(event: string) {
+    super._emit(event);
+
+    const stack: Folder[] = [this];
+    for (let folder = stack.pop(); folder; folder = stack.pop()) {
+      for (const child of folder.children) {
+        if (folder === this) child.changes.emit(`parent:${event}`);
+        child.changes.emit(`ancestor:${event}`);
+        if (child.type === 'folder') stack.push(child);
+      }
     }
   }
 
-  public constructor(name?: Folder<Root>['name']) {
-    if (name) this._name = name;
-  }
-
-  // === parent === //
-
-  private _parent: Root extends true ? null : Folder | null = null;
-  public get parent() {
-    return this._parent;
-  }
-  public set parent(parent) {
-    if (this._parent) {
-      this._parent.children.remove(this);
-      this._parent._emit('children');
-    }
-    if (parent) {
-      parent.children.push(this);
-      parent._emit('children');
-    }
-    this._parent = parent;
-    this._emit('parent');
-    for (const a of this.ancestors) a.expanded = true;
-  }
-  public get root(): Folder<true> | null {
-    if (!this.parent) return this as never;
-    let parent = this.parent;
-    while (parent?.parent) parent = parent.parent as never;
-    return parent as never;
-  }
-  public get ancestors() {
-    const ancestors = new Children<Folder>();
-    let parent = this.parent;
-    while (parent) {
-      ancestors.push(parent);
-      parent = parent.parent as never;
-    }
-    return ancestors;
+  public get path(): string {
+    if (this.name === '::root::') return '';
+    return `${this.parent?.path ?? ''}${this.name}/`;
   }
 
   // === children === //
 
   public readonly children = new Children();
+  /** Every item below this folder, direct children first and then each subfolder in turn. */
   public get descendants() {
-    const descendants = new Children(...this.children);
-    for (const child of this.children)
-      if (child instanceof Folder) descendants.push(...child.descendants);
+    const descendants = new Children();
+    const collect = (folder: Folder) => {
+      for (const child of folder.children) descendants.push(child);
+      for (const child of folder.children) if (child.type === 'folder') collect(child);
+    };
+    collect(this);
     return descendants;
   }
   public get lineage() {
-    return new Children(this, ...this.descendants);
-  }
-
-  // === name === //
-
-  private _name: Root extends true ? '::root::' : string = '' as never;
-  public get name() {
-    return this._name;
-  }
-  public set name(name) {
-    if (this.parent) {
-      if (name === '')
-        this.parent.children.where(
-          (f) => f.name === '',
-          (f) => (f.parent = null),
-        );
-      const existing = this.parent.children.find((c) => c.name === name);
-      if (existing) throw new Error('Name already exists');
-    }
-    this._name = name as never;
-    this._emit('name');
-  }
-
-  // === path === //
-
-  public get path(): string {
-    if (this.name === '::root::') return '';
-    return `${this.parent?.path || ''}${this.name}/`;
-  }
-
-  // === selected === //
-
-  private _selected = false;
-  public get selected() {
-    return this._selected;
-  }
-  public set selected(selected) {
-    if (this._selected === selected) return;
-    if (selected) for (const d of this.root?.lineage || []) d.selected = false;
-    this._selected = selected;
-    this._emit('selected');
-  }
-  public select() {
-    this.selected = true;
-    return this;
-  }
-  public deselect() {
-    if (this.root) this.root.selected = true;
-    this.selected = false;
-    return this;
+    const lineage = new Children<Folder | File>();
+    lineage.push(this);
+    for (const descendant of this.descendants) lineage.push(descendant);
+    return lineage;
   }
 
   // === expanded === //
@@ -127,7 +49,7 @@ export class Folder<Root extends boolean = boolean> {
   public get expanded() {
     return this._expanded;
   }
-  public set expanded(expanded) {
+  public set expanded(expanded: boolean) {
     if (this._expanded === expanded) return;
     if (expanded) for (const a of this.ancestors) a.expanded = true;
     this._expanded = expanded;

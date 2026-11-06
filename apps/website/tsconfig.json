@@ -1,13 +1,28 @@
 {
-  "extends": "../../tsconfig.react.json",
-  "include": ["src/**/*", "next-env.d.ts", ".next/types/**/*.ts"],
-
+  "include": ["src", "*.ts", "next-env.d.ts", ".next/types/**/*.ts", ".next/dev/types/**/*.ts"],
   "compilerOptions": {
-    "allowJs": true,
+    "target": "esnext",
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "skipLibCheck": true,
+    "types": ["node"],
     "noEmit": true,
     "incremental": true,
-    "plugins": [{ "name": "next" }],
-    "strictNullChecks": true,
-    "paths": { "~/*": ["./src/*"] }
-  }
+    "tsBuildInfoFile": ".next/tsconfig.tsbuildinfo",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "allowJs": true,
+    "esModuleInterop": true,
+    "isolatedModules": true
+  },
+  "exclude": ["node_modules"]
 }

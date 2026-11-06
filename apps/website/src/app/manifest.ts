@@ -1,14 +1,14 @@
 import type { MetadataRoute } from 'next';
-import say from '~/i18n';
+import { catalogue } from '#/i18n.ts';
 
 export default async function Manifest(): Promise<MetadataRoute.Manifest> {
-  await say.load();
+  await Promise.all(catalogue.locales.map((locale) => catalogue.load(locale)));
 
-  const [manifest, ...shortcuts] = say.map((say, locale) => ({
+  const [manifest, ...shortcuts] = [...catalogue].map(([locale, say]) => ({
     name: 'Evaluate',
     short_name: 'Evaluate',
     description: say`Test code in any programming language with Evaluate! Run code snippets in your browser, without installing anything.`,
-    url: locale === say.locales[0] ? '/' : `/${locale}`,
+    url: locale === catalogue.locales[0] ? '/' : `/${locale}`,
   }));
 
   return {
@@ -19,9 +19,14 @@ export default async function Manifest(): Promise<MetadataRoute.Manifest> {
     background_color: '#ffffff',
     scope: '/',
     start_url: '/',
+    id: '/',
+    display: 'standalone',
+    categories: ['developer tools', 'productivity', 'utilities'],
     icons: [
-      { src: '/images/icon/192.png', sizes: '192x192', type: 'image/png' },
-      { src: '/images/icon/512.png', sizes: '512x512', type: 'image/png' },
+      { src: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { src: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+      { src: '/icon-maskable.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+      { src: '/icon.svg', sizes: 'any', type: 'image/svg+xml' },
     ],
     shortcuts,
   };

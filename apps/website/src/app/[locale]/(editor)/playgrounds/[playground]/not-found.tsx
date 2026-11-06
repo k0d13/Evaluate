@@ -1,15 +1,17 @@
+'use client';
+
 import { Button } from '@evaluate/components/button';
-import { Say } from '@sayable/react';
-import { LocalisedLink } from '~/components/localised-link';
+import { Say } from '@saykit/react';
+import { LocalisedLink } from '#/components/localised-link.tsx';
 
 export default function PlaygroundNotFound() {
   return (
     <div className="mt-[20vh] flex flex-col items-center justify-center">
-      <span className="font-bold text-8xl">404</span>
-      <h1 className="font-bold text-4xl text-primary">
+      <span className="text-8xl font-bold">404</span>
+      <h1 className="text-4xl font-bold text-primary">
         <Say>Not Found</Say>
       </h1>
-      <p className="text-balance text-center text-muted-foreground">
+      <p className="text-center text-balance text-muted-foreground">
         <Say>Hmm, we couldn't find the playground you're looking for.</Say>
       </p>
 
