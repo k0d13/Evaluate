@@ -19,7 +19,7 @@ export function isAvailable() {
 export function initPostHog() {
   if (!isAvailable()) return;
 
-  posthog.init(import.meta.import.meta.env.VITE_PUBLIC_POSTHOG_KEY!, {
+  posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY!, {
     api_host: new URL('api/journal', import.meta.env.VITE_PUBLIC_WEBSITE_URL).href,
     ui_host: 'https://us.posthog.com/',
 

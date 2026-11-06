@@ -2,7 +2,7 @@
 
 import { toast } from '@evaluate/components/toast';
 import { useEventListener } from '@evaluate/hooks/event-listener';
-import { useSay } from '@sayable/react';
+import { useSay } from '@saykit/react/client';
 import { ExecuteOptions, type FilesOptions, getRuntimeExamples, type Runtime } from 'piston.ts';
 import { compress, decompress } from 'piston.ts/evaluate';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';

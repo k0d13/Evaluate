@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@evaluate/components/button';
-import { useSay } from '@sayable/react';
+import { useSay } from '@saykit/react/client';
 import { XIcon } from 'lucide-react';
 import { useCallback, useMemo } from 'react';
 import type { File } from 'virtual-file-explorer-backend';

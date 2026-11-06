@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@evaluate/components/button';
-import { Say } from '@sayable/react';
+import { Say } from '@saykit/react';
 import { TextCursorInputIcon, Trash2Icon } from 'lucide-react';
 import { twMerge as cn } from 'tailwind-merge';
 import type { File } from 'virtual-file-explorer-backend';

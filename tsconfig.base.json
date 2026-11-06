@@ -46,14 +46,9 @@
     "skipLibCheck": true,
 
     "diagnostics": true,
-    "baseUrl": "${configDir}",
     "outDir": "${configDir}/dist",
     "tsBuildInfoFile": "${configDir}/dist/.tsbuildinfo",
-    "paths": { "~/*": ["src/*"] },
-
-    "plugins": [
-      { "transform": "typescript-transform-paths" },
-      { "transform": "typescript-transform-paths", "afterDeclarations": true }
-    ]
+    "paths": { "~/*": ["${configDir}/src/*"] },
+    "types": ["node"]
   }
 }

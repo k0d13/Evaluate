@@ -1,4 +1,4 @@
 {
   "extends": "../../tsconfig.base.json",
-  "compilerOptions": { "noImplicitOverride": false }
+  "compilerOptions": { "noImplicitOverride": false, "declaration": false, "declarationMap": false }
 }

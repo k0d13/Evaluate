@@ -12,7 +12,8 @@ import {
 } from '@evaluate/components/select';
 import { Separator } from '@evaluate/components/separator';
 import { toast } from '@evaluate/components/toast';
-import { Say, useSay } from '@sayable/react';
+import { Say } from '@saykit/react';
+import { useSay } from '@saykit/react/client';
 import { ArrowDownWideNarrowIcon, CircleDotIcon, SearchIcon, XIcon } from 'lucide-react';
 import type { Runtime } from 'piston.ts';
 import { useDeferredValue, useEffect, useMemo } from 'react';

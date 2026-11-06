@@ -13,25 +13,28 @@
     "build": "pnpm tsup",
     "check": "tsc --noEmit",
     "check:env": "varlock load",
-    "prebuild": "sayable extract && sayable compile"
+    "extract": "saykit extract",
+    "prebuild": "saykit compile",
+    "precheck": "saykit compile",
+    "predev": "saykit compile"
   },
   "dependencies": {
-    "@buape/carbon": "^0.13.0",
+    "@buape/carbon": "^0.17.0",
     "@evaluate/logger": "workspace:^",
-    "@sayable/carbon": "0.0.0-alpha.4",
-    "@sayable/react": "0.0.0-alpha.6",
-    "date-fns": "^4.1.0",
-    "es-toolkit": "^1.40.0",
+    "@saykit/carbon": "^0.12.0",
+    "date-fns": "^4.4.0",
+    "es-toolkit": "^1.53.1",
     "piston.ts": "workspace:^",
-    "posthog-node": "^5.5.1",
-    "sayable": "0.0.0-alpha.6",
-    "zod": "^4.1.12"
+    "posthog-node": "^5.63.0",
+    "saykit": "^0.12.0",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
-    "@sayable/config": "0.0.0",
-    "@sayable/format-po": "0.0.0",
-    "tsup": "^8.5.0",
-    "unplugin-sayable": "0.0.0-alpha.4",
+    "@saykit/config": "^0.12.0",
+    "@saykit/format-po": "^0.12.0",
+    "@saykit/transform-js": "^0.12.0",
+    "tsup": "^9.0.0",
+    "unplugin-saykit": "^0.12.0",
     "varlock": "^1.24.0"
   }
 }

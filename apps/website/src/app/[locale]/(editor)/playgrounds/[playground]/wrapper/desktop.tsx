@@ -9,10 +9,10 @@ export function DesktopWrapper({ children }: React.PropsWithChildren) {
   const [explorer, editor, terminal] = Children.toArray(children);
 
   return (
-    <ResizablePanelGroup direction="horizontal">
+    <ResizablePanelGroup orientation="horizontal">
       <ResizablePanel
-        defaultSize={15}
-        minSize={10}
+        defaultSize="15%"
+        minSize="10%"
         collapsible={false}
         className="m-1.5 rounded-lg border-2 bg-card"
       >
@@ -22,8 +22,8 @@ export function DesktopWrapper({ children }: React.PropsWithChildren) {
       <ResizableHandle className="bg-transparent" />
 
       <ResizablePanel
-        defaultSize={55}
-        minSize={35}
+        defaultSize="55%"
+        minSize="35%"
         collapsible={false}
         className="m-1.5 rounded-lg border-2 bg-card"
       >
@@ -33,8 +33,8 @@ export function DesktopWrapper({ children }: React.PropsWithChildren) {
       <ResizableHandle className="bg-transparent" />
 
       <ResizablePanel
-        defaultSize={30}
-        minSize={10}
+        defaultSize="30%"
+        minSize="10%"
         collapsible={false}
         className="m-1.5 rounded-lg border-2 bg-card"
       >

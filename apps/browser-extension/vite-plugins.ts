@@ -1,13 +1,10 @@
 import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
-import generate_ from '@babel/generator';
+import generate from '@babel/generator';
 import { parse } from '@babel/parser';
-import traverse_ from '@babel/traverse';
+import traverse from '@babel/traverse';
 import * as t from '@babel/types';
 import type { Plugin } from 'vite';
-
-const generate = Reflect.get(generate_, 'default') as typeof generate_;
-const traverse = Reflect.get(traverse_, 'default') as typeof traverse_;
 
 /**
  * Vite plugin to remove the external script loading from posthog-js. This is required because

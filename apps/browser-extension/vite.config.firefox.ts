@@ -3,16 +3,15 @@ import tailwindCss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import zipPack from 'vite-plugin-zip-pack';
-import tsconfigPaths from 'vite-tsconfig-paths';
-import manifest from './manifest.json';
-import { removeExternalScriptLoading, replaceJsonImports } from './vite-plugins';
+import manifest from './manifest.json' with { type: 'json' };
+import { removeExternalScriptLoading, replaceJsonImports } from './vite-plugins.ts';
 
 export default defineConfig({
+  resolve: { tsconfigPaths: true },
   plugins: [
     removeExternalScriptLoading(),
     replaceJsonImports(),
     tailwindCss(),
-    tsconfigPaths(),
     react(),
     chromeExtension({
       browser: 'firefox',
@@ -27,7 +26,7 @@ export default defineConfig({
   build: {
     outDir: 'dist/firefox',
     minify: false,
-    rollupOptions: {
+    rolldownOptions: {
       output: {
         entryFileNames: 'assets/[name].js',
         chunkFileNames: 'assets/[name].js',

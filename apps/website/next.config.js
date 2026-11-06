@@ -1,5 +1,3 @@
-// TODO: Bug in Next.js 15.4.x, cannot upgrade, see https://github.com/vercel/next.js/issues/81628
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -41,6 +39,7 @@ const nextConfig = {
   skipTrailingSlashRedirect: true,
 
   images: {
+    localPatterns: [{ pathname: '/images/**' }],
     remotePatterns: [
       {
         protocol: 'https',
@@ -49,16 +48,9 @@ const nextConfig = {
       },
     ],
   },
-
-  experimental: {
-    swcPlugins: [['@sayable/swc-plugin', {}]],
-  },
 };
 
 const truthy = (v) => ['true', 't', '1'].includes(v);
-export default [
-  truthy(process.env.ANALYSE) && (await import('@next/bundle-analyzer')).default({ enabled: true }),
-  !truthy(process.env.TURBOPACK) && (await import('@million/lint')).next({ rsc: true }),
-]
-  .filter(Boolean)
-  .reduce((acc, curr) => curr(acc), nextConfig);
+export default truthy(process.env.ANALYSE)
+  ? (await import('@next/bundle-analyzer')).default({ enabled: true })(nextConfig)
+  : nextConfig;

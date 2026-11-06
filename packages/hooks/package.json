@@ -13,7 +13,7 @@
     "check": "tsc --noEmit"
   },
   "devDependencies": {
-    "@types/react": "^19.2.7"
+    "@types/react": "^19.3.0"
   },
   "peerDependencies": {
     "react": "^19.2.0"

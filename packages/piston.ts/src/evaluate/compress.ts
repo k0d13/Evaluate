@@ -1,5 +1,5 @@
 // pako needed for support in browser
-import pako from 'pako';
+import { deflate, inflate } from 'pako';
 
 export type Compressed<T> = string & { as: T };
 
@@ -10,7 +10,7 @@ export type Compressed<T> = string & { as: T };
  * @returns Branded compressed string.
  */
 export function compress<T>(data: T): Compressed<T> {
-  const u8 = pako.deflate(JSON.stringify(data));
+  const u8 = deflate(JSON.stringify(data));
   const b64 = btoa(String.fromCharCode(...u8));
   return b64.replaceAll('=', '') as Compressed<T>;
 }
@@ -23,5 +23,5 @@ export function compress<T>(data: T): Compressed<T> {
  */
 export function decompress<T>(compressed: Compressed<T> | string): T {
   const u8 = Uint8Array.from(atob(compressed), (c) => c.charCodeAt(0));
-  return JSON.parse(pako.inflate(u8, { to: 'string' })) as T;
+  return JSON.parse(inflate(u8, { toText: true })) as T;
 }

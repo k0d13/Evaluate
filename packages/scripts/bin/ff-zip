@@ -12,7 +12,7 @@ import { readdir, readFile, rm, stat } from 'node:fs/promises';
 import { basename, dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import gitignoreParser from '@gerhobbelt/gitignore-parser';
-import archiver from 'archiver';
+import { ZipArchive } from 'archiver';
 import { logger } from './_logger.js';
 
 // ===== //
@@ -23,7 +23,7 @@ const outFile = //
 await rm(outFile, { force: true });
 const stream = createWriteStream(outFile);
 
-const archive = archiver('zip', { zlib: { level: 9 } });
+const archive = new ZipArchive({ zlib: { level: 9 } });
 archive.pipe(stream);
 
 stream.on('close', () => {

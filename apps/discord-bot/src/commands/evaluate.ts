@@ -4,17 +4,16 @@ import {
   Command,
   type CommandInteraction,
 } from '@buape/carbon';
-import { sayable } from '@sayable/carbon';
-import type { Sayable } from 'sayable';
 import { EvaluateModal } from '~/components/evaluate-modal';
 import { handleEvaluating } from '~/handlers/evaluate';
 import { getInteractionContext } from '~/helpers/session-context';
+import { withSay } from '~/i18n.js';
 import piston from '~/services/piston.js';
 import { captureEvent } from '~/services/posthog';
 
-export class EvaluateCommand extends sayable(Command) {
-  constructor(say: Sayable) {
-    super(say, (say) => ({
+export class EvaluateCommand extends withSay(Command) {
+  constructor() {
+    super((say) => ({
       name: say`evaluate`,
       description: say`Evaluate any piece of code in any runtime with optional input and command line arguments.`,
       options: [

@@ -5,7 +5,7 @@ import { Explorer } from '~/components/explorer';
 import { ExplorerProvider } from '~/components/explorer/use';
 import { Terminal } from '~/components/terminal';
 import { TerminalProvider } from '~/components/terminal/use';
-import say from '~/i18n';
+import { localeOf, withSay } from '~/i18n';
 import piston from '~/services/piston';
 import { EditorWrapper } from './wrapper';
 
@@ -21,16 +21,14 @@ export async function generateMetadata({
   const runtime = await piston.runtimes.get(decodeURIComponent(playground));
   if (!runtime) notFound();
 
-  return generateBaseMetadata(say.activate(locale), `/playgrounds/${playground}`, (say) => ({
+  return generateBaseMetadata(locale, `/playgrounds/${playground}`, (say) => ({
     title: say`${runtime.name} Online Playground on Evaluate`,
     description: say`Run ${runtime.name} and more code snippets online in your browser with Evaluate's code playground.`,
     keywords: [runtime.name, ...runtime.aliases, ...runtime.tags].map((k) => k.toLowerCase()),
   }));
 }
 
-export default async function EditorPage({
-  params,
-}: PageProps<'/[locale]/playgrounds/[playground]'>) {
+async function EditorPage({ params }: PageProps<'/[locale]/playgrounds/[playground]'>) {
   const { playground } = await params;
   const runtime = await piston.runtimes.get(decodeURIComponent(playground));
   if (!runtime) notFound();
@@ -55,3 +53,5 @@ export default async function EditorPage({
     </>
   );
 }
+
+export default withSay(EditorPage, localeOf);

@@ -1,15 +1,15 @@
-import { Say } from '@sayable/react';
-import say from '~/i18n';
+import { Say } from '@saykit/react';
+import { localeOf, withSay } from '~/i18n';
 import piston from '~/services/piston';
 import { generateBaseMetadata } from '../../metadata';
 import { PlaygroundCardList } from './playground-card-list';
 
 export async function generateMetadata({ params }: PageProps<'/[locale]/playgrounds'>) {
   const { locale } = await params;
-  return generateBaseMetadata(say.activate(locale), '/playgrounds');
+  return generateBaseMetadata(locale, '/playgrounds');
 }
 
-export default async function PlaygroundsPage() {
+async function PlaygroundsPage() {
   const runtimes = await piston.runtimes();
 
   return (
@@ -31,3 +31,5 @@ export default async function PlaygroundsPage() {
     </div>
   );
 }
+
+export default withSay(PlaygroundsPage, localeOf);

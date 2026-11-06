@@ -1,8 +1,9 @@
 import { Button } from '@evaluate/components/button';
-import { Say } from '@sayable/react';
+import { Say } from '@saykit/react';
 import Link from 'next/link';
+import { localeOf, withSay } from '~/i18n';
 
-export default function BrowserExtensionPlatformContent() {
+function BrowserExtensionPlatformContent() {
   return (
     <div className="container flex flex-col gap-6 py-6">
       <div className="space-y-6 pt-[20vh] text-center">
@@ -40,3 +41,5 @@ export default function BrowserExtensionPlatformContent() {
     </div>
   );
 }
+
+export default withSay(BrowserExtensionPlatformContent, localeOf);

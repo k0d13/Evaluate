@@ -1,15 +1,15 @@
 import { Button, type ButtonInteraction, ButtonStyle } from '@buape/carbon';
-import { sayable } from '@sayable/carbon';
-import type { Sayable } from 'sayable';
+import type { View } from 'saykit';
 import { getEvaluateOptions } from '~/helpers/evaluate-helpers';
 import { resolveEmoji } from '~/helpers/resolve-emoji';
 import { getInteractionContext } from '~/helpers/session-context';
+import { withSay } from '~/i18n.js';
 import { captureEvent } from '~/services/posthog';
 import { EvaluateModalEdit } from './evaluate-modal';
 
-export class EditEvaluationButton extends sayable(Button) {
+export class EditEvaluationButton extends withSay(Button) {
   customId = 'evaluate,edit';
-  constructor(say: Sayable) {
+  constructor(say: View) {
     super({
       label: say`Edit`,
     });

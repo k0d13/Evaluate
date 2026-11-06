@@ -1,9 +1,10 @@
 import { Button } from '@evaluate/components/button';
-import { Say } from '@sayable/react';
+import { Say } from '@saykit/react';
 import Link from 'next/link';
+import { localeOf, withSay } from '~/i18n';
 import { ImageCarousel } from './image-carousel';
 
-export default function BrowserExtensionPlatformPage() {
+function BrowserExtensionPlatformPage() {
   return (
     <div className="container grid grid-cols-1 gap-6 py-6 pt-[20vh] lg:grid-cols-2">
       <div className="flex flex-col items-center justify-center gap-6 text-center">
@@ -211,3 +212,5 @@ export default function BrowserExtensionPlatformContent() {
   );
 }
 */
+
+export default withSay(BrowserExtensionPlatformPage, localeOf);

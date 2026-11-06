@@ -23,12 +23,9 @@
     "check": "tsc --noEmit"
   },
   "dependencies": {
-    "fuse.js": "^7.1.0",
+    "fuse.js": "^7.5.0",
     "lexure": "^0.17.0",
-    "pako": "^2.1.0",
-    "zod": "4.1.12"
-  },
-  "devDependencies": {
-    "@types/pako": "^2.0.4"
+    "pako": "^3.0.3",
+    "zod": "4.6.7"
   }
 }

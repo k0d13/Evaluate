@@ -2,7 +2,7 @@
 
 import { Input } from '@evaluate/components/input';
 import { Popover, PopoverAnchor, PopoverContent } from '@evaluate/components/popover';
-import { useSay } from '@sayable/react';
+import { useSay } from '@saykit/react/client';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { twMerge as cn } from 'tailwind-merge';
 import type { File, Folder } from 'virtual-file-explorer-backend';

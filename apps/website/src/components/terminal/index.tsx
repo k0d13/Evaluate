@@ -3,7 +3,7 @@
 import { Button } from '@evaluate/components/button';
 import { ScrollArea, ScrollBar } from '@evaluate/components/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@evaluate/components/tabs';
-import { Say } from '@sayable/react';
+import { Say } from '@saykit/react';
 import { CodeIcon, FullscreenIcon, PackageCheckIcon, PlayIcon, Trash2Icon } from 'lucide-react';
 import type { Runtime } from 'piston.ts';
 import { ReadonlyEditor } from '../editor/readonly';

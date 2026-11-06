@@ -3,7 +3,8 @@
 import { Button } from '@evaluate/components/button';
 import { ScrollArea } from '@evaluate/components/scroll-area';
 import { Separator } from '@evaluate/components/separator';
-import { Say, useSay } from '@sayable/react';
+import { Say } from '@saykit/react';
+import { useSay } from '@saykit/react/client';
 import { FilePlusIcon, FolderPlusIcon, HardDriveDownloadIcon } from 'lucide-react';
 import { twMerge as cn } from 'tailwind-merge';
 import type { File } from 'virtual-file-explorer-backend';

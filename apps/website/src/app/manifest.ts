@@ -1,14 +1,14 @@
 import type { MetadataRoute } from 'next';
-import say from '~/i18n';
+import { catalogue } from '~/i18n';
 
 export default async function Manifest(): Promise<MetadataRoute.Manifest> {
-  await say.load();
+  await Promise.all(catalogue.locales.map((locale) => catalogue.load(locale)));
 
-  const [manifest, ...shortcuts] = say.map((say, locale) => ({
+  const [manifest, ...shortcuts] = [...catalogue].map(([locale, say]) => ({
     name: 'Evaluate',
     short_name: 'Evaluate',
     description: say`Test code in any programming language with Evaluate! Run code snippets in your browser, without installing anything.`,
-    url: locale === say.locales[0] ? '/' : `/${locale}`,
+    url: locale === catalogue.locales[0] ? '/' : `/${locale}`,
   }));
 
   return {

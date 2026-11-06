@@ -1,14 +1,14 @@
 import { type NextRequest, NextResponse } from 'next/server';
-import say from './i18n';
+import { defaultLocale, locales } from './config';
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   let response = NextResponse.next();
 
-  const defaultLocale = say.locales[0]!;
   let pathLocale = fromUrlPathname(request.nextUrl.pathname);
-  if (pathLocale && !say.locales.includes(pathLocale)) pathLocale = undefined;
+  if (pathLocale && !(locales as readonly string[]).includes(pathLocale)) pathLocale = undefined;
   let cookieLocale = fromRequestCookies(request.cookies);
-  if (cookieLocale && !say.locales.includes(cookieLocale)) cookieLocale = undefined;
+  if (cookieLocale && !(locales as readonly string[]).includes(cookieLocale))
+    cookieLocale = undefined;
 
   if (pathLocale === defaultLocale) {
     // Redirect /{defaultLocale} to /

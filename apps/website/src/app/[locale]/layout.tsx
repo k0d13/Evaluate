@@ -1,26 +1,24 @@
+import { SayProvider } from '@saykit/react/client';
+import { getSay } from '@saykit/react/server';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { twMerge as cn } from 'tailwind-merge';
 import { Footer } from '~/components/footer';
 import { Header } from '~/components/header';
 import { BodyProviders, HtmlProviders } from '~/components/providers';
-import say from '~/i18n';
+import { catalogue, localeOf, withSay } from '~/i18n';
 import '../../style.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export function generateStaticParams() {
-  return say.locales.map((l) => ({ locale: l }));
+  return catalogue.locales.map((l) => ({ locale: l }));
 }
 
-export default async function RootLayout({ params, children }: LayoutProps<'/[locale]'>) {
-  const { locale = 'en' } = await params;
-  try {
-    await say.load(String(locale));
-    say.activate(String(locale));
-  } catch {
-    notFound();
-  }
+async function RootLayout({ params, children }: LayoutProps<'/[locale]'>) {
+  const { locale } = await params;
+  if (!(catalogue.locales as readonly string[]).includes(locale)) notFound();
+  const say = getSay();
 
   return (
     <HtmlProviders>
@@ -46,13 +44,17 @@ export default async function RootLayout({ params, children }: LayoutProps<'/[lo
           key="body"
           className={cn(inter.className, 'flex min-h-screen flex-col overflow-y-scroll')}
         >
-          <BodyProviders {...say}>
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </BodyProviders>
+          <SayProvider>
+            <BodyProviders>
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </BodyProviders>
+          </SayProvider>
         </body>
       </html>
     </HtmlProviders>
   );
 }
+
+export default withSay(RootLayout, localeOf);

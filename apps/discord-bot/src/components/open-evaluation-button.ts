@@ -1,10 +1,10 @@
 import { LinkButton } from '@buape/carbon';
-import { sayable } from '@sayable/carbon';
-import type { Sayable } from 'sayable';
+import type { View } from 'saykit';
 import { resolveEmoji } from '~/helpers/resolve-emoji';
+import { withSay } from '~/i18n.js';
 
-export class OpenEvaluationButton extends sayable(LinkButton) {
-  public constructor(say: Sayable, url?: string) {
+export class OpenEvaluationButton extends withSay(LinkButton) {
+  public constructor(say: View, url?: string) {
     super({ label: say`Open Evaluation` });
     if (url) this.url = url;
   }

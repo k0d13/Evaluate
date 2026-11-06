@@ -1,5 +1,5 @@
 import type { IConfig } from 'next-sitemap';
-import sayable from './sayable.config.ts';
+import saykit from './saykit.config.ts';
 
 export default {
   siteUrl: process.env.WEBSITE_URL!,
@@ -12,7 +12,7 @@ export default {
       lastmod: new Date().toISOString(),
       changefreq: 'weekly',
       priority: 0.7,
-      alternateRefs: sayable.locales.map((locale) => ({
+      alternateRefs: saykit.locales.map((locale) => ({
         href: `${process.env.WEBSITE_URL!}/${locale}${pathname.replace('/en/', '/')}`,
         hreflang: locale,
       })),

@@ -1,6 +1,6 @@
 'use client';
 
-import { Say } from '@sayable/react';
+import { Say } from '@saykit/react';
 import DOMPurify from 'dompurify';
 import { Children, useEffect, useState } from 'react';
 

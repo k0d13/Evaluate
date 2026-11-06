@@ -1,5 +1,7 @@
+'use client';
+
 import { Button } from '@evaluate/components/button';
-import { Say } from '@sayable/react';
+import { Say } from '@saykit/react';
 import { LocalisedLink } from '~/components/localised-link';
 
 export default function PlaygroundNotFound() {

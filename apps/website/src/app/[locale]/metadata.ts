@@ -1,13 +1,14 @@
 import { merge } from 'es-toolkit/object';
 import type { Metadata } from 'next';
-import type { Sayable } from 'sayable';
+import type { View } from 'saykit';
+import { catalogue } from '~/i18n';
 
 export async function generateBaseMetadata(
-  say: Sayable,
+  locale: string,
   pathname: `/${string}`,
-  overrides?: (say: Sayable) => Metadata,
+  overrides?: (say: View) => Metadata,
 ) {
-  await say.load();
+  const say = await catalogue.load(catalogue.match(locale));
   const metadata = merge(
     {
       title: 'Evaluate',
@@ -28,23 +29,23 @@ export async function generateBaseMetadata(
     ...metadata,
     openGraph: {
       type: 'website',
-      title: metadata.title,
-      description: metadata.description,
+      title: metadata.title ?? undefined,
+      description: metadata.description ?? undefined,
       locale: say.locale,
-      alternateLocale: say.locales,
-      siteName: metadata.title,
+      alternateLocale: [...catalogue.locales],
+      siteName: String(metadata.title ?? 'Evaluate'),
       url: new URL(`/${say.locale}${pathname}`, process.env.WEBSITE_URL!),
     },
     twitter: {
       card: 'summary',
-      title: metadata.title,
-      description: metadata.description,
+      title: metadata.title ?? undefined,
+      description: metadata.description ?? undefined,
       site: '@evaluatedotrun',
       creator: '@apteryxxyz',
     },
     alternates: {
       canonical: pathname,
-      languages: say.locales.reduce<Record<string, string>>((acc, locale) => {
+      languages: catalogue.locales.reduce<Record<string, string>>((acc, locale) => {
         acc[locale] = `/${locale}${pathname}`;
         return acc;
       }, {}),

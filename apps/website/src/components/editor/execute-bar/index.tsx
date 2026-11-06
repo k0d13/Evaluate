@@ -12,7 +12,8 @@ import {
 import { toast } from '@evaluate/components/toast';
 import { useEventListener } from '@evaluate/hooks/event-listener';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Say, useSay } from '@sayable/react';
+import { Say } from '@saykit/react';
+import { useSay } from '@saykit/react/client';
 import { useMutation } from '@tanstack/react-query';
 import { Loader2Icon, PlayIcon } from 'lucide-react';
 import { FilesOptions, type Runtime } from 'piston.ts';

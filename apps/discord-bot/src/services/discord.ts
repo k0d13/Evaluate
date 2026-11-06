@@ -1,11 +1,13 @@
 import { Client } from '@buape/carbon';
 import { CommandDataPlugin } from '@buape/carbon/command-data';
-import { SayablePlugin } from '@sayable/carbon';
+import { SayPlugin } from '@saykit/carbon';
 import { EvaluateCommand } from '~/commands/evaluate';
 import { EditEvaluationButton } from '~/components/edit-evaluation-button.js';
 import { EvaluateModal, EvaluateModalEdit } from '~/components/evaluate-modal.js';
 import { ApplicationAuthorisedListener } from '~/events/application-authorised';
-import say from '~/i18n.js';
+import { catalogue } from '~/i18n.js';
+
+const view = catalogue.locale(catalogue.locales[0]);
 
 const enabled = Boolean(
   process.env.DISCORD_CLIENT_ID && process.env.DISCORD_PUBLIC_KEY && process.env.DISCORD_TOKEN,
@@ -23,14 +25,14 @@ const client = enabled
         requestOptions: { queueRequests: false },
       },
       {
-        commands: [new EvaluateCommand(say)],
+        commands: [new EvaluateCommand()],
         listeners: [new ApplicationAuthorisedListener()],
-        components: [new EditEvaluationButton(say)],
+        components: [new EditEvaluationButton(view)],
       },
-      [new CommandDataPlugin(), new SayablePlugin(say)],
+      [new CommandDataPlugin(), new SayPlugin(catalogue)],
     )
   : null;
-for (const modal of [new EvaluateModal(say), new EvaluateModalEdit(say)])
+for (const modal of [new EvaluateModal(view), new EvaluateModalEdit(view)])
   client?.modalHandler.registerModal(modal);
 
 export default client;

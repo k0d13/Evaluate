@@ -3,8 +3,8 @@
 import { Button } from '@evaluate/components/button';
 import { Sheet, SheetBody, SheetTrigger } from '@evaluate/components/sheet';
 import { useMediaQuery } from '@evaluate/hooks/media-query';
-import { Say } from '@sayable/react';
-import { GithubIcon, MenuIcon } from 'lucide-react';
+import { Say } from '@saykit/react';
+import { MenuIcon } from 'lucide-react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import type React from 'react';
@@ -12,6 +12,7 @@ import { Children, useCallback, useState } from 'react';
 import { twMerge as cn } from 'tailwind-merge';
 import { LocalisedLink } from '../localised-link';
 import { DiscordIcon } from './discord-icon';
+import { GithubIcon } from './github-icon';
 import { LocaleSwitcher } from './locale-switcher';
 import { ThemeSwitcher } from './theme-switcher';
 

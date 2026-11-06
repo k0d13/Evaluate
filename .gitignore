@@ -6,5 +6,6 @@ node_modules/
 dist/
 .next/
 .env*.local
-messages.json
+apps/*/src/locales/*.js
+apps/*/src/locales/*.d.ts
 sitemap.xml

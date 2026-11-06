@@ -7,15 +7,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@evaluate/components/dropdown-menu';
-import { Say, useSay } from '@sayable/react';
+import { Say } from '@saykit/react';
 import { LanguagesIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
+import { locales } from '~/config';
 
 export function LocaleSwitcher() {
-  const say = useSay();
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -28,7 +27,7 @@ export function LocaleSwitcher() {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
-        {say.locales.map((locale) => (
+        {locales.map((locale) => (
           <DropdownMenuItem key={locale} className="cursor-pointer capitalize" asChild>
             <LocaleSwitcherItem locale={locale} />
           </DropdownMenuItem>

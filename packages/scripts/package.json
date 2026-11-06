@@ -7,6 +7,6 @@
   "type": "module",
   "dependencies": {
     "@gerhobbelt/gitignore-parser": "0.2.0-9",
-    "archiver": "^7.0.1"
+    "archiver": "^8.0.0"
   }
 }

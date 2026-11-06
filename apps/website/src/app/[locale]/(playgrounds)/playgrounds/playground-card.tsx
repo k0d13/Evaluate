@@ -2,7 +2,7 @@
 
 import { Button } from '@evaluate/components/button';
 import { Card, CardDescription, CardHeader, CardTitle } from '@evaluate/components/card';
-import { Say } from '@sayable/react';
+import { Say } from '@saykit/react';
 import { CodeIcon, PinIcon } from 'lucide-react';
 import { getRuntimeIconUrl, type Runtime } from 'piston.ts';
 import { useCallback, useMemo, useRef, useState } from 'react';
