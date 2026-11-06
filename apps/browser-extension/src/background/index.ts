@@ -2,6 +2,7 @@ import { type ExecuteResult, getRuntimeIdsFromExtension, type Runtime } from 'pi
 import type { ProtocolWithReturn } from 'webext-bridge';
 import { onMessage, sendMessage } from 'webext-bridge/background';
 import browser from 'webextension-polyfill';
+import { say } from '#/i18n.ts';
 import piston from '#/services/piston.ts';
 import posthog, { sessionLog } from '#/services/posthog.ts';
 
@@ -53,7 +54,7 @@ browser.runtime.onInstalled.addListener((details) => {
 
 browser.contextMenus.create({
   id: 'runCodeSelection',
-  title: 'Execute Code',
+  title: say`Execute Code`,
   contexts: ['selection'],
 });
 
@@ -96,7 +97,7 @@ browser.contextMenus.onClicked.addListener(async (info, tab) => {
   );
   if (!finished.length) {
     const reason = (settled[0] as PromiseRejectedResult).reason;
-    const errorMessage = reason instanceof Error ? reason.message : 'Unknown error';
+    const errorMessage = reason instanceof Error ? reason.message : say`Unknown error`;
     return sendMessage('executionFailed', { errorMessage }, endpoint);
   }
 

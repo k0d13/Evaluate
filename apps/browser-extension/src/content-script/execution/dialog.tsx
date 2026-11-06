@@ -8,6 +8,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@evaluate/components/tabs';
 import type { ExecuteResult, Runtime } from 'piston.ts';
 import browser from 'webextension-polyfill';
+import { say } from '#/i18n.ts';
 import { ResultDialog } from './result';
 
 export function ExecutionDialog({
@@ -33,7 +34,7 @@ export function ExecutionDialog({
         <DialogHeader className="flex-row">
           <img
             src={browser.runtime.getURL('images/icon.png')}
-            alt="Evaluate logo"
+            alt={say`Evaluate logo`}
             width={36}
             height={36}
           />

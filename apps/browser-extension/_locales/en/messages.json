@@ -1,0 +1,78 @@
+{
+  "29VNqC": {
+    "message": "Unknown error",
+    "x-saykit-references": ["src/background/index.ts:100"]
+  },
+  "2Elc_j": {
+    "message": "Your code execution exceeded the allotted time and was terminated. Consider optimising it for better performance.",
+    "x-saykit-references": ["src/content-script/execution/result.tsx:23"]
+  },
+  "6C9p6z": {
+    "message": "Evaluate logo",
+    "x-saykit-references": ["src/content-script/execution/dialog.tsx:37"]
+  },
+  "6erVq8": {
+    "message": "Could not determine runtime",
+    "x-saykit-references": ["src/content-script/execution/index.tsx:22"]
+  },
+  "7D1CBo": {
+    "message": "Your code executed successfully; however, it did not generate any output for the console.",
+    "x-saykit-references": ["src/content-script/execution/result.tsx:33"]
+  },
+  "cjBUR0": {
+    "message": "Evaluate was unable to determine a runtime for the selected text.",
+    "x-saykit-references": ["src/content-script/execution/index.tsx:23"]
+  },
+  "e5Epeb": {
+    "message": "Change Runtime",
+    "x-saykit-references": ["src/content-script/execution/result.tsx:53"]
+  },
+  "elLf2J": {
+    "message": "Pick a Runtime",
+    "x-saykit-references": ["src/content-script/execution/index.tsx:25"]
+  },
+  "extensionDescription": {
+    "message": "Execute any code snippet on any website with Evaluate.",
+    "description": "The extension's one-line description in the browser's extension store."
+  },
+  "extensionName": {
+    "message": "Evaluate - Run Code Anytime, Anywhere",
+    "description": "The extension's name, shown in the browser's extension store and toolbar."
+  },
+  "extensionShortName": {
+    "message": "Evaluate",
+    "description": "A short version of the extension name, shown where space is limited."
+  },
+  "gh06VD": {
+    "message": "Output",
+    "x-saykit-references": ["src/content-script/execution/result.tsx:28"]
+  },
+  "iFgaVN": {
+    "message": "Edit Code",
+    "x-saykit-references": ["src/content-script/execution/result.tsx:69"]
+  },
+  "NiIfA7": {
+    "message": "Execute Code",
+    "x-saykit-references": ["src/background/index.ts:57"]
+  },
+  "pSlRnN": {
+    "message": "Execution could not be completed",
+    "x-saykit-references": ["src/content-script/execution/index.tsx:51"]
+  },
+  "Rn0-k7": {
+    "message": "Running in {runtimeNameOrCount}.",
+    "x-saykit-references": ["src/content-script/execution/index.tsx:38"]
+  },
+  "tPqhMM": {
+    "message": "Your code compilation exceeded the allotted time and was terminated. Consider optimising your code for faster compilation.",
+    "x-saykit-references": ["src/content-script/execution/result.tsx:21"]
+  },
+  "yPrVFR": {
+    "message": "Running in {runtimeNameOrCount} runtimes for the best results.",
+    "x-saykit-references": ["src/content-script/execution/index.tsx:37"]
+  },
+  "zZbTr9": {
+    "message": "Executing code, this may take a few seconds...",
+    "x-saykit-references": ["src/content-script/execution/index.tsx:39"]
+  }
+}

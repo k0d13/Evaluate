@@ -1,6 +1,7 @@
 import { chromeExtension } from '@crxjs/vite-plugin';
 import tailwindCss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
+import saykit from 'unplugin-saykit/vite';
 import { defineConfig } from 'vite';
 import zipPack from 'vite-plugin-zip-pack';
 import manifest from './manifest.json' with { type: 'json' };
@@ -10,6 +11,7 @@ export default defineConfig({
   plugins: [
     removeExternalScriptLoading(),
     replaceJsonImports(),
+    saykit(),
     tailwindCss(),
     react(),
     chromeExtension({

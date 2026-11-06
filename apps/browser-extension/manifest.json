@@ -4,9 +4,10 @@
   "manifest_version": 3,
   "version": "0.3.0",
   "author": "Apteryx Software",
-  "name": "Evaluate - Run Code Anytime, Anywhere",
-  "short_name": "Evaluate",
-  "description": "Execute any code snippet on any website with Evaluate.",
+  "name": "__MSG_extensionName__",
+  "short_name": "__MSG_extensionShortName__",
+  "description": "__MSG_extensionDescription__",
+  "default_locale": "en",
   "homepage_url": "https://evaluate.run",
 
   "icons": {

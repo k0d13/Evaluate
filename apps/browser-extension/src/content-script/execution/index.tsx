@@ -3,6 +3,7 @@ import type { ExecuteResult, Runtime } from 'piston.ts';
 import { makePickRuntimePathname } from 'piston.ts/evaluate';
 import { useEffect, useState } from 'react';
 import { onMessage } from 'webext-bridge/content-script';
+import { say } from '#/i18n.ts';
 import { ExecutionDialog } from './dialog';
 
 export function Execution({ dialogPortal }: { dialogPortal: HTMLElement }) {
@@ -18,10 +19,10 @@ export function Execution({ dialogPortal }: { dialogPortal: HTMLElement }) {
         makePickRuntimePathname({ code }),
         import.meta.env.VITE_PUBLIC_WEBSITE_URL,
       );
-      toast.error('Could not determine runtime', {
-        description: 'Evaluate was unable to determine a runtime for the selected text.',
+      toast.error(say`Could not determine runtime`, {
+        description: say`Evaluate was unable to determine a runtime for the selected text.`,
         action: {
-          label: 'Pick a Runtime',
+          label: say`Pick a Runtime`,
           onClick: () => window.open(pickUrl, '_blank'),
         },
       });
@@ -33,9 +34,9 @@ export function Execution({ dialogPortal }: { dialogPortal: HTMLElement }) {
         const description =
           typeof runtimeNameOrCount === 'number'
             ? // Number is always greater than 1
-              `Running in ${runtimeNameOrCount} runtimes for the best results.`
-            : `Running in ${runtimeNameOrCount}.`;
-        const toastId = toast.loading('Executing code, this may take a few seconds...', {
+              say`Running in ${runtimeNameOrCount} runtimes for the best results.`
+            : say`Running in ${runtimeNameOrCount}.`;
+        const toastId = toast.loading(say`Executing code, this may take a few seconds...`, {
           description,
         });
         lastToastId = toastId;
@@ -47,7 +48,7 @@ export function Execution({ dialogPortal }: { dialogPortal: HTMLElement }) {
       'executionFailed',
       ({ data: { errorMessage } }) => {
         toast.dismiss(lastToastId);
-        toast.error('Execution could not be completed', {
+        toast.error(say`Execution could not be completed`, {
           description: errorMessage,
         });
       },

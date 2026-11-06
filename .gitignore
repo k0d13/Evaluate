@@ -4,4 +4,4 @@ dist/
 .next/
 .env*.local
 apps/*/src/locales/*.js
-apps/*/src/locales/*.d.ts
+apps/browser-extension/_locales/*/*.js
