@@ -3,6 +3,14 @@ import { deflate, inflate } from 'pako';
 
 export type Compressed<T> = string & { as: T };
 
+/** Spreading a large array into `fromCharCode` overflows the call stack, so go in chunks. */
+function toBase64(bytes: Uint8Array) {
+  let binary = '';
+  for (let i = 0; i < bytes.length; i += 0x8000)
+    binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+  return btoa(binary);
+}
+
 /**
  * Compresses data to a string.
  *
@@ -10,9 +18,7 @@ export type Compressed<T> = string & { as: T };
  * @returns Branded compressed string.
  */
 export function compress<T>(data: T): Compressed<T> {
-  const u8 = deflate(JSON.stringify(data));
-  const b64 = btoa(String.fromCharCode(...u8));
-  return b64.replaceAll('=', '') as Compressed<T>;
+  return toBase64(deflate(JSON.stringify(data))).replaceAll('=', '') as Compressed<T>;
 }
 
 /**

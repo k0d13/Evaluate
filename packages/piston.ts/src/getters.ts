@@ -9,22 +9,11 @@ function toUrl(slug: string) {
   return slug.replaceAll('+', 'plus').replaceAll('.', 'dot').replaceAll('#', 'sharp');
 }
 
-function fromUrl(slug: string) {
-  return slug.replaceAll('plus', '+').replaceAll('dot', '.').replaceAll('sharp', '#');
-}
-
 /** Make an identifier from a language and runtime */
 export function encodeRuntimeId(language: string, runtime?: string) {
   if (language === 'typescript' && !runtime) runtime = 'node';
   const id = `${toUrl(language)}${runtime ? `+${toUrl(runtime)}` : ''}`;
   return isRuntimeId(id) ? id : null;
-}
-
-/** Extract the language and runtime from an identifier */
-export function decodeRuntimeId(id: string) {
-  if (!isRuntimeId(id)) return null;
-  const [language, runtime] = id.split('+');
-  return [fromUrl(language!), fromUrl(runtime ?? '') || undefined] as const;
 }
 
 /** Check if the given value is a valid runtime id */
@@ -64,7 +53,7 @@ export function getRuntimeTags(id: string) {
   return RuntimeNames[id].tags ?? null;
 }
 
-/** Get the icon of a runtime by its id */
+/** Get the examples of a runtime by its id */
 export function getRuntimeExamples(id: string) {
   if (!isRuntimeId(id)) return null;
   return RuntimeExamples[id];
@@ -78,9 +67,10 @@ export function getRuntimeIconUrl(id: string) {
   return `https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/940f2ea7a6fcdc0221ab9a8fc9454cc585de11f0/icons/${slug}.svg`;
 }
 
-/** Get the id of a runtime by its icon URL */
-export function getRuntimeidFromExtension(extension: string) {
-  for (const [key, value] of Object.entries(RuntimeExtensions))
-    if (value.includes(extension)) return key;
-  return null;
+/** Get the ids of the runtimes that use a file extension, with or without the leading dot */
+export function getRuntimeIdsFromExtension(extension: string) {
+  const wanted = extension.replace(/^\./, '').toLowerCase();
+  return Object.entries(RuntimeExtensions)
+    .filter(([, extensions]) => extensions.includes(wanted))
+    .map(([id]) => id);
 }

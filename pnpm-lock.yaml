@@ -395,9 +395,6 @@ importers:
       fuse.js:
         specifier: ^7.5.0
         version: 7.5.0
-      lexure:
-        specifier: ^0.17.0
-        version: 0.17.0
       pako:
         specifier: ^3.0.3
         version: 3.0.3
@@ -405,11 +402,7 @@ importers:
         specifier: 4.6.7
         version: 4.6.7
 
-  packages/virtual-file-explorer-backend:
-    dependencies:
-      eventemitter2:
-        specifier: ^6.4.9
-        version: 6.4.9
+  packages/virtual-file-explorer-backend: {}
 
 packages:
 
@@ -2943,9 +2936,6 @@ packages:
     resolution: {integrity: sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==}
     engines: {node: '>=6'}
 
-  eventemitter2@6.4.9:
-    resolution: {integrity: sha512-JEPTiaOt9f04oa6NOkc4aH+nVp5I3wEjpHbIPqfgCdD5v5bUzy7xQqwcVO2aDQgOWhI28da57HksMrzK9HlRxg==}
-
   events-universal@1.0.1:
     resolution: {integrity: sha512-LUd5euvbMLpwOF8m6ivPCbhQeSiYVNb8Vs0fQ8QjXo0JTkEHpz8pxdQf0gStltaPpw0Cca8b39KxvK9cfKRiAw==}
 
@@ -3145,10 +3135,6 @@ packages:
   lefthook@2.2.2:
     resolution: {integrity: sha512-37fYHAhL12r1twaEV0PA5TwoIT491eTGGYjhhXxlYNMq3DSkiGZBQ++Jfk5maXj0vq52NRauLtMikBKtbNJs3Q==}
     hasBin: true
-
-  lexure@0.17.0:
-    resolution: {integrity: sha512-0L8GqFgPW36sLNqxdp2VOOef5Ajpb98kc0Zk4AzE+Yf0xYTDndcT1vpFqwkTdrCCw+FV8DH4mC9NUw0RlARThA==}
-    engines: {node: '>=12.0.0'}
 
   lie@3.3.0:
     resolution: {integrity: sha512-UaiMJzeWRlEujzAuw5LokY1L5ecNQYZKfmyZ9L7wDHb/p5etKaxXhohBcrw0EYby+G/NA52vRSN4N39dxHAIwQ==}
@@ -6272,8 +6258,6 @@ snapshots:
 
   event-target-shim@5.0.1: {}
 
-  eventemitter2@6.4.9: {}
-
   events-universal@1.0.1:
     dependencies:
       bare-events: 2.9.2
@@ -6428,8 +6412,6 @@ snapshots:
       lefthook-openbsd-x64: 2.2.2
       lefthook-windows-arm64: 2.2.2
       lefthook-windows-x64: 2.2.2
-
-  lexure@0.17.0: {}
 
   lie@3.3.0:
     dependencies:

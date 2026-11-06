@@ -19,7 +19,7 @@ import { useClickable, useDeleteable, useDraggable, useDropzone, useNameable } f
 
 export namespace ExplorerFolderItem {
   export interface Props {
-    folder: Folder<false>;
+    folder: Folder;
   }
 }
 

@@ -34,7 +34,6 @@
   },
   "dependencies": {
     "fuse.js": "^7.5.0",
-    "lexure": "^0.17.0",
     "pako": "^3.0.3",
     "zod": "4.6.7"
   }

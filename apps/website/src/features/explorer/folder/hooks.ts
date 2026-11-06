@@ -15,7 +15,11 @@ export function useDropzone(folder: Folder) {
   const [props, dropzoneRef] = useDrop(
     () => ({
       accept: ['file', 'folder'],
-      canDrop: (i: File | Folder) => i !== folder,
+      canDrop: (i: File | Folder) =>
+        i !== folder &&
+        i.parent !== folder &&
+        !folder.ancestors.includes(i as never) &&
+        !folder.children.some((c) => c.name === i.name),
       drop: (i: File | Folder, m) => m.didDrop() || (i.parent = folder),
       collect: (m) => ({ isOver: m.isOver({ shallow: true }) }),
     }),
@@ -55,7 +59,7 @@ export function useDeleteable(folder: Folder) {
 }
 
 function createChild<C extends File | Folder>(
-  this: { root: Folder<true> | null },
+  this: { root: Folder | null },
   Constructor: new () => C,
   parent?: Folder,
 ) {

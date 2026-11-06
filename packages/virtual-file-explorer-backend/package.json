@@ -26,8 +26,5 @@
   "scripts": {
     "check": "tsc --noEmit",
     "prepack": "tsc -p tsconfig.build.json"
-  },
-  "dependencies": {
-    "eventemitter2": "^6.4.9"
   }
 }

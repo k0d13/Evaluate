@@ -31,7 +31,7 @@ async function handleRequest(req: NextRequest, { params }: RouteContext<'/api/pi
     method: req.method,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: process.env.PISTON_API_KEY!,
+      ...(process.env.PISTON_API_KEY && { Authorization: process.env.PISTON_API_KEY }),
     },
     body: req.method !== 'GET' && req.method !== 'HEAD' ? await req.text() : undefined,
   });

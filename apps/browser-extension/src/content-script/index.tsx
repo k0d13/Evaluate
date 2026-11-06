@@ -2,7 +2,7 @@ import { Toaster } from '@evaluate/components/toast';
 import { createRoot } from 'react-dom/client';
 // import sonnerCss from 'sonner/dist/styles.css?inline';
 import { onMessage, sendMessage } from 'webext-bridge/content-script';
-import { extractRuntimeResolvables } from '#/helpers/runtime-resolvables.ts';
+import { detectRuntimeHints } from '#/helpers/runtime-hints.ts';
 import posthog, { sessionLog } from '#/services/posthog.ts';
 import tailwindCss from '../style.css?inline';
 import { Execution } from './execution';
@@ -15,12 +15,8 @@ sendMessage('getBackgroundSessionId', void 0).then((id) => {
 
 onMessage('getSelectionInfo', () => {
   const selection = window.getSelection();
-  const element = selection?.anchorNode?.parentElement;
-  const code = selection ? selection.toString() : '';
-
-  if (!element) return { code, resolvables: [] };
-  const resolvables = extractRuntimeResolvables(element);
-  return { code, resolvables };
+  const code = selection?.toString() ?? '';
+  return { code, hints: detectRuntimeHints(selection, code, location.href) };
 });
 
 const { parentElement, portalElement, isolatedElement } = createIsolatedElement({

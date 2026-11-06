@@ -16,7 +16,7 @@ import { useSay } from '@saykit/react/client';
 import { useMutation } from '@tanstack/react-query';
 import { Loader2Icon, PlayIcon } from 'lucide-react';
 import { FilesOptions, type Runtime } from 'piston.ts';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import type { File } from 'virtual-file-explorer-backend';
 import { useExplorer, useWatch } from '#/features/explorer/use.tsx';
@@ -33,13 +33,13 @@ export function ExecuteBar({ runtime }: { runtime: typeof Runtime._output }) {
 
   // Files
 
-  const [entry, setEntry] = useState<File>();
+  const [entry, setEntry] = useState(() => files.find((f) => f.entry));
   const handleEntryChange = useCallback(
     (path: string) => {
       setEntry((prevEntry) => {
-        if (prevEntry) Reflect.set(prevEntry, 'entry', false);
+        if (prevEntry) prevEntry.entry = false;
         const newEntry = files.find((f) => f.path === path);
-        Reflect.set(newEntry ?? {}, 'entry', true);
+        if (newEntry) newEntry.entry = true;
         return newEntry;
       });
     },
@@ -47,14 +47,6 @@ export function ExecuteBar({ runtime }: { runtime: typeof Runtime._output }) {
   );
   // If the entry file is deleted (aka removed from parent), reset the entry state
   useWatch(entry || null, ['parent'], () => !entry?.parent && setEntry(undefined));
-  // Once trigger once
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (!entry) setEntry(files.find((f) => Reflect.get(f, 'entry')));
-    }, 500);
-    return () => clearTimeout(timeout);
-  }, []);
-
   // Mutation
 
   const { setResult } = useTerminal();

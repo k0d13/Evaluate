@@ -12,7 +12,7 @@ import { useEventListener } from '#/hooks/event-listener.ts';
 import { useHashFragment } from '#/hooks/hash-fragment.ts';
 
 export const ExplorerContext = //
-  createContext<Folder<true>>(null!);
+  createContext<Folder>(null!);
 ExplorerContext.displayName = 'ExplorerContext';
 
 export const ExplorerConsumer = ExplorerContext.Consumer;
@@ -30,10 +30,9 @@ export function ExplorerProvider({
 
   // Only want triggered once
   const root = useMemo(() => {
-    let root: Folder<true>;
-    if (hash) root = decodeExplorer(hash);
-    else if (example) root = optionsToFolder(example);
-    else root = new Folder<true>('::root::');
+    let root = hash ? decodeExplorer(hash) : null;
+    if (!root && example) root = optionsToFolder(example);
+    root ??= new Folder('::root::');
 
     if (!root.children.some((c) => c.name === '::args::')) new File('::args::').parent = root;
     if (!root.children.some((c) => c.name === '::input::')) new File('::input::').parent = root;
@@ -89,9 +88,13 @@ function encodeExplorer(explorer: Folder) {
   return compress(folderToOptions(explorer));
 }
 
+/** A shared link can be truncated or hand edited, so a bad hash is ignored rather than fatal. */
 function decodeExplorer(hash: string) {
-  if (!hash) return new Folder<true>('::root::');
-  return optionsToFolder(decompress(hash));
+  try {
+    return optionsToFolder(ExecuteOptions.parse(decompress(hash)));
+  } catch {
+    return null;
+  }
 }
 
 function folderToOptions(folder: Folder) {
@@ -101,7 +104,7 @@ function folderToOptions(folder: Folder) {
 
   for (const file of folder.descendants //
     .filter((f): f is File => f.type === 'file')) {
-    if (Reflect.get(file, 'entry')) entry = file.path;
+    if (file.entry) entry = file.path;
     if (file.focused) focused = file.path;
     files[file.path] = file.content;
   }
@@ -110,7 +113,7 @@ function folderToOptions(folder: Folder) {
 }
 
 function optionsToFolder(options: typeof FilesOptions._output & { focused?: string }) {
-  const root = new Folder<true>('::root::');
+  const root = new Folder('::root::');
 
   for (const [path, content] of Object.entries(options.files)) {
     let parent = root;
@@ -135,7 +138,7 @@ function optionsToFolder(options: typeof FilesOptions._output & { focused?: stri
       file.content = content;
       file.parent = parent;
 
-      if (path === options.entry) Reflect.set(file, 'entry', true);
+      if (path === options.entry) file.entry = true;
       if (path === (options.focused ?? options.entry)) file.opened = file.focused = true;
     }
   }
