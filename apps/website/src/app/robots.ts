@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next/types';
 
 export default function Robots(): MetadataRoute.Robots {
-  const url = 'https://evaluate.run';
+  const url = process.env.WEBSITE_URL!;
 
   return {
     rules: [

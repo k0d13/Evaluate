@@ -29,8 +29,7 @@
     "es-toolkit": "^1.53.1",
     "piston.ts": "workspace:^",
     "posthog-node": "^5.63.0",
-    "saykit": "^0.12.0",
-    "zod": "^4.6.7"
+    "saykit": "^0.12.0"
   },
   "devDependencies": {
     "@saykit/config": "^0.12.0",

@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from 'next/server';
-import { defaultLocale, locales } from './config';
+import { defaultLocale, locales } from './config.ts';
 
 export function proxy(request: NextRequest) {
   let response = NextResponse.next();

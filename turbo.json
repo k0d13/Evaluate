@@ -8,7 +8,7 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["src/**", "public/**", "assets/**"],
-      "outputs": ["dist/**", "build/**", ".plasmo/**", ".next/**"],
+      "outputs": ["dist/**", ".next/**"],
       "outputLogs": "new-only"
     },
     "dev": {
@@ -24,8 +24,6 @@
     "NEXT_PUBLIC_POSTHOG_KEY",
     "PISTON_API_KEY",
     "ALLOWED_ORIGIN",
-    "DISCORD_CLIENT_ID",
-    "DISCORD_PUBLIC_KEY",
     "DISCORD_CLIENT_SECRET",
     "DISCORD_TOKEN"
   ]

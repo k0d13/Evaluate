@@ -1,7 +1,5 @@
 packages:
   - apps/*
-  - bots/*
-  - extensions/*
   - packages/*
 
 shellEmulator: true

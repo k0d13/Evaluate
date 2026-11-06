@@ -9,17 +9,13 @@ import { catalogue } from '#/i18n.ts';
 
 const view = catalogue.locale(catalogue.locales[0]);
 
-const enabled = Boolean(
-  process.env.DISCORD_CLIENT_ID && process.env.DISCORD_PUBLIC_KEY && process.env.DISCORD_TOKEN,
-);
+const enabled = Boolean(process.env.DISCORD_TOKEN);
 if (!enabled) console.warn('Missing Discord bot environment variables, bot will be disabled.');
 
 const client = enabled
   ? new Client(
       {
         baseUrl: new URL('api/discord', process.env.WEBSITE_URL!).href,
-        clientId: process.env.DISCORD_CLIENT_ID!,
-        publicKey: process.env.DISCORD_PUBLIC_KEY!,
         token: process.env.DISCORD_TOKEN!,
         deploySecret: process.env.DISCORD_CLIENT_SECRET!,
         requestOptions: { queueRequests: false },

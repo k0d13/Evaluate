@@ -1,7 +1,7 @@
 'use client';
 
-import { useEventListener } from '@evaluate/hooks/event-listener';
 import { useCallback, useState } from 'react';
+import { useEventListener } from '#/hooks/event-listener.ts';
 
 /**
  * Hook to get and set the hash fragment of the URL.

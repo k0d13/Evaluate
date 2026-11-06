@@ -4,7 +4,7 @@
 apps/website/
 apps/discord-bot/
 packages/hooks/
-packages/scripts/bin/ff-zip
+apps/browser-extension/scripts/
 .ffignore
 .gitignore
 .vercelignore

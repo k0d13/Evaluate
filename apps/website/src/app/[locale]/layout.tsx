@@ -3,11 +3,11 @@ import { getSay } from '@saykit/react/server';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { twMerge as cn } from 'tailwind-merge';
-import { Footer } from '#/components/footer/index.tsx';
-import { Header } from '#/components/header/index.tsx';
-import { BodyProviders, HtmlProviders } from '#/components/providers.tsx';
+import { Footer } from '#/features/layout/footer/index.tsx';
+import { Header } from '#/features/layout/header/index.tsx';
+import { BodyProviders, HtmlProviders } from '#/features/layout/providers.tsx';
 import { catalogue, localeOf, withSay } from '#/i18n.ts';
-import '../../style.css';
+import '#/style.css';
 
 const inter = Inter({ subsets: ['latin'] });
 

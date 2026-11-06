@@ -1,7 +1,7 @@
 'use client';
 
 import { useTheme } from 'next-themes';
-import { getIconForFile, getIconForFolder, makeIconUrl } from './languages';
+import { getIconForFile, getIconForFolder, makeIconUrl } from '#/lib/languages.ts';
 
 export function MaterialIcon(p: {
   type: 'file' | 'folder';

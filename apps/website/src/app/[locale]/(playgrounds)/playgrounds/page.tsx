@@ -1,8 +1,8 @@
 import { Say } from '@saykit/react';
+import { PlaygroundCardList } from '#/features/playgrounds/playground-card-list.tsx';
 import { localeOf, withSay } from '#/i18n.ts';
+import { generateBaseMetadata } from '#/lib/metadata.ts';
 import piston from '#/services/piston.ts';
-import { generateBaseMetadata } from '../../metadata';
-import { PlaygroundCardList } from './playground-card-list';
 
 export async function generateMetadata({ params }: PageProps<'/[locale]/playgrounds'>) {
   const { locale } = await params;
