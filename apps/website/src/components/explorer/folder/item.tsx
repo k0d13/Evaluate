@@ -15,13 +15,7 @@ import { useIsMobile } from '~/hooks/is-mobile';
 import { ExplorerItemName } from '../name';
 import { useWatch } from '../use';
 import { ExplorerFolderChildren } from './children';
-import {
-  useClickable,
-  useDeleteable,
-  useDraggable,
-  useDropzone,
-  useNameable,
-} from './hooks';
+import { useClickable, useDeleteable, useDraggable, useDropzone, useNameable } from './hooks';
 
 export namespace ExplorerFolderItem {
   export interface Props {
@@ -59,16 +53,8 @@ export function ExplorerFolderItem({ folder }: ExplorerFolderItem.Props) {
             }}
             data-ignore-blur
           >
-            <MaterialIcon
-              type="folder"
-              expanded={folder.expanded}
-              name={folder.name}
-            />
-            <ExplorerItemName
-              item={folder}
-              naming={naming}
-              setNaming={setNaming}
-            />
+            <MaterialIcon type="folder" expanded={folder.expanded} name={folder.name} />
+            <ExplorerItemName item={folder} naming={naming} setNaming={setNaming} />
 
             <div
               className={cn(

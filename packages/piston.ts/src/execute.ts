@@ -45,9 +45,7 @@ export const ExecuteOptions = Object.assign(
       return { ...o, lines, length, focused: o.focused ?? o.entry };
     }),
   {
-    fromOptions(
-      value: typeof CodeOptions._output | typeof FilesOptions._output,
-    ) {
+    fromOptions(value: typeof CodeOptions._output | typeof FilesOptions._output) {
       if ('code' in value) {
         return ExecuteOptions.parse({
           files: {
@@ -97,8 +95,7 @@ export class Execute extends Callable<
     runtime: typeof Runtime._output,
     options: typeof CodeOptions._input | typeof FilesOptions._input,
   ) => Promise<
-    [typeof ExecuteResult._output, typeof ExecuteOptions._output] &
-      typeof ExecuteResult._output
+    [typeof ExecuteResult._output, typeof ExecuteOptions._output] & typeof ExecuteResult._output
   >
 > {
   constructor(client: Client) {
@@ -138,10 +135,7 @@ export class Execute extends Callable<
       const json = await response.json();
 
       const result = ExecuteResult.parse(json);
-      return Object.assign(
-        [result, options] satisfies [unknown, unknown],
-        result,
-      );
+      return Object.assign([result, options] satisfies [unknown, unknown], result);
     });
   }
 }

@@ -10,7 +10,5 @@ export function OpenedFiles() {
   const opened = explorer.descendants //
     .filter((f): f is File => f.type === 'file' && f.opened);
 
-  return opened.map((f, _, o) => (
-    <OpenedFileButton key={f.path} file={f} others={o} />
-  ));
+  return opened.map((f, _, o) => <OpenedFileButton key={f.path} file={f} others={o} />);
 }

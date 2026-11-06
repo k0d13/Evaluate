@@ -6,17 +6,11 @@ import RuntimeNames from './data/names.json';
 //
 
 function toUrl(slug: string) {
-  return slug
-    .replaceAll('+', 'plus')
-    .replaceAll('.', 'dot')
-    .replaceAll('#', 'sharp');
+  return slug.replaceAll('+', 'plus').replaceAll('.', 'dot').replaceAll('#', 'sharp');
 }
 
 function fromUrl(slug: string) {
-  return slug
-    .replaceAll('plus', '+')
-    .replaceAll('dot', '.')
-    .replaceAll('sharp', '#');
+  return slug.replaceAll('plus', '+').replaceAll('dot', '.').replaceAll('sharp', '#');
 }
 
 /** Make an identifier from a language and runtime */

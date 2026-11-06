@@ -47,8 +47,7 @@ export function createIsolatedElement(options: CreateIsolatedElementOptions) {
     const eventTypes = Array.isArray(isolatedEvents)
       ? isolatedEvents
       : ['keydown', 'keyup', 'keypress'];
-    for (const t of eventTypes)
-      bodyElement.addEventListener(t, (e) => e.stopPropagation());
+    for (const t of eventTypes) bodyElement.addEventListener(t, (e) => e.stopPropagation());
   }
 
   return { parentElement, portalElement, isolatedElement };

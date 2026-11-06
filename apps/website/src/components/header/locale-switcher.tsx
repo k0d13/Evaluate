@@ -29,11 +29,7 @@ export function LocaleSwitcher() {
 
       <DropdownMenuContent>
         {say.locales.map((locale) => (
-          <DropdownMenuItem
-            key={locale}
-            className="capitalize cursor-pointer"
-            asChild
-          >
+          <DropdownMenuItem key={locale} className="cursor-pointer capitalize" asChild>
             <LocaleSwitcherItem locale={locale} />
           </DropdownMenuItem>
         ))}
@@ -55,7 +51,7 @@ function LocaleSwitcherItem({ locale, ...props }: { locale: string }) {
   }, [locale, pathname, searchParams]);
 
   const updatePreferredLocale = useCallback(() => {
-    // biome-ignore lint/suspicious/noDocumentCookie: update the locale cookie
+    // update the locale cookie
     document.cookie = `preferred-locale=${locale}; max-age=31536000; path=/`;
   }, [locale]);
 

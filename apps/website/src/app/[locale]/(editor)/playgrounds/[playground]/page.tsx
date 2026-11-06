@@ -21,17 +21,11 @@ export async function generateMetadata({
   const runtime = await piston.runtimes.get(decodeURIComponent(playground));
   if (!runtime) notFound();
 
-  return generateBaseMetadata(
-    say.activate(locale),
-    `/playgrounds/${playground}`,
-    (say) => ({
-      title: say`${runtime.name} Online Playground on Evaluate`,
-      description: say`Run ${runtime.name} and more code snippets online in your browser with Evaluate's code playground.`,
-      keywords: [runtime.name, ...runtime.aliases, ...runtime.tags].map((k) =>
-        k.toLowerCase(),
-      ),
-    }),
-  );
+  return generateBaseMetadata(say.activate(locale), `/playgrounds/${playground}`, (say) => ({
+    title: say`${runtime.name} Online Playground on Evaluate`,
+    description: say`Run ${runtime.name} and more code snippets online in your browser with Evaluate's code playground.`,
+    keywords: [runtime.name, ...runtime.aliases, ...runtime.tags].map((k) => k.toLowerCase()),
+  }));
 }
 
 export default async function EditorPage({

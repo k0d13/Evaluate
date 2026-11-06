@@ -52,14 +52,10 @@ export class EvaluateCommand extends sayable(Command) {
 
     if (runtime) {
       const runtimes = await piston.runtimes.search(runtime);
-      return interaction.respond(
-        runtimes.slice(0, 25).map((r) => ({ name: r.name, value: r.id })),
-      );
+      return interaction.respond(runtimes.slice(0, 25).map((r) => ({ name: r.name, value: r.id })));
     } else {
       const runtimes = await piston.runtimes();
-      return interaction.respond(
-        runtimes.slice(0, 25).map((r) => ({ name: r.name, value: r.id })),
-      );
+      return interaction.respond(runtimes.slice(0, 25).map((r) => ({ name: r.name, value: r.id })));
     }
   }
 

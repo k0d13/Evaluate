@@ -8,8 +8,7 @@ export function middleware(request: NextRequest) {
   let pathLocale = fromUrlPathname(request.nextUrl.pathname);
   if (pathLocale && !say.locales.includes(pathLocale)) pathLocale = undefined;
   let cookieLocale = fromRequestCookies(request.cookies);
-  if (cookieLocale && !say.locales.includes(cookieLocale))
-    cookieLocale = undefined;
+  if (cookieLocale && !say.locales.includes(cookieLocale)) cookieLocale = undefined;
 
   if (pathLocale === defaultLocale) {
     // Redirect /{defaultLocale} to /
@@ -59,10 +58,7 @@ function fromUrlPathname(pathname: string, partIndex = 0) {
   return undefined;
 }
 
-function fromRequestCookies(
-  cookies: NextRequest['cookies'],
-  key = 'preferred-locale',
-) {
+function fromRequestCookies(cookies: NextRequest['cookies'], key = 'preferred-locale') {
   const value = cookies.get(key)?.value;
   if (value?.match(LOCALE)) return value;
   return undefined;

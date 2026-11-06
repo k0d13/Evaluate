@@ -19,8 +19,7 @@ function Toaster({
           description: 'group-[.toast]:text-muted-foreground',
           actionButton:
             'group-[.toast]:bg-primary group-[.toast]:text-primary-foreground font-medium',
-          cancelButton:
-            'group-[.toast]:bg-muted group-[.toast]:text-muted-foreground font-medium',
+          cancelButton: 'group-[.toast]:bg-muted group-[.toast]:text-muted-foreground font-medium',
         },
       }}
       {...props}

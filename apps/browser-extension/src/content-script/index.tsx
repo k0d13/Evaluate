@@ -23,21 +23,19 @@ onMessage('getSelectionInfo', () => {
   return { code, resolvables };
 });
 
-const { parentElement, portalElement, isolatedElement } = createIsolatedElement(
-  {
-    name: 'evaluate',
-    type: 'overlay',
-    fonts: {
-      inter: 'https://rsms.me/inter/inter.css',
-    },
-    styles: {
-      // TODO: Figure out why this is necessary
-      tailwind: tailwindCss.replaceAll('border-style:', '__ignore__:'),
-      // sonner: sonnerCss,
-    },
-    isolatedEvents: true,
+const { parentElement, portalElement, isolatedElement } = createIsolatedElement({
+  name: 'evaluate',
+  type: 'overlay',
+  fonts: {
+    inter: 'https://rsms.me/inter/inter.css',
   },
-);
+  styles: {
+    // TODO: Figure out why this is necessary
+    tailwind: tailwindCss.replaceAll('border-style:', '__ignore__:'),
+    // sonner: sonnerCss,
+  },
+  isolatedEvents: true,
+});
 
 const root = createRoot(isolatedElement);
 root.render(<ContentScript />);

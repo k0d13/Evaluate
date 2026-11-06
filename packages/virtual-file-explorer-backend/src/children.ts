@@ -1,9 +1,7 @@
 import type { File } from './file';
 import type { Folder } from './folder';
 
-export class Children<
-  Of extends Folder | File = Folder | File,
-> extends Array<Of> {
+export class Children<Of extends Folder | File = Folder | File> extends Array<Of> {
   public remove(...items: Of[]) {
     for (const item of items) {
       if (typeof item === 'function') {

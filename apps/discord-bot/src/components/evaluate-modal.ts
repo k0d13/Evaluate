@@ -1,10 +1,4 @@
-import {
-  Label,
-  Modal,
-  type ModalInteraction,
-  TextInput,
-  TextInputStyle,
-} from '@buape/carbon';
+import { Label, Modal, type ModalInteraction, TextInput, TextInputStyle } from '@buape/carbon';
 import { sayable } from '@sayable/carbon';
 import type { Sayable } from 'sayable';
 import { handleEvaluating } from '~/handlers/evaluate';

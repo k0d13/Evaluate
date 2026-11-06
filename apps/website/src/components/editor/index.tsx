@@ -21,8 +21,7 @@ export function Editor({ runtime }: { runtime: typeof Runtime._output }) {
 
   const setEditorHeight = useCallback(() => {
     if (!sectionRef.current || !headerRef.current) return;
-    const editorHeight =
-      sectionRef.current.clientHeight - headerRef.current.clientHeight - 25;
+    const editorHeight = sectionRef.current.clientHeight - headerRef.current.clientHeight - 25;
     if (editorRef.current) editorRef.current.style.height = `${editorHeight}px`;
   }, []);
   useEventListener('resize', setEditorHeight);
@@ -51,9 +50,7 @@ export function Editor({ runtime }: { runtime: typeof Runtime._output }) {
           <Button
             variant="secondary"
             className="aspect-square p-0 lg:hidden"
-            onClick={() =>
-              dispatchEvent(new CustomEvent('mobile-explorer-open-change'))
-            }
+            onClick={() => dispatchEvent(new CustomEvent('mobile-explorer-open-change'))}
           >
             <FilesIcon size={16} strokeWidth={2} />
           </Button>
@@ -65,9 +62,7 @@ export function Editor({ runtime }: { runtime: typeof Runtime._output }) {
           <Button
             variant="secondary"
             className="ml-auto aspect-square p-0 lg:hidden"
-            onClick={() =>
-              dispatchEvent(new CustomEvent('mobile-terminal-open-change'))
-            }
+            onClick={() => dispatchEvent(new CustomEvent('mobile-terminal-open-change'))}
           >
             <TerminalIcon className="size-4" />
           </Button>
@@ -75,10 +70,7 @@ export function Editor({ runtime }: { runtime: typeof Runtime._output }) {
       </div>
 
       <div className="relative h-full w-full">
-        <div
-          className={cn('h-full [&>*]:h-full', !file && 'hidden')}
-          ref={editorRef}
-        />
+        <div className={cn('h-full [&>*]:h-full', !file && 'hidden')} ref={editorRef} />
       </div>
     </section>
   );

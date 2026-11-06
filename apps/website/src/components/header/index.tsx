@@ -30,10 +30,7 @@ export function Header() {
   return (
     <header className={cn('h-14 w-full px-4', !isFullWidth && 'container')}>
       <Nav open={open} setOpen={setOpen}>
-        <LocalisedLink
-          href="/"
-          className="flex items-center justify-center gap-1"
-        >
+        <LocalisedLink href="/" className="flex items-center justify-center gap-1">
           <Image
             src="/images/icon.png"
             alt="Evaluate Logo"
@@ -41,7 +38,7 @@ export function Header() {
             height={32}
             className="inline"
           />
-          <span className="font-bold text-primary text-xl">Evaluate</span>
+          <span className="text-xl font-bold text-primary">Evaluate</span>
         </LocalisedLink>
 
         <div>
@@ -51,15 +48,10 @@ export function Header() {
             </LocalisedLink>
           </Button>
 
-          <Button
-            variant="ghost"
-            onClick={closeByLink}
-            className="relative"
-            asChild
-          >
+          <Button variant="ghost" onClick={closeByLink} className="relative" asChild>
             <LocalisedLink href="/products/browser-extension">
               <Say>Browser Extension</Say>
-              <span className="absolute top-0 left-[5.8rem] text-primary text-xs">
+              <span className="absolute top-0 left-[5.8rem] text-xs text-primary">
                 <Say>new</Say>
               </span>
             </LocalisedLink>
@@ -74,21 +66,13 @@ export function Header() {
 
         <div>
           <Button variant="ghost" size="icon" asChild>
-            <a
-              href="https://discord.gg/TUskQz75F6"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://discord.gg/TUskQz75F6" target="_blank" rel="noreferrer">
               <DiscordIcon className="size-4" />
             </a>
           </Button>
 
           <Button variant="ghost" size="icon" asChild>
-            <a
-              href="https://github.com/apteryxxyz/Evaluate"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://github.com/apteryxxyz/Evaluate" target="_blank" rel="noreferrer">
               <GithubIcon className="size-4" />
             </a>
           </Button>
@@ -127,11 +111,7 @@ function MobileNavigationWrapper(
 
       <Sheet open={p.open} onOpenChange={p.setOpen}>
         <SheetTrigger asChild>
-          <Button
-            size="icon"
-            variant="secondary"
-            className="ml-auto aspect-square"
-          >
+          <Button size="icon" variant="secondary" className="ml-auto aspect-square">
             <MenuIcon className="size-4" />
             <span className="sr-only">
               <Say>Toggle Mobile Navigation</Say>

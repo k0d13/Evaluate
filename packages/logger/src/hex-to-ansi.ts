@@ -1,6 +1,4 @@
-/**
- * Get the closest ANSI colour code for given RGB values.
- */
+/** Get the closest ANSI colour code for given RGB values. */
 export function closestAnsiColour(r: number, g: number, b: number) {
   const colours = [
     [0, 0, 0],
@@ -25,15 +23,10 @@ export function closestAnsiColour(r: number, g: number, b: number) {
   for (let r1 = 0; r1 < 6; r1++)
     for (let g1 = 0; g1 < 6; g1++)
       for (let b1 = 0; b1 < 6; b1++)
-        colours.push([
-          Math.floor(r1 * 42.5),
-          Math.floor(g1 * 42.5),
-          Math.floor(b1 * 42.5),
-        ]);
+        colours.push([Math.floor(r1 * 42.5), Math.floor(g1 * 42.5), Math.floor(b1 * 42.5)]);
 
   // Add grayscale colors
-  for (let i = 0; i < 24; i++)
-    colours.push([i * 10 + 8, i * 10 + 8, i * 10 + 8]);
+  for (let i = 0; i < 24; i++) colours.push([i * 10 + 8, i * 10 + 8, i * 10 + 8]);
 
   let minDist = Number.MAX_SAFE_INTEGER;
   let closestColour = 0;
@@ -41,7 +34,10 @@ export function closestAnsiColour(r: number, g: number, b: number) {
     const [cr, cg, cb] = colours[i]!;
     const dist = (cr - r) ** 2 + (cg - g) ** 2 + (cb - b) ** 2;
 
-    if (dist < minDist) (minDist = dist), (closestColour = i);
+    if (dist < minDist) {
+      minDist = dist;
+      closestColour = i;
+    }
   }
 
   return closestColour;
@@ -49,6 +45,7 @@ export function closestAnsiColour(r: number, g: number, b: number) {
 
 /**
  * Convert a hex colour code to an ANSI colour code.
+ *
  * @returns ANSI opening code.
  */
 export function hexToAnsi(hex: string) {

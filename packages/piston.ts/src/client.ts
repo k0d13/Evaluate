@@ -19,8 +19,7 @@ export class Client {
 
   [FETCH](path: `/${string}`, options: RequestInit) {
     const headers = new Headers(options.headers);
-    if (this.#options.apiKey)
-      headers.set('Authorization', `${this.#options.apiKey}`);
+    if (this.#options.apiKey) headers.set('Authorization', `${this.#options.apiKey}`);
     return betterFetch(this.#options.baseUrl + path, { ...options, headers });
   }
 

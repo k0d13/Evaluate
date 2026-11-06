@@ -12,8 +12,7 @@ export function ImageWithFallback({
   fallback: string | React.ReactElement;
 }) {
   const [errored, setErrored] = useState(!src);
-  if (errored && typeof fallback === 'string')
-    return <Image src={fallback} {...props} />;
+  if (errored && typeof fallback === 'string') return <Image src={fallback} {...props} />;
   if (errored && isValidElement(fallback)) return fallback;
   return <Image src={src!} onError={() => setErrored(true)} {...props} />;
 }

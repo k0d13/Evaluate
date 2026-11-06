@@ -8,7 +8,7 @@
     }
   },
   "scripts": {
-    "check": "tsc --noEmit",
-    "build": "tsc"
+    "build": "tsc",
+    "check": "tsc --noEmit"
   }
 }

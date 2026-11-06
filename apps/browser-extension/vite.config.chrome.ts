@@ -5,10 +5,7 @@ import { defineConfig } from 'vite';
 import zipPack from 'vite-plugin-zip-pack';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import manifest from './manifest.json';
-import {
-  removeExternalScriptLoading,
-  replaceJsonImports,
-} from './vite-plugins';
+import { removeExternalScriptLoading, replaceJsonImports } from './vite-plugins';
 
 export default defineConfig({
   plugins: [

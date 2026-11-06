@@ -56,7 +56,7 @@ export function OpenedFileButton({ file, others }: OpenedFileButton.Props) {
       <Button
         size="icon"
         variant={null}
-        className="w-auto pl-2 text-white/20 hover:text-white group-hover:text-white/50"
+        className="w-auto pl-2 text-white/20 group-hover:text-white/50 hover:text-white"
         onClick={handleCloseClick}
         asChild
       >

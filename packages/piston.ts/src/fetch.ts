@@ -16,15 +16,14 @@ export async function betterFetch(input: RequestInfo, init?: RequestInit) {
     }
 
     if (response.status === 429) {
-      if (attempts >= 3)
-        throw new Error('Too many requests', { cause: response });
+      if (attempts >= 3) throw new Error('Too many requests', { cause: response });
 
       attempts++;
       const delay = 2 ** attempts * 1000;
-      console.warn(
-        `Request was rate limited, retrying in ${delay}ms (attempt ${attempts})`,
-        { input, init },
-      );
+      console.warn(`Request was rate limited, retrying in ${delay}ms (attempt ${attempts})`, {
+        input,
+        init,
+      });
       await new Promise((r) => setTimeout(r, delay));
       continue;
     }

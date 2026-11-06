@@ -7,32 +7,24 @@ export default function BrowserExtensionPlatformPage() {
   return (
     <div className="container grid grid-cols-1 gap-6 py-6 pt-[20vh] lg:grid-cols-2">
       <div className="flex flex-col items-center justify-center gap-6 text-center">
-        <h1 className="font-bold text-3xl tracking-tight md:text-5xl">
+        <h1 className="text-3xl font-bold tracking-tight md:text-5xl">
           <Say>
             The <span className="text-primary">Evaluate</span> Browser Extension
           </Say>
         </h1>
-        <p className="mx-auto max-w-5xl text-balance text-sm md:text-base">
+        <p className="mx-auto max-w-5xl text-sm text-balance md:text-base">
           <Say>
-            When you stumble upon code snippets while browsing the web, wouldn't
-            it be great to execute them instantly? Look no further—the Evaluate
-            extension is your solution, with its over 70 supported languages and
-            quick code execution capabilities.
+            When you stumble upon code snippets while browsing the web, wouldn't it be great to
+            execute them instantly? Look no further—the Evaluate extension is your solution, with
+            its over 70 supported languages and quick code execution capabilities.
           </Say>
         </p>
 
         <div className="flex flex-col items-center gap-2">
           <div className="flex items-center justify-center gap-2">
-            <Button
-              variant="secondary"
-              className="flex items-center gap-2 rounded-full"
-              asChild
-            >
-              <Link
-                href="https://go.evaluate.run/chrome-extension"
-                target="_blank"
-              >
-                {/** biome-ignore lint/performance/noImgElement: Want to use img */}
+            <Button variant="secondary" className="flex items-center gap-2 rounded-full" asChild>
+              <Link href="https://go.evaluate.run/chrome-extension" target="_blank">
+                {/** Biome-ignore lint/performance/noImgElement: Want to use img */}
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/1024px-Google_Chrome_icon_%28February_2022%29.svg.png"
                   className="aspect-square w-6"
@@ -53,11 +45,8 @@ export default function BrowserExtensionPlatformPage() {
               className="flex items-center gap-3 rounded-full"
               asChild
             >
-              <Link
-                href="https://go.evaluate.run/chrome-extension?for=edge"
-                target="_blank"
-              >
-                {/** biome-ignore lint/performance/noImgElement: Want to use img */}
+              <Link href="https://go.evaluate.run/chrome-extension?for=edge" target="_blank">
+                {/** Biome-ignore lint/performance/noImgElement: Want to use img */}
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Microsoft_Edge_logo_%282019%29.png"
                   className="aspect-square w-6"
@@ -73,11 +62,8 @@ export default function BrowserExtensionPlatformPage() {
               className="flex items-center gap-3 rounded-full"
               asChild
             >
-              <Link
-                href="https://go.evaluate.run/chrome-extension?for=opera"
-                target="_blank"
-              >
-                {/** biome-ignore lint/performance/noImgElement: Want to use img */}
+              <Link href="https://go.evaluate.run/chrome-extension?for=opera" target="_blank">
+                {/** Biome-ignore lint/performance/noImgElement: Want to use img */}
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Opera_2015_icon.svg/180px-Opera_2015_icon.svg.png"
                   className="aspect-square w-6"
@@ -93,11 +79,8 @@ export default function BrowserExtensionPlatformPage() {
               className="flex items-center gap-3 rounded-full"
               asChild
             >
-              <Link
-                href="https://go.evaluate.run/chrome-extension?for=brave"
-                target="_blank"
-              >
-                {/** biome-ignore lint/performance/noImgElement: Want to use img */}
+              <Link href="https://go.evaluate.run/chrome-extension?for=brave" target="_blank">
+                {/** Biome-ignore lint/performance/noImgElement: Want to use img */}
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Brave_lion_icon.svg"
                   className="aspect-square w-6"
@@ -109,16 +92,9 @@ export default function BrowserExtensionPlatformPage() {
         </div>
 
         <div>
-          <Button
-            variant="secondary"
-            className="flex items-center gap-2 rounded-full"
-            asChild
-          >
-            <Link
-              href="https://go.evaluate.run/firefox-extension"
-              target="_blank"
-            >
-              {/** biome-ignore lint/performance/noImgElement: Want to use img */}
+          <Button variant="secondary" className="flex items-center gap-2 rounded-full" asChild>
+            <Link href="https://go.evaluate.run/firefox-extension" target="_blank">
+              {/** Biome-ignore lint/performance/noImgElement: Want to use img */}
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/800px-Firefox_logo%2C_2019.svg.png"
                 className="aspect-square w-6"

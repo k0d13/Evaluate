@@ -1,11 +1,7 @@
 'use client';
 
 import { Input } from '@evaluate/components/input';
-import {
-  Popover,
-  PopoverAnchor,
-  PopoverContent,
-} from '@evaluate/components/popover';
+import { Popover, PopoverAnchor, PopoverContent } from '@evaluate/components/popover';
 import { useSay } from '@sayable/react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { twMerge as cn } from 'tailwind-merge';
@@ -41,19 +37,15 @@ export function ExplorerItemName(props: ExplorerItemName.Props) {
     setErrorMessage(undefined);
   }, [say, item]);
 
-  const handleKeyUp = useCallback(
-    (ev: React.KeyboardEvent<HTMLInputElement>) => {
-      if (ev.key === 'Enter' || ev.key === 'Escape') inputRef.current?.blur();
-    },
-    [],
-  );
+  const handleKeyUp = useCallback((ev: React.KeyboardEvent<HTMLInputElement>) => {
+    if (ev.key === 'Enter' || ev.key === 'Escape') inputRef.current?.blur();
+  }, []);
 
   const handleBlur = useCallback(
     (ev: React.FocusEvent<HTMLInputElement>) => {
       // In some cases the input can be unintentionally blurred, so we need to
       // check if the blur was intentional
-      if (ev.relatedTarget?.getAttribute('data-ignore-blur'))
-        return ev.target?.focus();
+      if (ev.relatedTarget?.getAttribute('data-ignore-blur')) return ev.target?.focus();
 
       const name = inputRef.current?.value ?? '';
       if (name !== item.name && !errorMessage) item.name = name;
@@ -99,7 +91,7 @@ export function ExplorerItemName(props: ExplorerItemName.Props) {
       </PopoverAnchor>
 
       <PopoverContent
-        className="w-auto bg-destructive/50 p-1 text-destructive-foreground text-sm"
+        className="w-auto bg-destructive/50 p-1 text-sm text-destructive-foreground"
         data-ignore-blur
       >
         <span>{errorMessage}</span>

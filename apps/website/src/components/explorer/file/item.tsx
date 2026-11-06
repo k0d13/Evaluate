@@ -9,12 +9,7 @@ import { MaterialIcon } from '~/components/material-icon';
 import { useIsMobile } from '~/hooks/is-mobile';
 import { ExplorerItemName } from '../name';
 import { useWatch } from '../use';
-import {
-  useClickable,
-  useDeleteable,
-  useDraggable,
-  useNameable,
-} from './hooks';
+import { useClickable, useDeleteable, useDraggable, useNameable } from './hooks';
 
 export namespace ExplorerFileItem {
   export interface Props {

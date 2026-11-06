@@ -2,8 +2,9 @@ export type RGB = { r: number; g: number; b: number };
 
 /**
  * Get the dominant colour of an image.
- * @param imageElement element to get the dominant colour of
- * @returns the dominant colour of the image
+ *
+ * @param imageElement Element to get the dominant colour of
+ * @returns The dominant colour of the image
  */
 export function getDominantColour(imageElement: HTMLImageElement) {
   const canvas = document.createElement('canvas');

@@ -13,10 +13,7 @@ export function generateStaticParams() {
   return say.locales.map((l) => ({ locale: l }));
 }
 
-export default async function RootLayout({
-  params,
-  children,
-}: LayoutProps<'/[locale]'>) {
+export default async function RootLayout({ params, children }: LayoutProps<'/[locale]'>) {
   const { locale = 'en' } = await params;
   try {
     await say.load(String(locale));
@@ -30,9 +27,7 @@ export default async function RootLayout({
       <html
         key="html"
         lang={say.locale}
-        dir={
-          ['ar', 'fa', 'he', 'ur', 'ps'].includes(say.locale) ? 'rtl' : 'ltr'
-        }
+        dir={['ar', 'fa', 'he', 'ur', 'ps'].includes(say.locale) ? 'rtl' : 'ltr'}
         className="dark"
       >
         <head key="head">
@@ -49,10 +44,7 @@ export default async function RootLayout({
 
         <body
           key="body"
-          className={cn(
-            inter.className,
-            'flex min-h-screen flex-col overflow-y-scroll',
-          )}
+          className={cn(inter.className, 'flex min-h-screen flex-col overflow-y-scroll')}
         >
           <BodyProviders {...say}>
             <Header />

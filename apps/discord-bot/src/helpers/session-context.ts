@@ -6,9 +6,7 @@ function hashSessionId(sessionId: string) {
   return crypto.createHash('sha256').update(sessionId).digest('hex');
 }
 
-export function getInteractionContext(
-  interaction: Exclude<APIInteraction, { type: 1 }>,
-) {
+export function getInteractionContext(interaction: Exclude<APIInteraction, { type: 1 }>) {
   const user = interaction.member?.user ?? interaction.user!;
   const channel = interaction.channel;
   const guild = interaction.guild;

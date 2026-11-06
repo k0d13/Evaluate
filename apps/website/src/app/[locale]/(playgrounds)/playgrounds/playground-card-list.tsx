@@ -13,12 +13,7 @@ import {
 import { Separator } from '@evaluate/components/separator';
 import { toast } from '@evaluate/components/toast';
 import { Say, useSay } from '@sayable/react';
-import {
-  ArrowDownWideNarrowIcon,
-  CircleDotIcon,
-  SearchIcon,
-  XIcon,
-} from 'lucide-react';
+import { ArrowDownWideNarrowIcon, CircleDotIcon, SearchIcon, XIcon } from 'lucide-react';
 import type { Runtime } from 'piston.ts';
 import { useDeferredValue, useEffect, useMemo } from 'react';
 import { useHashFragment } from '~/hooks/hash-fragment';
@@ -39,19 +34,12 @@ export function PlaygroundCardList({
     if (!deferredSearch) return initialRuntimes;
 
     return initialRuntimes.filter((runtime) => {
-      if (runtime.name.toLowerCase().includes(deferredSearch.toLowerCase()))
-        return true;
+      if (runtime.name.toLowerCase().includes(deferredSearch.toLowerCase())) return true;
       if (
-        runtime.aliases.some((alias) =>
-          alias.toLowerCase().includes(deferredSearch.toLowerCase()),
-        )
+        runtime.aliases.some((alias) => alias.toLowerCase().includes(deferredSearch.toLowerCase()))
       )
         return true;
-      if (
-        runtime.tags.some((tag) =>
-          tag.toLowerCase().includes(deferredSearch.toLowerCase()),
-        )
-      )
+      if (runtime.tags.some((tag) => tag.toLowerCase().includes(deferredSearch.toLowerCase())))
         return true;
       return false;
     });
@@ -133,26 +121,18 @@ export function PlaygroundCardList({
 
       {pinnedRuntimes.length > 0 && (
         <>
-          <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7">
+          <div className="xs:grid-cols-2 grid grid-cols-1 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7">
             {pinnedRuntimes.map((runtime) => (
-              <PlaygroundCard
-                key={runtime.id}
-                runtime={runtime}
-                hash={hash || undefined}
-              />
+              <PlaygroundCard key={runtime.id} runtime={runtime} hash={hash || undefined} />
             ))}
           </div>
           <Separator />
         </>
       )}
 
-      <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7">
+      <div className="xs:grid-cols-2 grid grid-cols-1 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7">
         {sortedRuntimes.map((runtime) => (
-          <PlaygroundCard
-            key={runtime.id}
-            runtime={runtime}
-            hash={hash || undefined}
-          />
+          <PlaygroundCard key={runtime.id} runtime={runtime} hash={hash || undefined} />
         ))}
       </div>
     </div>

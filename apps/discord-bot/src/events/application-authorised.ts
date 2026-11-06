@@ -1,7 +1,4 @@
-import {
-  ApplicationAuthorizedListener,
-  type ListenerEventData,
-} from '@buape/carbon';
+import { ApplicationAuthorizedListener, type ListenerEventData } from '@buape/carbon';
 import { getUserContext } from '~/helpers/session-context';
 import { captureEvent } from '~/services/posthog';
 

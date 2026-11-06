@@ -5,10 +5,7 @@ import { useDrag, useDrop } from 'react-dnd';
 import { File, Folder } from 'virtual-file-explorer-backend';
 
 export function useDraggable(folder: Folder) {
-  const [, draggableRef] = useDrag(
-    () => ({ type: 'folder', item: folder }),
-    [folder],
-  );
+  const [, draggableRef] = useDrag(() => ({ type: 'folder', item: folder }), [folder]);
   return {
     draggableRef: draggableRef as unknown as React.RefCallback<unknown>,
   };
@@ -35,8 +32,7 @@ export function useClickable(folder: Folder) {
     (ev: React.MouseEvent | string) => {
       if (typeof ev === 'object' && folder.name === '::root::') {
         const target = ev.target as HTMLElement;
-        if (target.getAttribute('data-radix-scroll-area-viewport') === '')
-          folder.selected = true;
+        if (target.getAttribute('data-radix-scroll-area-viewport') === '') folder.selected = true;
       } else {
         folder.selected = true;
         folder.expanded = !folder.expanded;
@@ -79,14 +75,8 @@ function createChild<C extends File | Folder>(
 }
 
 export function useChildren(folder: Folder) {
-  const handleNewFileClick = useCallback(
-    () => createChild.call(folder, File),
-    [folder],
-  );
-  const handleNewFolderClick = useCallback(
-    () => createChild.call(folder, Folder),
-    [folder],
-  );
+  const handleNewFileClick = useCallback(() => createChild.call(folder, File), [folder]);
+  const handleNewFolderClick = useCallback(() => createChild.call(folder, Folder), [folder]);
   return {
     handleNewFileClick,
     handleNewFolderClick,
@@ -126,9 +116,7 @@ export function useDownloadable(folder: Folder) {
     );
 
     const name = folder.name === '::root::' ? 'evaluate' : folder.name;
-    return zip
-      .generateAsync({ type: 'blob' })
-      .then((b) => FileSaver.saveAs(b, name));
+    return zip.generateAsync({ type: 'blob' }).then((b) => FileSaver.saveAs(b, name));
   }, [folder]);
 
   return { handleDownloadClick };

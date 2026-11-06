@@ -1,4 +1,4 @@
-@import "@evaluate/style";
-@import "@evaluate/components";
-@import "sonner/dist/styles.css";
+@import '@evaluate/style';
+@import '@evaluate/components';
+@import 'sonner/dist/styles.css';
 @source ".";

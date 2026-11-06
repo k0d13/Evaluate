@@ -2,20 +2,9 @@
 
 import { Button } from '@evaluate/components/button';
 import { ScrollArea, ScrollBar } from '@evaluate/components/scroll-area';
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@evaluate/components/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@evaluate/components/tabs';
 import { Say } from '@sayable/react';
-import {
-  CodeIcon,
-  FullscreenIcon,
-  PackageCheckIcon,
-  PlayIcon,
-  Trash2Icon,
-} from 'lucide-react';
+import { CodeIcon, FullscreenIcon, PackageCheckIcon, PlayIcon, Trash2Icon } from 'lucide-react';
 import type { Runtime } from 'piston.ts';
 import { ReadonlyEditor } from '../editor/readonly';
 import { HtmlPreview } from './html-preview';
@@ -32,7 +21,7 @@ export function Terminal({ runtime }: Terminal.Props) {
   return (
     <section className="h-full">
       <Tabs defaultValue="run" className="h-full gap-0">
-        <ScrollArea className="flex items-center whitespace-nowrap rounded-full">
+        <ScrollArea className="flex items-center rounded-full whitespace-nowrap">
           <TabsList className="h-10 w-full space-x-1 rounded-none border-b-2 bg-transparent px-0.5">
             <TabsTrigger value="run" asChild>
               <Button
@@ -44,7 +33,7 @@ export function Terminal({ runtime }: Terminal.Props) {
                   &nbsp;<Say>Run</Say>
                 </span>
                 {result?.run.output && (
-                  <span className="-mt-1 -mr-1 absolute top-2 right-2 size-1.5 rounded-full bg-primary/50" />
+                  <span className="absolute top-2 right-2 -mt-1 -mr-1 size-1.5 rounded-full bg-primary/50" />
                 )}
               </Button>
             </TabsTrigger>
@@ -59,7 +48,7 @@ export function Terminal({ runtime }: Terminal.Props) {
                   &nbsp;<Say>Compile</Say>
                 </span>
                 {result?.compile?.output && (
-                  <span className="-mt-1 -mr-1 absolute top-2 right-2 size-1.5 rounded-full bg-primary/50" />
+                  <span className="absolute top-2 right-2 -mt-1 -mr-1 size-1.5 rounded-full bg-primary/50" />
                 )}
               </Button>
             </TabsTrigger>
@@ -97,22 +86,22 @@ export function Terminal({ runtime }: Terminal.Props) {
 
           {!result?.run.output && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-              <span className="max-w-64 text-balance text-center text-foreground/50 text-sm">
+              <span className="max-w-64 text-center text-sm text-balance text-foreground/50">
                 {result?.run.expired ? (
                   <Say>
-                    Your code execution exceeded the allotted time and was
-                    terminated. Consider optimising it for better performance.
+                    Your code execution exceeded the allotted time and was terminated. Consider
+                    optimising it for better performance.
                   </Say>
                 ) : result && !result.run.output ? (
                   <Say>
-                    Your code executed successfully; however, it did not
-                    generate any output for the console.
+                    Your code executed successfully; however, it did not generate any output for the
+                    console.
                   </Say>
                 ) : (
                   <Say>
                     Write your code and press
-                    <PlayIcon size={16} className="inline"></PlayIcon> to
-                    execute it. The results will be displayed here.
+                    <PlayIcon size={16} className="inline"></PlayIcon> to execute it. The results
+                    will be displayed here.
                   </Say>
                 )}
               </span>
@@ -121,23 +110,20 @@ export function Terminal({ runtime }: Terminal.Props) {
         </TabsContent>
 
         <TabsContent value="compile" className="relative mt-0 h-full">
-          {result?.compile?.output && (
-            <ReadonlyEditor content={result.compile.output} />
-          )}
+          {result?.compile?.output && <ReadonlyEditor content={result.compile.output} />}
 
           {!result?.compile?.output && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-              <span className="max-w-64 text-balance text-center text-foreground/50 text-sm">
+              <span className="max-w-64 text-center text-sm text-balance text-foreground/50">
                 {result?.compile?.expired ? (
                   <Say>
-                    Your code compilation exceeded the allotted time and was
-                    terminated. Consider optimising your code for faster
-                    compilation.
+                    Your code compilation exceeded the allotted time and was terminated. Consider
+                    optimising your code for faster compilation.
                   </Say>
                 ) : (
                   <Say>
-                    <strong>If</strong> this runtime requires compilation, the
-                    output will be displayed here.
+                    <strong>If</strong> this runtime requires compilation, the output will be
+                    displayed here.
                   </Say>
                 )}
               </span>
@@ -146,16 +132,12 @@ export function Terminal({ runtime }: Terminal.Props) {
         </TabsContent>
 
         <TabsContent value="preview" className="relative mt-0 h-full">
-          {runtime.id === 'php' && (
-            <HtmlPreview>{result?.run?.output}</HtmlPreview>
-          )}
+          {runtime.id === 'php' && <HtmlPreview>{result?.run?.output}</HtmlPreview>}
 
           {!(runtime.id === 'php') && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-              <span className="max-w-64 text-balance text-center text-foreground/50 text-sm">
-                <Say>
-                  This runtime does not have a way to display any preview.
-                </Say>
+              <span className="max-w-64 text-center text-sm text-balance text-foreground/50">
+                <Say>This runtime does not have a way to display any preview.</Say>
               </span>
             </div>
           )}

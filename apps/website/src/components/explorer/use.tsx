@@ -3,22 +3,9 @@
 import { toast } from '@evaluate/components/toast';
 import { useEventListener } from '@evaluate/hooks/event-listener';
 import { useSay } from '@sayable/react';
-import {
-  ExecuteOptions,
-  type FilesOptions,
-  getRuntimeExamples,
-  type Runtime,
-} from 'piston.ts';
-
+import { ExecuteOptions, type FilesOptions, getRuntimeExamples, type Runtime } from 'piston.ts';
 import { compress, decompress } from 'piston.ts/evaluate';
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { File, Folder } from 'virtual-file-explorer-backend';
@@ -39,22 +26,17 @@ export function ExplorerProvider({
   const say = useSay();
 
   const [hash, setHash] = useHashFragment();
-  const example = useMemo(
-    () => getRuntimeExamples(runtime.id)?.[0],
-    [runtime.id],
-  );
+  const example = useMemo(() => getRuntimeExamples(runtime.id)?.[0], [runtime.id]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: Only want triggered once
+  // Only want triggered once
   const root = useMemo(() => {
     let root: Folder<true>;
     if (hash) root = decodeExplorer(hash);
     else if (example) root = optionsToFolder(example);
     else root = new Folder<true>('::root::');
 
-    if (!root.children.some((c) => c.name === '::args::'))
-      new File('::args::').parent = root;
-    if (!root.children.some((c) => c.name === '::input::'))
-      new File('::input::').parent = root;
+    if (!root.children.some((c) => c.name === '::args::')) new File('::args::').parent = root;
+    if (!root.children.some((c) => c.name === '::input::')) new File('::input::').parent = root;
 
     root.select().expand();
     return root;
@@ -73,9 +55,7 @@ export function ExplorerProvider({
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <ExplorerContext.Provider value={root}>
-        {children}
-      </ExplorerContext.Provider>
+      <ExplorerContext.Provider value={root}>{children}</ExplorerContext.Provider>
     </DndProvider>
   );
 }
@@ -86,18 +66,14 @@ export function useExplorer() {
   throw new Error('useExplorer must be used within a ExplorerProvider');
 }
 
-export function useWatch(
-  item: Folder | File | null,
-  events: string[],
-  callback?: () => unknown,
-) {
+export function useWatch(item: Folder | File | null, events: string[], callback?: () => unknown) {
   const [, setTick] = useState(0);
   const update = useCallback(() => {
     if (callback) callback();
     else setTick((t) => t + 1);
   }, [callback]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: Rest of the deps
+  // Rest of the deps
   useEffect(() => {
     for (const e of events) item?.changes.on(e, update);
     return () => {
@@ -133,9 +109,7 @@ function folderToOptions(folder: Folder) {
   return ExecuteOptions.parse({ files, entry, focused });
 }
 
-function optionsToFolder(
-  options: typeof FilesOptions._output & { focused?: string },
-) {
+function optionsToFolder(options: typeof FilesOptions._output & { focused?: string }) {
   const root = new Folder<true>('::root::');
 
   for (const [path, content] of Object.entries(options.files)) {
@@ -162,8 +136,7 @@ function optionsToFolder(
       file.parent = parent;
 
       if (path === options.entry) Reflect.set(file, 'entry', true);
-      if (path === (options.focused ?? options.entry))
-        file.opened = file.focused = true;
+      if (path === (options.focused ?? options.entry)) file.opened = file.focused = true;
     }
   }
 

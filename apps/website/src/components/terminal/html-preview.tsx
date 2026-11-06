@@ -25,9 +25,7 @@ export function HtmlPreview({ children }: React.PropsWithChildren) {
       {sanitisedHtml && (
         <iframe
           title="HTML Preview"
-          src={`data:text/html;charset=utf-8,${encodeURIComponent(
-            sanitisedHtml,
-          )}`}
+          src={`data:text/html;charset=utf-8,${encodeURIComponent(sanitisedHtml)}`}
           className="h-full w-full"
           style={{ border: 'none' }}
           sandbox="allow-scripts"
@@ -36,7 +34,7 @@ export function HtmlPreview({ children }: React.PropsWithChildren) {
 
       {!sanitisedHtml && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-          <span className="max-w-64 text-balance text-center text-foreground/50 text-sm">
+          <span className="max-w-64 text-center text-sm text-balance text-foreground/50">
             <Say>Nothing to render here.</Say>
           </span>
         </div>

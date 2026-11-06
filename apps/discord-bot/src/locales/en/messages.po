@@ -6,41 +6,41 @@ msgstr ""
 "Language: en\n"
 "X-Generator: sayable\n"
 
-#: src/handlers/evaluate.ts:66
+#: src/handlers/evaluate.ts:63
 msgid "I was unable to find the runtime you were looking for, try again with another name."
 msgstr "I was unable to find the runtime you were looking for, try again with another name."
 
-#: src/handlers/evaluate.ts:95
+#: src/handlers/evaluate.ts:89
 msgid "Your code compilation exceeded the allotted time and was terminated. Consider optimising your code for faster compilation."
 msgstr "Your code compilation exceeded the allotted time and was terminated. Consider optimising your code for faster compilation."
 
-#: src/handlers/evaluate.ts:97
+#: src/handlers/evaluate.ts:91
 msgid "Your code execution exceeded the allotted time and was terminated. Consider optimising it for better performance."
 msgstr "Your code execution exceeded the allotted time and was terminated. Consider optimising it for better performance."
 
-#: src/handlers/evaluate.ts:99
+#: src/handlers/evaluate.ts:93
 msgid "Your code executed successfully; however, it did not generate any output for the console."
 msgstr "Your code executed successfully; however, it did not generate any output for the console."
 
-#: src/handlers/evaluate.ts:105
+#: src/handlers/evaluate.ts:96
 msgid "Output was too large to display, [click here to view the full output]({url})."
 msgstr "Output was too large to display, [click here to view the full output]({url})."
 
-#: src/handlers/evaluate.ts:127
+#: src/handlers/evaluate.ts:112
 msgid "Code Evaluation"
 msgstr "Code Evaluation"
 
-#: src/handlers/evaluate.ts:142
-#: src/components/evaluate-modal.ts:102
+#: src/handlers/evaluate.ts:127
+#: src/components/evaluate-modal.ts:96
 msgid "CLI Arguments"
 msgstr "CLI Arguments"
 
-#: src/handlers/evaluate.ts:148
-#: src/components/evaluate-modal.ts:120
+#: src/handlers/evaluate.ts:133
+#: src/components/evaluate-modal.ts:114
 msgid "STDIN"
 msgstr "STDIN"
 
-#: src/handlers/evaluate.ts:152
+#: src/handlers/evaluate.ts:137
 msgid "Output"
 msgstr "Output"
 
@@ -48,38 +48,38 @@ msgstr "Output"
 msgid "Edit"
 msgstr "Edit"
 
-#: src/components/evaluate-modal.ts:18
+#: src/components/evaluate-modal.ts:12
 msgid "Evaluate"
 msgstr "Evaluate"
 
-#: src/components/evaluate-modal.ts:46
+#: src/components/evaluate-modal.ts:40
 msgid "Edit Evaluation"
 msgstr "Edit Evaluation"
 
-#: src/components/evaluate-modal.ts:53
+#: src/components/evaluate-modal.ts:47
 #: src/commands/evaluate.ts:24
 msgid "The runtime in which the code is written."
 msgstr "The runtime in which the code is written."
 
-#: src/components/evaluate-modal.ts:64
+#: src/components/evaluate-modal.ts:58
 msgid "Runtime"
 msgstr "Runtime"
 
-#: src/components/evaluate-modal.ts:71
+#: src/components/evaluate-modal.ts:65
 #: src/commands/evaluate.ts:31
 msgid "The source code to evaluate."
 msgstr "The source code to evaluate."
 
-#: src/components/evaluate-modal.ts:82
+#: src/components/evaluate-modal.ts:76
 msgid "Code"
 msgstr "Code"
 
-#: src/components/evaluate-modal.ts:90
+#: src/components/evaluate-modal.ts:84
 #: src/commands/evaluate.ts:43
 msgid "Additional command line arguments to pass to the program."
 msgstr "Additional command line arguments to pass to the program."
 
-#: src/components/evaluate-modal.ts:109
+#: src/components/evaluate-modal.ts:103
 #: src/commands/evaluate.ts:37
 msgid "The STDIN input to provide to the program."
 msgstr "The STDIN input to provide to the program."

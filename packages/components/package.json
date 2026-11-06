@@ -12,8 +12,8 @@
     }
   },
   "scripts": {
-    "check": "tsc --noEmit",
-    "build": "tsc"
+    "build": "tsc",
+    "check": "tsc --noEmit"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",

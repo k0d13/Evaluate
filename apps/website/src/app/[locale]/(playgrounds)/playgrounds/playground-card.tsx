@@ -1,12 +1,7 @@
 'use client';
 
 import { Button } from '@evaluate/components/button';
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@evaluate/components/card';
+import { Card, CardDescription, CardHeader, CardTitle } from '@evaluate/components/card';
 import { Say } from '@sayable/react';
 import { CodeIcon, PinIcon } from 'lucide-react';
 import { getRuntimeIconUrl, type Runtime } from 'piston.ts';
@@ -36,10 +31,7 @@ export function PlaygroundCard({
 
   const [pinnedRuntimes, setPinnedRuntimes] = //
     useLocalStorage<string[]>('evaluate.pinned', []);
-  const pinned = useMemo(
-    () => pinnedRuntimes.includes(runtime.id),
-    [pinnedRuntimes, runtime.id],
-  );
+  const pinned = useMemo(() => pinnedRuntimes.includes(runtime.id), [pinnedRuntimes, runtime.id]);
   const togglePin = useCallback(() => {
     if (pinned) {
       setPinnedRuntimes(pinnedRuntimes.filter((id) => id !== runtime.id));
@@ -91,10 +83,7 @@ export function PlaygroundCard({
           className="!bg-transparent text-muted-foreground opacity-0 transition-all group-hover:opacity-100 group-data-[pinned=true]:opacity-100"
           onClick={togglePin}
         >
-          <PinIcon
-            size={16}
-            className="group-data-[pinned=true]:fill-current"
-          />
+          <PinIcon size={16} className="group-data-[pinned=true]:fill-current" />
         </Button>
       </div>
     </Card>

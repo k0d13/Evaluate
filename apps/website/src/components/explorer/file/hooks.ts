@@ -4,10 +4,7 @@ import { useDrag } from 'react-dnd';
 import type { File } from 'virtual-file-explorer-backend';
 
 export function useDraggable(file: File) {
-  const [, draggableRef] = useDrag(
-    () => ({ type: 'file', item: file }),
-    [file],
-  );
+  const [, draggableRef] = useDrag(() => ({ type: 'file', item: file }), [file]);
   return {
     draggableRef: draggableRef as unknown as React.RefCallback<unknown>,
   };

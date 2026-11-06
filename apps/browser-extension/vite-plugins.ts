@@ -10,8 +10,8 @@ const generate = Reflect.get(generate_, 'default') as typeof generate_;
 const traverse = Reflect.get(traverse_, 'default') as typeof traverse_;
 
 /**
- * Vite plugin to remove the external script loading from posthog-js.
- * This is required because chrome extensions do not allow loading external scripts due to security reasons.
+ * Vite plugin to remove the external script loading from posthog-js. This is required because
+ * chrome extensions do not allow loading external scripts due to security reasons.
  */
 export function removeExternalScriptLoading(): Plugin {
   return {
@@ -44,9 +44,7 @@ export function removeExternalScriptLoading(): Plugin {
   };
 }
 
-/**
- * Vite plugin to inline JSON imports with attributes as const declarations.
- */
+/** Vite plugin to inline JSON imports with attributes as const declarations. */
 export function replaceJsonImports(): Plugin {
   return {
     name: 'replace-json-imports',
@@ -70,10 +68,7 @@ export function replaceJsonImports(): Plugin {
 
             path.replaceWith(
               t.variableDeclaration('const', [
-                t.variableDeclarator(
-                  t.identifier(varName),
-                  t.valueToNode(jsonContent),
-                ),
+                t.variableDeclarator(t.identifier(varName), t.valueToNode(jsonContent)),
               ]),
             );
           }

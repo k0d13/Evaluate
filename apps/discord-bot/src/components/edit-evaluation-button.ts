@@ -24,8 +24,6 @@ export class EditEvaluationButton extends sayable(Button) {
 
     const embed = interaction.embeds?.[0];
     const options = embed && getEvaluateOptions(embed);
-    return interaction.showModal(
-      new EvaluateModalEdit(interaction.say, options),
-    );
+    return interaction.showModal(new EvaluateModalEdit(interaction.say, options));
   }
 }

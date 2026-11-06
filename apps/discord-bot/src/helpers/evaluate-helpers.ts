@@ -5,16 +5,16 @@ import { resolveEmoji } from './resolve-emoji.js';
 
 /**
  * Get the options from an evaluate embed.
- * @param embed the embed to get the options from
- * @returns the options
- * @throws if the embed does not contain the required fields
+ *
+ * @param embed The embed to get the options from
+ * @returns The options
+ * @throws If the embed does not contain the required fields
  */
 export function getEvaluateOptions(embed: Embed) {
   const runtime = extractBoldText(embed.description ?? '')[0];
   const code = extractCodeBlocks(embed.description ?? '')[0]?.code;
 
-  if (!runtime || !code)
-    throw new Error('Could not find runtime or code in embed description');
+  if (!runtime || !code) throw new Error('Could not find runtime or code in embed description');
 
   const inputField = getEmbedField(embed, resolveEmoji('keyboard'));
   const input = extractCodeBlocks(inputField?.value ?? '')[0]?.code;

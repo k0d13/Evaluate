@@ -5,6 +5,7 @@ export type Compressed<T> = string & { as: T };
 
 /**
  * Compresses data to a string.
+ *
  * @param data Data to compress.
  * @returns Branded compressed string.
  */
@@ -16,6 +17,7 @@ export function compress<T>(data: T): Compressed<T> {
 
 /**
  * Decompresses a string to its original data.
+ *
  * @param compressed Compressed string, preferably branded.
  * @returns Original data.
  */

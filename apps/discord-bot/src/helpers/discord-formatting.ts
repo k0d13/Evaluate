@@ -1,7 +1,8 @@
 /**
  * Extract all the double asterisk text from a string.
- * @param content the string to extract bold text from
- * @returns an array of bold text
+ *
+ * @param content The string to extract bold text from
+ * @returns An array of bold text
  */
 export function extractBoldText(content: string) {
   return Array.from(content.match(/(\*\*)(.*?)\1/g) ?? []) //
@@ -10,8 +11,9 @@ export function extractBoldText(content: string) {
 
 /**
  * Extracts code blocks from a string.
- * @param content the string to extract code blocks from
- * @returns an array of code blocks
+ *
+ * @param content The string to extract code blocks from
+ * @returns An array of code blocks
  */
 export function extractCodeBlocks(content: string) {
   const regex = /`{3}([\w#+]*\n)?([\S\s]*?)\n?`{3}|`([^\n`]+)`/gi;
@@ -37,8 +39,9 @@ export function extractCodeBlocks(content: string) {
 
 /**
  * Escapes code blocks in a string.
- * @param content the string to escape code blocks in
- * @returns the escaped string
+ *
+ * @param content The string to escape code blocks in
+ * @returns The escaped string
  */
 export function escapeCodeBlock(content: string) {
   return content.replace(/(```)/g, '`\u200b``').replace(/(`)/g, '`\u200b');
@@ -46,21 +49,20 @@ export function escapeCodeBlock(content: string) {
 
 /**
  * Formats a string as a code block.
- * @param content the string to format
- * @param maxLength the maximum length of the string
- * @returns the formatted string
+ *
+ * @param content The string to format
+ * @param maxLength The maximum length of the string
+ * @returns The formatted string
  */
-export function codeBlock<T extends string>(
-  content: T,
-  maxLength: number,
-): `\`\`\`\n${T}\`\`\``;
+export function codeBlock<T extends string>(content: T, maxLength: number): `\`\`\`\n${T}\`\`\``;
 
 /**
  * Formats a string as a code block.
- * @param runtime the runtime of the code block.
- * @param content the string to format
- * @param maxLength the maximum length of the string
- * @returns the formatted string
+ *
+ * @param runtime The runtime of the code block.
+ * @param content The string to format
+ * @param maxLength The maximum length of the string
+ * @returns The formatted string
  */
 export function codeBlock<T extends string, U extends string>(
   runtime: T,
@@ -68,9 +70,7 @@ export function codeBlock<T extends string, U extends string>(
   maxLength: number,
 ): `\`\`\`${T}\n${U}\`\`\``;
 
-export function codeBlock(
-  ...params: [string, number] | [string, string, number]
-) {
+export function codeBlock(...params: [string, number] | [string, string, number]) {
   const runtime = typeof params[1] === 'string' ? params[0] : '';
   const content = typeof params[1] === 'string' ? params[1] : params[0];
   const maxLength = typeof params[1] === 'number' ? params[1] : params[2]!;
@@ -81,9 +81,7 @@ export function codeBlock(
     .replaceAll('#', 's')
     .replaceAll('+', 'p')}\n${
     escapeCodeBlock(
-      content.length > maxLength
-        ? `${content.slice(0, maxLength)}...`
-        : content,
+      content.length > maxLength ? `${content.slice(0, maxLength)}...` : content,
     ).trim() || '‎'
   }\n\`\`\``;
 }

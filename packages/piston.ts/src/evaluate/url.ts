@@ -1,8 +1,4 @@
-import {
-  type CodeOptions,
-  ExecuteOptions,
-  type FilesOptions,
-} from '../execute.js';
+import { type CodeOptions, ExecuteOptions, type FilesOptions } from '../execute.js';
 import type { Runtime } from '../runtimes.js';
 import { compress } from './compress.js';
 

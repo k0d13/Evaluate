@@ -145,8 +145,7 @@ export class File {
   public set focused(focused) {
     if (this._focused === focused) return;
     if (focused)
-      for (const d of this.root?.descendants || [])
-        if (d.type === 'file') d.focused = false;
+      for (const d of this.root?.descendants || []) if (d.type === 'file') d.focused = false;
     this._focused = focused;
     this._emit('focused');
   }

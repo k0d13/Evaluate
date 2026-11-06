@@ -1,5 +1,5 @@
-@import "@evaluate/style";
-@import "@evaluate/components";
+@import '@evaluate/style';
+@import '@evaluate/components';
 @source ".";
 
 ::-webkit-scrollbar {

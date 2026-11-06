@@ -9,13 +9,13 @@
     }
   },
   "scripts": {
-    "check": "tsc --noEmit",
-    "build": "tsc"
-  },
-  "peerDependencies": {
-    "react": "^19.2.0"
+    "build": "tsc",
+    "check": "tsc --noEmit"
   },
   "devDependencies": {
     "@types/react": "^19.2.7"
+  },
+  "peerDependencies": {
+    "react": "^19.2.0"
   }
 }

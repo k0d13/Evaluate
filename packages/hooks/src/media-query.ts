@@ -12,6 +12,7 @@ const TAILWIND_BREAKPOINTS = {
 
 /**
  * Evaluate a CSS media query and respond to changes.
+ *
  * @param query Tailwind breakpoint or a media query string.
  * @returns Boolean indicating whether the query matches.
  */

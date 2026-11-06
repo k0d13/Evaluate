@@ -9,8 +9,7 @@ const MANIFEST = (() => {
     for (const ext of extensions) {
       const ex = ext.slice(1);
       if (manifest.fileExtensions) manifest.fileExtensions[ex] ??= name;
-      if (manifest.light?.fileExtensions)
-        manifest.light.fileExtensions[ex] ??= name;
+      if (manifest.light?.fileExtensions) manifest.light.fileExtensions[ex] ??= name;
     }
   return manifest;
 })();
@@ -33,11 +32,7 @@ export function getIconForFolder(name: string, theme?: string): string {
   const icons = (theme === 'light' ? MANIFEST.light : MANIFEST) || MANIFEST;
   const { folderNames } = icons;
 
-  return (
-    folderNames?.[name] ||
-    (theme === 'light' && getIconForFolder(name, 'dark')) ||
-    'folder'
-  );
+  return folderNames?.[name] || (theme === 'light' && getIconForFolder(name, 'dark')) || 'folder';
 }
 
 export function makeIconUrl(icon: string) {

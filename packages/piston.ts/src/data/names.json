@@ -109,15 +109,7 @@
   },
   "csharp+mono": {
     "name": "C# (Mono)",
-    "aliases": [
-      "mono",
-      "mono-csharp",
-      "mono-c#",
-      "mono-cs",
-      "c#",
-      "cs",
-      "csharp"
-    ],
+    "aliases": ["mono", "mono-csharp", "mono-c#", "mono-cs", "c#", "cs", "csharp"],
     "popularity": 27.62,
     "tags": []
   },

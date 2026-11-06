@@ -45,8 +45,7 @@ export function useLocalStorage<T>(
         return undefined as unknown as T;
       }
 
-      const defaultValue =
-        initialValue instanceof Function ? initialValue() : initialValue;
+      const defaultValue = initialValue instanceof Function ? initialValue() : initialValue;
 
       let parsed: unknown;
       try {
@@ -64,8 +63,7 @@ export function useLocalStorage<T>(
   // Get from local storage then
   // parse stored json or return initialValue
   const readValue = useCallback((): T => {
-    const initialValueToUse =
-      initialValue instanceof Function ? initialValue() : initialValue;
+    const initialValueToUse = initialValue instanceof Function ? initialValue() : initialValue;
 
     // Prevent build error "window is undefined" but keep working
     if (IS_SERVER) {
@@ -124,8 +122,7 @@ export function useLocalStorage<T>(
       );
     }
 
-    const defaultValue =
-      initialValue instanceof Function ? initialValue() : initialValue;
+    const defaultValue = initialValue instanceof Function ? initialValue() : initialValue;
 
     // Remove the key from local storage
     window.localStorage.removeItem(key);
@@ -137,7 +134,7 @@ export function useLocalStorage<T>(
     window.dispatchEvent(new StorageEvent('local-storage', { key }));
   });
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: _
+  // _
   useEffect(() => {
     setStoredValue(readValue());
   }, [key]);

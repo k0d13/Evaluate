@@ -4,21 +4,12 @@ import { Button } from '@evaluate/components/button';
 import { ScrollArea } from '@evaluate/components/scroll-area';
 import { Separator } from '@evaluate/components/separator';
 import { Say, useSay } from '@sayable/react';
-import {
-  FilePlusIcon,
-  FolderPlusIcon,
-  HardDriveDownloadIcon,
-} from 'lucide-react';
+import { FilePlusIcon, FolderPlusIcon, HardDriveDownloadIcon } from 'lucide-react';
 import { twMerge as cn } from 'tailwind-merge';
 import type { File } from 'virtual-file-explorer-backend';
 import { ExplorerFileItem } from './file/item';
 import { ExplorerFolderChildren } from './folder/children';
-import {
-  useChildren,
-  useClickable,
-  useDownloadable,
-  useDropzone,
-} from './folder/hooks';
+import { useChildren, useClickable, useDownloadable, useDropzone } from './folder/hooks';
 import { useExplorer, useWatch } from './use';
 
 export function Explorer() {
@@ -39,7 +30,7 @@ export function Explorer() {
   return (
     <section className="h-full w-full">
       <div className="flex h-10 items-center gap-1 border-b-2 px-3 py-1">
-        <span className="mr-auto font-medium text-sm">
+        <span className="mr-auto text-sm font-medium">
           <Say>Explorer</Say>
         </span>
 
@@ -93,10 +84,7 @@ export function Explorer() {
         <ScrollArea
           // TODO: Fix types
           ref={dropzoneRef as never}
-          className={cn(
-            'relative h-[calc(100%_-_45px)] w-full',
-            isOver && 'bg-border',
-          )}
+          className={cn('relative h-[calc(100%_-_45px)] w-full', isOver && 'bg-border')}
           onClick={handleClick}
         >
           <ExplorerFolderChildren folder={explorer} />
@@ -104,10 +92,8 @@ export function Explorer() {
           {/* Take into account the meta files (2) */}
           {explorer.children.length <= 2 && (
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="max-w-64 text-balance p-1 text-center text-foreground/50 text-sm">
-                <Say>
-                  This is the file explorer. Create a new file to get started.
-                </Say>
+              <span className="max-w-64 p-1 text-center text-sm text-balance text-foreground/50">
+                <Say>This is the file explorer. Create a new file to get started.</Say>
               </span>
             </div>
           )}
