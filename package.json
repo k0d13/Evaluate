@@ -1,29 +1,42 @@
 {
   "name": "evaluate",
-  "packageManager": "pnpm@10.18.3",
-  "workspaces": ["apps/*", "bots/*", "extensions/*", "packages/*"],
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "bots/*",
+    "extensions/*",
+    "packages/*"
+  ],
+  "type": "module",
   "scripts": {
-    "lint": "biome check . --write",
-    "format": "biome check . --write",
-    "check": "turbo run check",
     "build": "turbo run build",
     "build:packages": "turbo run build --filter=\"./packages/*\"",
+    "check": "turbo run check",
+    "check:env": "pnpm -r --parallel check:env",
+    "check:format": "oxfmt --check",
+    "check:lint": "oxlint",
     "dev": "pnpm run \"/dev:.*/\"",
-    "dev:packages": "turbo watch build --filter=\"./packages/*\"",
     "dev:apps": "turbo run dev --filter=\"./apps/*\"",
-    "prepare": "husky & ts-patch install",
-    "graph": "pnpx nx@18 graph"
+    "dev:packages": "turbo watch build --filter=\"./packages/*\"",
+    "fix": "pnpm run fix:lint && pnpm run fix:format",
+    "fix:format": "oxfmt",
+    "fix:lint": "oxlint --fix",
+    "graph": "pnpx nx@18 graph",
+    "prepare": "lefthook install && ts-patch install"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.2.6",
     "@evaluate/scripts": "workspace:^",
     "@types/node": "^22.18.11",
-    "husky": "^9.1.7",
+    "lefthook": "^2.2.1",
+    "oxfmt": "^0.75.0",
+    "oxlint": "^1.90.0",
     "ts-patch": "^3.3.0",
     "turbo": "^2.5.8",
     "typescript": "^5.9.3",
-    "typescript-transform-paths": "^3.5.5"
+    "typescript-transform-paths": "^3.5.5",
+    "varlock": "^1.24.0"
   },
+  "packageManager": "pnpm@10.18.3",
   "patchedDependencies": {
     "@tailwindcss/vite@4.1.11@4.1.11": "patches/@tailwindcss__vite@4.1.11.patch"
   }

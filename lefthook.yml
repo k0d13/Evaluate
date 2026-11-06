@@ -1,0 +1,13 @@
+colors: false
+output:
+  - failure
+
+pre-commit:
+  commands:
+    lint:
+      glob: '*.{js,mjs,cjs,jsx,ts,mts,cts,tsx}'
+      run: pnpm exec oxlint {staged_files}
+    format:
+      glob: '*.{js,mjs,cjs,jsx,ts,mts,cts,tsx,json,jsonc,yaml,yml,toml,html,css,md}'
+      run: pnpm exec oxfmt --no-error-on-unmatched-pattern {staged_files}
+      stage_fixed: true

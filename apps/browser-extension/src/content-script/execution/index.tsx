@@ -3,7 +3,6 @@ import type { ExecuteResult, Runtime } from 'piston.ts';
 import { makePickRuntimePathname } from 'piston.ts/evaluate';
 import { useEffect, useState } from 'react';
 import { onMessage } from 'webext-bridge/content-script';
-import env from '~/env.js';
 import { ExecutionDialog } from './dialog';
 
 export function Execution({ dialogPortal }: { dialogPortal: HTMLElement }) {
@@ -14,23 +13,19 @@ export function Execution({ dialogPortal }: { dialogPortal: HTMLElement }) {
   useEffect(() => {
     let lastToastId: string | number;
 
-    const removeUnknownRuntimeListener = onMessage(
-      'unknownRuntime',
-      ({ data: { code } }) => {
-        const pickUrl = new URL(
-          makePickRuntimePathname({ code }),
-          env.VITE_PUBLIC_WEBSITE_URL,
-        );
-        toast.error('Could not determine runtime', {
-          description:
-            'Evaluate was unable to determine a runtime for the selected text.',
-          action: {
-            label: 'Pick a Runtime',
-            onClick: () => window.open(pickUrl, '_blank'),
-          },
-        });
-      },
-    );
+    const removeUnknownRuntimeListener = onMessage('unknownRuntime', ({ data: { code } }) => {
+      const pickUrl = new URL(
+        makePickRuntimePathname({ code }),
+        import.meta.env.VITE_PUBLIC_WEBSITE_URL,
+      );
+      toast.error('Could not determine runtime', {
+        description: 'Evaluate was unable to determine a runtime for the selected text.',
+        action: {
+          label: 'Pick a Runtime',
+          onClick: () => window.open(pickUrl, '_blank'),
+        },
+      });
+    });
 
     const removeExecutionStartedListener = onMessage(
       'executionStarted',
@@ -40,10 +35,9 @@ export function Execution({ dialogPortal }: { dialogPortal: HTMLElement }) {
             ? // Number is always greater than 1
               `Running in ${runtimeNameOrCount} runtimes for the best results.`
             : `Running in ${runtimeNameOrCount}.`;
-        const toastId = toast.loading(
-          'Executing code, this may take a few seconds...',
-          { description },
-        );
+        const toastId = toast.loading('Executing code, this may take a few seconds...', {
+          description,
+        });
         lastToastId = toastId;
         setTimeout(() => toast.dismiss(toastId), 15000);
       },

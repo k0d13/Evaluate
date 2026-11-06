@@ -1,13 +1,13 @@
 .git/
 .github/
-.husky/
 .vscode/
 apps/website/
 apps/discord-bot/
 packages/hooks/
 packages/scripts/bin/ff-zip
-.editorconfig
 .ffignore
 .gitignore
 .vercelignore
-biome.json
+oxfmt.config.ts
+lefthook.yml
+mise.toml

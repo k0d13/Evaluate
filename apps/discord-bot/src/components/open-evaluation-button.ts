@@ -1,7 +1,6 @@
 import { LinkButton } from '@buape/carbon';
 import { sayable } from '@sayable/carbon';
 import type { Sayable } from 'sayable';
-import env from '~/env';
 import { resolveEmoji } from '~/helpers/resolve-emoji';
 
 export class OpenEvaluationButton extends sayable(LinkButton) {
@@ -9,6 +8,6 @@ export class OpenEvaluationButton extends sayable(LinkButton) {
     super({ label: say`Open Evaluation` });
     if (url) this.url = url;
   }
-  url = `${env.WEBSITE_URL}`;
+  url = process.env.WEBSITE_URL!;
   emoji = resolveEmoji('globe', true);
 }

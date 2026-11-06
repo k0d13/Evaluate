@@ -3,21 +3,17 @@
 /**
  * Builds a ZIP archive of the Firefox browser extension source.
  * - Excludes files listed in .gitignore and .ffignore
- * - Adds production env vars to .env.production.local
+ * - Adds production env vars to the extension's .env.production.local
  * - Outputs to apps/browser-extension/dist/firefox-source.zip
  */
 
-import { exec } from 'node:child_process';
 import { createWriteStream } from 'node:fs';
 import { readdir, readFile, rm, stat } from 'node:fs/promises';
 import { basename, dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { promisify } from 'node:util';
 import gitignoreParser from '@gerhobbelt/gitignore-parser';
 import archiver from 'archiver';
 import { logger } from './_logger.js';
-
-const execAsync = promisify(exec);
 
 // ===== //
 
@@ -71,13 +67,13 @@ async function addFilesToArchive(rootDir, archive, directoryPath, ignorer) {
 }
 
 async function addProductionEnvironmentFilesToArchive(archive) {
-  const websiteUrl = await execAsync(
-    'pnpm use-env -P -- echo $WEBSITE_URL',
-  ).then(({ stdout }) => stdout.trim().split('\n').at(-1));
-  const posthogKey = await execAsync(
-    'pnpm use-env -P -- echo $POSTHOG_KEY',
-  ).then(({ stdout }) => stdout.trim().split('\n').at(-1));
+  // Run under `varlock run`, which supplies the production values
+  const websiteUrl = process.env.VITE_PUBLIC_WEBSITE_URL ?? '';
+  const posthogKey = process.env.VITE_PUBLIC_POSTHOG_KEY ?? '';
 
-  const content = `PUBLIC_WEBSITE_URL=${websiteUrl}\nPUBLIC_POSTHOG_KEY=${posthogKey}`;
-  archive.append(content, { name: '.env/.env.production.local' });
+  const content = `VITE_PUBLIC_WEBSITE_URL=${websiteUrl}
+VITE_PUBLIC_POSTHOG_KEY=${posthogKey}`;
+  archive.append(content, {
+    name: 'apps/browser-extension/.env.production.local',
+  });
 }

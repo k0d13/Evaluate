@@ -1,15 +1,16 @@
 {
   "name": "website",
-  "description": "Run code snippets in any programming language with Evaluate!",
   "version": "2.0.0",
+  "description": "Run code snippets in any programming language with Evaluate!",
   "type": "module",
   "scripts": {
+    "build": "NODE_ENV=production varlock run -- next build --no-lint",
     "check": "tsc --noEmit",
+    "check:env": "varlock load",
+    "dev": "varlock run -- next dev --turbo",
+    "postbuild": "NODE_ENV=production varlock run -- next-sitemap --config sitemap.config.ts",
     "prebuild": "sayable extract && sayable compile",
-    "build": "use-env -p NEXT -P -- next build --no-lint",
-    "postbuild": "use-env -p NEXT -P -- next-sitemap --config sitemap.config.ts",
-    "start": "use-env -p NEXT -P -- next start",
-    "dev": "use-env -p NEXT -- next dev --turbo"
+    "start": "NODE_ENV=production varlock run -- next start"
   },
   "dependencies": {
     "@codemirror/commands": "^6.9.0",
@@ -20,7 +21,6 @@
     "@evaluate/style": "workspace:^",
     "@hookform/resolvers": "^5.2.2",
     "@sayable/react": "0.0.0-alpha.8",
-    "@t3-oss/env-nextjs": "^0.13.8",
     "@tanstack/react-query": "^5.90.5",
     "@tanstack/react-query-devtools": "^5.90.2",
     "@uiw/codemirror-extensions-langs": "^4.25.2",
@@ -69,6 +69,7 @@
     "@types/react": "^19.2.7",
     "autoprefixer": "^10.4.21",
     "next-sitemap": "^4.2.3",
-    "tailwindcss": "^4.1.14"
+    "tailwindcss": "^4.1.14",
+    "varlock": "^1.24.0"
   }
 }

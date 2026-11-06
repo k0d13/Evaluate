@@ -3,30 +3,23 @@ import { CommandDataPlugin } from '@buape/carbon/command-data';
 import { SayablePlugin } from '@sayable/carbon';
 import { EvaluateCommand } from '~/commands/evaluate';
 import { EditEvaluationButton } from '~/components/edit-evaluation-button.js';
-import {
-  EvaluateModal,
-  EvaluateModalEdit,
-} from '~/components/evaluate-modal.js';
-import env from '~/env';
+import { EvaluateModal, EvaluateModalEdit } from '~/components/evaluate-modal.js';
 import { ApplicationAuthorisedListener } from '~/events/application-authorised';
 import say from '~/i18n.js';
 
 const enabled = Boolean(
-  env.DISCORD_CLIENT_ID && env.DISCORD_PUBLIC_KEY && env.DISCORD_TOKEN,
+  process.env.DISCORD_CLIENT_ID && process.env.DISCORD_PUBLIC_KEY && process.env.DISCORD_TOKEN,
 );
-if (!enabled)
-  console.warn(
-    'Missing Discord bot environment variables, bot will be disabled.',
-  );
+if (!enabled) console.warn('Missing Discord bot environment variables, bot will be disabled.');
 
 const client = enabled
   ? new Client(
       {
-        baseUrl: `${env.WEBSITE_URL}api/discord`,
-        clientId: env.DISCORD_CLIENT_ID!,
-        publicKey: env.DISCORD_PUBLIC_KEY!,
-        token: env.DISCORD_TOKEN!,
-        deploySecret: env.DISCORD_CLIENT_SECRET!,
+        baseUrl: new URL('api/discord', process.env.WEBSITE_URL!).href,
+        clientId: process.env.DISCORD_CLIENT_ID!,
+        publicKey: process.env.DISCORD_PUBLIC_KEY!,
+        token: process.env.DISCORD_TOKEN!,
+        deploySecret: process.env.DISCORD_CLIENT_SECRET!,
         requestOptions: { queueRequests: false },
       },
       {

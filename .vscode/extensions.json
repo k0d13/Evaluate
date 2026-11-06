@@ -1,8 +1,12 @@
 {
   "recommendations": [
-    "biomejs.biome",
+    "fanaticpythoner.better-todo-tree",
     "streetsidesoftware.code-spell-checker",
-    "gruntfuggly.todo-tree",
-    "bradlc.vscode-tailwindcss"
+    "streetsidesoftware.code-spell-checker-australian-english",
+    "hverlin.mise-vscode",
+    "oxc.oxc-vscode",
+    "bradlc.vscode-tailwindcss",
+    "varlock.env-spec-language",
+    "github.vscode-github-actions"
   ]
 }

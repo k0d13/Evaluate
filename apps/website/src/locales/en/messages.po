@@ -153,27 +153,27 @@ msgid "<0>Execute</0> <1>{2}</1> <3>Code</3>"
 msgstr "<0>Execute</0> <1>{2}</1> <3>Code</3>"
 
 #: src/app/manifest.ts:10
-#: src/app/[locale]/metadata.ts:15
+#: src/app/[locale]/metadata.ts:14
 msgid "Test code in any programming language with Evaluate! Run code snippets in your browser, without installing anything."
 msgstr "Test code in any programming language with Evaluate! Run code snippets in your browser, without installing anything."
 
-#: src/app/[locale]/metadata.ts:17
+#: src/app/[locale]/metadata.ts:16
 msgid "online playground"
 msgstr "online playground"
 
-#: src/app/[locale]/metadata.ts:18
+#: src/app/[locale]/metadata.ts:17
 msgid "code playground"
 msgstr "code playground"
 
-#: src/app/[locale]/metadata.ts:19
+#: src/app/[locale]/metadata.ts:18
 msgid "code sandbox"
 msgstr "code sandbox"
 
-#: src/app/[locale]/metadata.ts:20
+#: src/app/[locale]/metadata.ts:19
 msgid "online compiler"
 msgstr "online compiler"
 
-#: src/app/[locale]/metadata.ts:21
+#: src/app/[locale]/metadata.ts:20
 msgid "online interpreter"
 msgstr "online interpreter"
 

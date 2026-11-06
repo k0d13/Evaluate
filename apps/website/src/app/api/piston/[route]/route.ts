@@ -1,5 +1,4 @@
 import type { NextRequest } from 'next/server';
-import env from '~/env';
 
 function matchOrigin(origin: string, pattern: string) {
   if (pattern === '*') return true;
@@ -10,14 +9,13 @@ function matchOrigin(origin: string, pattern: string) {
 }
 
 function withOriginCheck(
-  handler: (
-    req: NextRequest,
-    ctx: RouteContext<'/api/piston/[route]'>,
-  ) => Promise<Response>,
+  handler: (req: NextRequest, ctx: RouteContext<'/api/piston/[route]'>) => Promise<Response>,
 ) {
   return async (req: NextRequest, ctx: RouteContext<'/api/piston/[route]'>) => {
     const origin = req.headers.get('origin') ?? '';
-    const allowed = env.ALLOWED_ORIGIN.some((o) => matchOrigin(origin, o));
+    const allowed = (process.env.ALLOWED_ORIGIN ?? '*')
+      .split(',')
+      .some((o) => matchOrigin(origin, o.trim()));
     if (!origin || !allowed) return new Response(null, { status: 403 });
     return handler(req, ctx);
   };
@@ -25,10 +23,7 @@ function withOriginCheck(
 
 const BASE_URL = 'https://emkc.org/api/v2/piston';
 
-async function handleRequest(
-  req: NextRequest,
-  { params }: RouteContext<'/api/piston/[route]'>,
-) {
+async function handleRequest(req: NextRequest, { params }: RouteContext<'/api/piston/[route]'>) {
   const { route } = await params;
   const url = new URL(`${BASE_URL}/${route}${req.nextUrl.search}`);
 
@@ -36,12 +31,9 @@ async function handleRequest(
     method: req.method,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: env.PISTON_API_KEY,
+      Authorization: process.env.PISTON_API_KEY!,
     },
-    body:
-      req.method !== 'GET' && req.method !== 'HEAD'
-        ? await req.text()
-        : undefined,
+    body: req.method !== 'GET' && req.method !== 'HEAD' ? await req.text() : undefined,
   });
 
   return new Response(upstream.body, {

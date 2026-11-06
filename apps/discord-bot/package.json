@@ -1,29 +1,25 @@
 {
   "name": "discord-bot",
-  "description": "Run code snippets directly in your Discord server with the Evaluate bot!",
   "version": "4.1.0",
+  "description": "Run code snippets directly in your Discord server with the Evaluate bot!",
   "type": "module",
   "exports": {
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
-    },
-    "./env": {
-      "import": "./dist/env.js",
-      "types": "./dist/env.d.ts"
     }
   },
   "scripts": {
+    "build": "pnpm tsup",
     "check": "tsc --noEmit",
-    "prebuild": "sayable extract && sayable compile",
-    "build": "pnpm tsup"
+    "check:env": "varlock load",
+    "prebuild": "sayable extract && sayable compile"
   },
   "dependencies": {
     "@buape/carbon": "^0.13.0",
     "@evaluate/logger": "workspace:^",
     "@sayable/carbon": "0.0.0-alpha.4",
     "@sayable/react": "0.0.0-alpha.6",
-    "@t3-oss/env-core": "^0.13.8",
     "date-fns": "^4.1.0",
     "es-toolkit": "^1.40.0",
     "piston.ts": "workspace:^",
@@ -35,6 +31,7 @@
     "@sayable/config": "0.0.0",
     "@sayable/format-po": "0.0.0",
     "tsup": "^8.5.0",
-    "unplugin-sayable": "0.0.0-alpha.4"
+    "unplugin-sayable": "0.0.0-alpha.4",
+    "varlock": "^1.24.0"
   }
 }

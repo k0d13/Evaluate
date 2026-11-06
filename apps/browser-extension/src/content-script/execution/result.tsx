@@ -3,12 +3,8 @@ import { Label } from '@evaluate/components/label';
 import { Textarea } from '@evaluate/components/textarea';
 import { ExternalLinkIcon } from 'lucide-react';
 import type { ExecuteResult, Runtime } from 'piston.ts';
-import {
-  makeEditCodePathname,
-  makePickRuntimePathname,
-} from 'piston.ts/evaluate';
+import { makeEditCodePathname, makePickRuntimePathname } from 'piston.ts/evaluate';
 import { twMerge as cn } from 'tailwind-merge';
-import env from '~/env.js';
 
 export function ResultDialog({
   runtime,
@@ -52,7 +48,7 @@ export function ResultDialog({
               rel="noreferrer noopener"
               href={new URL(
                 makePickRuntimePathname(options),
-                env.VITE_PUBLIC_WEBSITE_URL,
+                import.meta.env.VITE_PUBLIC_WEBSITE_URL,
               ).toString()}
             >
               <span>Change Runtime</span>
@@ -68,7 +64,7 @@ export function ResultDialog({
               rel="noreferrer noopener"
               href={new URL(
                 makeEditCodePathname(runtime, options),
-                env.VITE_PUBLIC_WEBSITE_URL,
+                import.meta.env.VITE_PUBLIC_WEBSITE_URL,
               ).toString()}
             >
               <span>Edit Code</span>

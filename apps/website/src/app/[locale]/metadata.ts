@@ -1,7 +1,6 @@
 import { merge } from 'es-toolkit/object';
 import type { Metadata } from 'next';
 import type { Sayable } from 'sayable';
-import env from '~/env';
 
 export async function generateBaseMetadata(
   say: Sayable,
@@ -25,7 +24,7 @@ export async function generateBaseMetadata(
   );
 
   return {
-    metadataBase: new URL(env.WEBSITE_URL),
+    metadataBase: new URL(process.env.WEBSITE_URL!),
     ...metadata,
     openGraph: {
       type: 'website',
@@ -34,7 +33,7 @@ export async function generateBaseMetadata(
       locale: say.locale,
       alternateLocale: say.locales,
       siteName: metadata.title,
-      url: new URL(`/${say.locale}${pathname}`, env.WEBSITE_URL),
+      url: new URL(`/${say.locale}${pathname}`, process.env.WEBSITE_URL!),
     },
     twitter: {
       card: 'summary',

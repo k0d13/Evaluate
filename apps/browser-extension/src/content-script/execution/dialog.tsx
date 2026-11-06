@@ -5,15 +5,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@evaluate/components/dialog';
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@evaluate/components/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@evaluate/components/tabs';
 import type { ExecuteResult, Runtime } from 'piston.ts';
 import browser from 'webextension-polyfill';
-import env from '~/env';
 import { ResultDialog } from './result';
 
 export function ExecutionDialog({
@@ -47,7 +41,7 @@ export function ExecutionDialog({
             <a
               target="_blank"
               rel="noreferrer noopener"
-              href={`${env.VITE_PUBLIC_WEBSITE_URL}`}
+              href={import.meta.env.VITE_PUBLIC_WEBSITE_URL}
             >
               Evaluate
             </a>
@@ -67,11 +61,7 @@ export function ExecutionDialog({
 
               {runtimes.map((runtime, i) => (
                 <TabsContent key={runtime.id} value={runtime.id}>
-                  <ResultDialog
-                    options={{ code }}
-                    runtime={runtime}
-                    result={results[i]!}
-                  />
+                  <ResultDialog options={{ code }} runtime={runtime} result={results[i]!} />
                 </TabsContent>
               ))}
             </Tabs>

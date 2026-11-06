@@ -2,21 +2,14 @@ import type { ExecuteResult, Runtime } from 'piston.ts';
 import type { ProtocolWithReturn } from 'webext-bridge';
 import { onMessage, sendMessage } from 'webext-bridge/background';
 import browser from 'webextension-polyfill';
-import env from '~/env';
 import piston from '~/services/piston.js';
 import posthog, { sessionLog } from '~/services/posthog';
 
 declare module 'webext-bridge' {
   export interface ProtocolMap {
-    getSelectionInfo: ProtocolWithReturn<
-      void,
-      { code: string; resolvables: string[] }
-    >;
+    getSelectionInfo: ProtocolWithReturn<void, { code: string; resolvables: string[] }>;
     unknownRuntime: ProtocolWithReturn<{ code: string }, void>;
-    executionStarted: ProtocolWithReturn<
-      { runtimeNameOrCount: string | number },
-      void
-    >;
+    executionStarted: ProtocolWithReturn<{ runtimeNameOrCount: string | number }, void>;
     executionFailed: ProtocolWithReturn<{ errorMessage: string }, void>;
     executionFinished: ProtocolWithReturn<
       {
@@ -48,7 +41,7 @@ browser.contextMenus.create({
 
 browser.action.onClicked.addListener(async () => {
   posthog?.capture('clicked_browser_action');
-  browser.tabs.create({ url: `${env.VITE_PUBLIC_WEBSITE_URL}` });
+  browser.tabs.create({ url: import.meta.env.VITE_PUBLIC_WEBSITE_URL });
 });
 
 browser.contextMenus.onClicked.addListener(async (info, tab) => {
@@ -60,11 +53,9 @@ browser.contextMenus.onClicked.addListener(async (info, tab) => {
   const selection = await sendMessage('getSelectionInfo', void 0, endpoint);
   const { code, resolvables } = selection;
   const runtimes = (await piston.runtimes.search(resolvables)).slice(0, 5);
-  if (!runtimes.length)
-    return sendMessage('unknownRuntime', { code }, endpoint);
+  if (!runtimes.length) return sendMessage('unknownRuntime', { code }, endpoint);
 
-  const runtimeNameOrCount =
-    runtimes.length === 1 ? runtimes[0]!.name : runtimes.length;
+  const runtimeNameOrCount = runtimes.length === 1 ? runtimes[0]!.name : runtimes.length;
   sendMessage('executionStarted', { runtimeNameOrCount }, endpoint);
 
   const promises = [];
@@ -82,8 +73,7 @@ browser.contextMenus.onClicked.addListener(async (info, tab) => {
         return result;
       })
       .catch((error) => {
-        const message =
-          error instanceof Error ? error.message : 'Unknown error';
+        const message = error instanceof Error ? error.message : 'Unknown error';
         sendMessage('executionFailed', { errorMessage: message }, endpoint);
         throw error;
       });

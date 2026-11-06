@@ -3,21 +3,46 @@
   "explorer.compactFolders": true,
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
-    ".env": "*.env, .env.*",
-    "package.json": "pnpm-lock.yaml, pnpm-workspace.yaml",
+    ".env.schema": ".env.*",
+    "package.json": "pnpm-lock.yaml, pnpm-workspace.yaml, mise.toml, lefthook.yml",
     "*.js": "$(capture).js.map, $(capture).d.ts",
     "*.jsx": "$(capture).jsx.map, $(capture).d.ts",
     "*.d.ts": "$(capture).d.ts.map"
   },
   "editor.formatOnSave": true,
   "editor.insertSpaces": true,
+  "editor.rulers": [100],
   "editor.tabSize": 2,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports.biome": "explicit"
+  "files.eol": "\n",
+  "files.watcherExclude": {
+    "**/.turbo": true,
+    "**/.next": true,
+    "**/dist": true
   },
+  "search.exclude": {
+    "**/.turbo": true,
+    "**/.next": true,
+    "**/dist": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.codeActionsOnSave": { "source.fixAll.oxc": "explicit" }
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.codeActionsOnSave": { "source.fixAll.oxc": "explicit" }
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.codeActionsOnSave": { "source.fixAll.oxc": "explicit" }
+  },
+  "[json]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
+  "[jsonc]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
+  "tailwindCSS.classFunctions": ["cn", "cva", "twMerge"],
   "files.associations": {
     "*.css": "tailwindcss",
-    ".ffignore": "ignore"
+    ".ffignore": "ignore",
+    ".env.schema": "env"
   },
   "material-icon-theme.folders.associations": {
     "shapes": "middleware",

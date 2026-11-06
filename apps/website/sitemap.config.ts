@@ -2,7 +2,7 @@ import type { IConfig } from 'next-sitemap';
 import sayable from './sayable.config.ts';
 
 export default {
-  siteUrl: process.env.NEXT_PUBLIC_WEBSITE_URL!,
+  siteUrl: process.env.WEBSITE_URL!,
   generateIndexSitemap: false,
 
   transform: (_: unknown, pathname: string) => {
@@ -13,7 +13,7 @@ export default {
       changefreq: 'weekly',
       priority: 0.7,
       alternateRefs: sayable.locales.map((locale) => ({
-        href: `${process.env.NEXT_PUBLIC_WEBSITE_URL!}/${locale}${pathname.replace('/en/', '/')}`,
+        href: `${process.env.WEBSITE_URL!}/${locale}${pathname.replace('/en/', '/')}`,
         hreflang: locale,
       })),
     };
