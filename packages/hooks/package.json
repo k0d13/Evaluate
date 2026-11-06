@@ -3,13 +3,9 @@
   "description": "Reusable React hooks.",
   "type": "module",
   "exports": {
-    "./*": {
-      "import": "./dist/*.js",
-      "types": "./dist/*.d.ts"
-    }
+    "./*": "./src/*.ts"
   },
   "scripts": {
-    "build": "tsc",
     "check": "tsc --noEmit"
   },
   "devDependencies": {

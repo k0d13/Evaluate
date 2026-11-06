@@ -1,4 +1,17 @@
 {
-  "extends": "../../tsconfig.react.json",
-  "include": ["src/**/*", "vite-env.d.ts"]
+  "include": ["src", "*.ts", "vite-env.d.ts"],
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "skipLibCheck": true,
+    "types": ["node"],
+    "noEmit": true
+  }
 }

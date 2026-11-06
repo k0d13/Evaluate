@@ -2,13 +2,9 @@
   "name": "@evaluate/logger",
   "type": "module",
   "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    }
+    ".": "./src/index.ts"
   },
   "scripts": {
-    "build": "tsc",
     "check": "tsc --noEmit"
   }
 }

@@ -1,7 +1,7 @@
 // https://usehooks-ts.com/react-hook/use-event-listener
 
 import { type RefObject, useEffect, useRef } from 'react';
-import { useIsomorphicLayoutEffect } from './isomorphic-layout-effect.js';
+import { useIsomorphicLayoutEffect } from './isomorphic-layout-effect.ts';
 
 // MediaQueryList Event based useEventListener interface
 export function useEventListener<K extends keyof MediaQueryListEventMap>(

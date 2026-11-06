@@ -1,4 +1,15 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "compilerOptions": { "noImplicitOverride": false, "declaration": false, "declarationMap": false }
+  "include": ["src", "*.ts"],
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "skipLibCheck": true,
+    "types": ["node"],
+    "noEmit": true
+  }
 }

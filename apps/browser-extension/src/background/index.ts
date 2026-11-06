@@ -2,8 +2,8 @@ import type { ExecuteResult, Runtime } from 'piston.ts';
 import type { ProtocolWithReturn } from 'webext-bridge';
 import { onMessage, sendMessage } from 'webext-bridge/background';
 import browser from 'webextension-polyfill';
-import piston from '~/services/piston.js';
-import posthog, { sessionLog } from '~/services/posthog';
+import piston from '#/services/piston.ts';
+import posthog, { sessionLog } from '#/services/posthog.ts';
 
 declare module 'webext-bridge' {
   export interface ProtocolMap {

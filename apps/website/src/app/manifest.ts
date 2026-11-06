@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { catalogue } from '~/i18n';
+import { catalogue } from '#/i18n.ts';
 
 export default async function Manifest(): Promise<MetadataRoute.Manifest> {
   await Promise.all(catalogue.locales.map((locale) => catalogue.load(locale)));

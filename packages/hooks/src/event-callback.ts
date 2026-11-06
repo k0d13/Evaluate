@@ -1,7 +1,7 @@
 // https://usehooks-ts.com/react-hook/use-event-callback
 
 import { useCallback, useRef } from 'react';
-import { useIsomorphicLayoutEffect } from './isomorphic-layout-effect.js';
+import { useIsomorphicLayoutEffect } from './isomorphic-layout-effect.ts';
 
 export function useEventCallback<Args extends unknown[], R>(
   fn: (...args: Args) => R,

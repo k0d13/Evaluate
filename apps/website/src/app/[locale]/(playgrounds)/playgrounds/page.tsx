@@ -1,6 +1,6 @@
 import { Say } from '@saykit/react';
-import { localeOf, withSay } from '~/i18n';
-import piston from '~/services/piston';
+import { localeOf, withSay } from '#/i18n.ts';
+import piston from '#/services/piston.ts';
 import { generateBaseMetadata } from '../../metadata';
 import { PlaygroundCardList } from './playground-card-list';
 

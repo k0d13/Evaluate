@@ -6,13 +6,9 @@
     ".": {
       "style": "./src/style.css"
     },
-    "./*": {
-      "import": "./dist/*.jsx",
-      "types": "./dist/*.d.ts"
-    }
+    "./*": "./src/*.tsx"
   },
   "scripts": {
-    "build": "tsc",
     "check": "tsc --noEmit"
   },
   "dependencies": {

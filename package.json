@@ -10,14 +10,11 @@
   "type": "module",
   "scripts": {
     "build": "turbo run build",
-    "build:packages": "turbo run build --filter=\"./packages/*\"",
     "check": "turbo run check",
     "check:env": "pnpm -r --parallel check:env",
     "check:format": "oxfmt --check",
     "check:lint": "oxlint",
-    "dev": "pnpm run \"/dev:.*/\"",
-    "dev:apps": "turbo run dev --filter=\"./apps/*\"",
-    "dev:packages": "turbo watch build --filter=\"./packages/*\"",
+    "dev": "turbo run dev",
     "fix": "pnpm run fix:lint && pnpm run fix:format",
     "fix:format": "oxfmt",
     "fix:lint": "oxlint --fix",
@@ -31,7 +28,7 @@
     "oxfmt": "^0.76.0",
     "oxlint": "^1.91.0",
     "turbo": "^2.11.10",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "varlock": "^1.24.0"
   },
   "packageManager": "pnpm@10.18.3"

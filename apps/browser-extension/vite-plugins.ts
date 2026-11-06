@@ -6,6 +6,11 @@ import traverse from '@babel/traverse';
 import * as t from '@babel/types';
 import type { Plugin } from 'vite';
 
+/** Babel's source map type is looser than the one rolldown accepts. */
+function toResult({ code, map }: ReturnType<typeof generate>) {
+  return { code, map: map as never };
+}
+
 /**
  * Vite plugin to remove the external script loading from posthog-js. This is required because
  * chrome extensions do not allow loading external scripts due to security reasons.
@@ -36,7 +41,7 @@ export function removeExternalScriptLoading(): Plugin {
         },
       });
 
-      return generate(ast);
+      return toResult(generate(ast));
     },
   };
 }
@@ -51,7 +56,7 @@ export function replaceJsonImports(): Plugin {
 
       const ast = parse(code, {
         sourceType: 'module',
-        plugins: ['importAttributes', 'typescript', 'jsx'],
+        plugins: ['typescript', 'jsx'],
       });
 
       traverse(ast, {
@@ -59,7 +64,7 @@ export function replaceJsonImports(): Plugin {
           const importNode = path.node;
 
           if (importNode.source.value.endsWith('.json')) {
-            const varName = importNode.specifiers[0].local.name;
+            const varName = importNode.specifiers[0]!.local.name;
             const jsonPath = resolve(dirname(id), importNode.source.value);
             const jsonContent = JSON.parse(readFileSync(jsonPath, 'utf8'));
 
@@ -72,7 +77,7 @@ export function replaceJsonImports(): Plugin {
         },
       });
 
-      return generate(ast);
+      return toResult(generate(ast));
     },
   };
 }

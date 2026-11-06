@@ -1,7 +1,7 @@
 'use client';
 
 import type { File } from 'virtual-file-explorer-backend';
-import { useExplorer, useWatch } from '~/components/explorer/use';
+import { useExplorer, useWatch } from '#/components/explorer/use.tsx';
 import { OpenedFileButton } from './button';
 
 export function OpenedFiles() {

@@ -9,7 +9,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { File, Folder } from 'virtual-file-explorer-backend';
-import { useHashFragment } from '~/hooks/hash-fragment';
+import { useHashFragment } from '#/hooks/hash-fragment.ts';
 
 export const ExplorerContext = //
   createContext<Folder<true>>(null!);

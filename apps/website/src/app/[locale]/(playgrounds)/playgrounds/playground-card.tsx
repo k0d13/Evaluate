@@ -6,9 +6,9 @@ import { Say } from '@saykit/react';
 import { CodeIcon, PinIcon } from 'lucide-react';
 import { getRuntimeIconUrl, type Runtime } from 'piston.ts';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { ImageWithFallback } from '~/components/image-fallback';
-import { LocalisedLink } from '~/components/localised-link';
-import { useLocalStorage } from '~/hooks/local-storage';
+import { ImageWithFallback } from '#/components/image-fallback.tsx';
+import { LocalisedLink } from '#/components/localised-link.tsx';
+import { useLocalStorage } from '#/hooks/local-storage.ts';
 import { getDominantColour, type RGB } from './get-colour';
 
 declare module 'react' {

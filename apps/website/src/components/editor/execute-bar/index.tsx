@@ -20,10 +20,10 @@ import { FilesOptions, type Runtime } from 'piston.ts';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import type { File } from 'virtual-file-explorer-backend';
-import { useExplorer, useWatch } from '~/components/explorer/use';
-import { useTerminal } from '~/components/terminal/use';
-import piston from '~/services/piston';
-import posthog from '~/services/posthog';
+import { useExplorer, useWatch } from '#/components/explorer/use.tsx';
+import { useTerminal } from '#/components/terminal/use.tsx';
+import piston from '#/services/piston.ts';
+import posthog from '#/services/posthog.ts';
 
 export function ExecuteBar({ runtime }: { runtime: typeof Runtime._output }) {
   const say = useSay();

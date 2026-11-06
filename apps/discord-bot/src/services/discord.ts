@@ -1,11 +1,11 @@
 import { Client } from '@buape/carbon';
 import { CommandDataPlugin } from '@buape/carbon/command-data';
 import { SayPlugin } from '@saykit/carbon';
-import { EvaluateCommand } from '~/commands/evaluate';
-import { EditEvaluationButton } from '~/components/edit-evaluation-button.js';
-import { EvaluateModal, EvaluateModalEdit } from '~/components/evaluate-modal.js';
-import { ApplicationAuthorisedListener } from '~/events/application-authorised';
-import { catalogue } from '~/i18n.js';
+import { EvaluateCommand } from '#/commands/evaluate.ts';
+import { EditEvaluationButton } from '#/components/edit-evaluation-button.ts';
+import { EvaluateModal, EvaluateModalEdit } from '#/components/evaluate-modal.ts';
+import { ApplicationAuthorisedListener } from '#/events/application-authorised.ts';
+import { catalogue } from '#/i18n.ts';
 
 const view = catalogue.locale(catalogue.locales[0]);
 

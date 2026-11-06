@@ -4,7 +4,7 @@ import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-reac
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import * as React from 'react';
 import { twMerge as cn } from 'tailwind-merge';
-import { Button } from './button.jsx';
+import { Button } from './button.tsx';
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;

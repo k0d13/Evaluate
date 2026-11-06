@@ -1,12 +1,12 @@
 import { notFound } from 'next/navigation';
-import { generateBaseMetadata } from '~/app/[locale]/metadata';
-import { Editor } from '~/components/editor';
-import { Explorer } from '~/components/explorer';
-import { ExplorerProvider } from '~/components/explorer/use';
-import { Terminal } from '~/components/terminal';
-import { TerminalProvider } from '~/components/terminal/use';
-import { localeOf, withSay } from '~/i18n';
-import piston from '~/services/piston';
+import { generateBaseMetadata } from '#/app/[locale]/metadata.ts';
+import { Editor } from '#/components/editor/index.tsx';
+import { Explorer } from '#/components/explorer/index.tsx';
+import { ExplorerProvider } from '#/components/explorer/use.tsx';
+import { Terminal } from '#/components/terminal/index.tsx';
+import { TerminalProvider } from '#/components/terminal/use.tsx';
+import { localeOf, withSay } from '#/i18n.ts';
+import piston from '#/services/piston.ts';
 import { EditorWrapper } from './wrapper';
 
 export async function generateStaticParams() {

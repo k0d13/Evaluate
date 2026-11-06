@@ -3,10 +3,10 @@ import { getSay } from '@saykit/react/server';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { twMerge as cn } from 'tailwind-merge';
-import { Footer } from '~/components/footer';
-import { Header } from '~/components/header';
-import { BodyProviders, HtmlProviders } from '~/components/providers';
-import { catalogue, localeOf, withSay } from '~/i18n';
+import { Footer } from '#/components/footer/index.tsx';
+import { Header } from '#/components/header/index.tsx';
+import { BodyProviders, HtmlProviders } from '#/components/providers.tsx';
+import { catalogue, localeOf, withSay } from '#/i18n.ts';
 import '../../style.css';
 
 const inter = Inter({ subsets: ['latin'] });

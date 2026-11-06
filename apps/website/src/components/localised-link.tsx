@@ -2,7 +2,7 @@
 
 import { useSay } from '@saykit/react/client';
 import Link from 'next/link';
-import { defaultLocale } from '~/config';
+import { defaultLocale } from '#/config.ts';
 
 export function LocalisedLink({
   href,

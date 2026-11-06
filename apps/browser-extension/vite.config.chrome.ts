@@ -7,7 +7,6 @@ import manifest from './manifest.json' with { type: 'json' };
 import { removeExternalScriptLoading, replaceJsonImports } from './vite-plugins.ts';
 
 export default defineConfig({
-  resolve: { tsconfigPaths: true },
   plugins: [
     removeExternalScriptLoading(),
     replaceJsonImports(),

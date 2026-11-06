@@ -1,4 +1,4 @@
-import { hexToAnsi } from './hex-to-ansi.js';
+import { hexToAnsi } from './hex-to-ansi.ts';
 
 function isCssSupported() {
   // Browser

@@ -2,7 +2,7 @@
 
 import { Button } from '@evaluate/components/button';
 import { Say } from '@saykit/react';
-import { LocalisedLink } from '~/components/localised-link';
+import { LocalisedLink } from '#/components/localised-link.tsx';
 
 export default function PlaygroundNotFound() {
   return (

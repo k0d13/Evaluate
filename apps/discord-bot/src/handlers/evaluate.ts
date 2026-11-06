@@ -9,13 +9,13 @@ import {
   Row,
 } from '@buape/carbon';
 import { makeEditCodePathname } from 'piston.ts/evaluate';
-import { EditEvaluationButton } from '~/components/edit-evaluation-button.js';
-import { OpenEvaluationButton } from '~/components/open-evaluation-button.js';
-import { codeBlock } from '~/helpers/discord-formatting.js';
-import { resolveEmoji } from '~/helpers/resolve-emoji.js';
-import { getInteractionContext } from '~/helpers/session-context.js';
-import piston from '~/services/piston.js';
-import { captureEvent } from '~/services/posthog.js';
+import { EditEvaluationButton } from '#/components/edit-evaluation-button.ts';
+import { OpenEvaluationButton } from '#/components/open-evaluation-button.ts';
+import { codeBlock } from '#/helpers/discord-formatting.ts';
+import { resolveEmoji } from '#/helpers/resolve-emoji.ts';
+import { getInteractionContext } from '#/helpers/session-context.ts';
+import piston from '#/services/piston.ts';
+import { captureEvent } from '#/services/posthog.ts';
 
 //
 

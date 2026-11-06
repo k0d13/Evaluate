@@ -4,12 +4,12 @@ import {
   Command,
   type CommandInteraction,
 } from '@buape/carbon';
-import { EvaluateModal } from '~/components/evaluate-modal';
-import { handleEvaluating } from '~/handlers/evaluate';
-import { getInteractionContext } from '~/helpers/session-context';
-import { withSay } from '~/i18n.js';
-import piston from '~/services/piston.js';
-import { captureEvent } from '~/services/posthog';
+import { EvaluateModal } from '#/components/evaluate-modal.ts';
+import { handleEvaluating } from '#/handlers/evaluate.ts';
+import { getInteractionContext } from '#/helpers/session-context.ts';
+import { withSay } from '#/i18n.ts';
+import piston from '#/services/piston.ts';
+import { captureEvent } from '#/services/posthog.ts';
 
 export class EvaluateCommand extends withSay(Command) {
   constructor() {

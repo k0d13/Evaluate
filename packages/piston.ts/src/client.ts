@@ -1,7 +1,7 @@
 import z from 'zod';
-import { Execute } from './execute.js';
-import { betterFetch } from './fetch.js';
-import { Runtimes } from './runtimes.js';
+import { Execute } from './execute.ts';
+import { betterFetch } from './fetch.ts';
+import { Runtimes } from './runtimes.ts';
 
 const ClientOptions = z.object({
   baseUrl: z.string().url().default('https://emkc.org/api/v2/piston'),

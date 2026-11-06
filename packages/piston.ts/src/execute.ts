@@ -1,9 +1,9 @@
 import z from 'zod';
-import { parseArguments } from './arguments.js';
-import { Callable } from './callable.js';
-import { type Client, FETCH } from './client.js';
-import { decodeRuntimeId, getRuntimeDefaultFileName } from './getters.js';
-import type { Runtime } from './runtimes.js';
+import { parseArguments } from './arguments.ts';
+import { Callable } from './callable.ts';
+import { type Client, FETCH } from './client.ts';
+import { decodeRuntimeId, getRuntimeDefaultFileName } from './getters.ts';
+import type { Runtime } from './runtimes.ts';
 
 // export const CodeOptions = type({
 //   code: 'string',

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useIsomorphicLayoutEffect } from './isomorphic-layout-effect.js';
+import { useIsomorphicLayoutEffect } from './isomorphic-layout-effect.ts';
 
 // Pre Tailwind v4, this grabbed the breakpoints from the tailwind.config.js, but...
 const TAILWIND_BREAKPOINTS = {

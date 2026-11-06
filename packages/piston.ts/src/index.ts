@@ -1,4 +1,4 @@
-export { Client as Piston } from './client.js';
-export * from './execute.js';
-export * from './getters.js';
-export * from './runtimes.js';
+export { Client as Piston } from './client.ts';
+export * from './execute.ts';
+export * from './getters.ts';
+export * from './runtimes.ts';

@@ -3,6 +3,9 @@
   "version": "0.3.0",
   "description": "Run any code snippet you come across on the web with the Evaluate browser extension!",
   "type": "module",
+  "imports": {
+    "#/*": "./src/*"
+  },
   "scripts": {
     "build": "pnpm run \"/build:.*/\"",
     "build:chrome": "NODE_ENV=production varlock run -- vite build --config vite.config.chrome.ts",
@@ -42,6 +45,7 @@
     "@types/webextension-polyfill": "^0.12.6",
     "@vitejs/plugin-react": "^6.2.1",
     "tailwindcss": "^4.3.4",
+    "typescript": "^7.0.2",
     "varlock": "^1.24.0",
     "vite": "8.3.6",
     "vite-plugin-zip-pack": "^1.2.4"

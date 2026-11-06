@@ -1,7 +1,7 @@
 import { merge } from 'es-toolkit/object';
 import type { Metadata } from 'next';
 import type { View } from 'saykit';
-import { catalogue } from '~/i18n';
+import { catalogue } from '#/i18n.ts';
 
 export async function generateBaseMetadata(
   locale: string,

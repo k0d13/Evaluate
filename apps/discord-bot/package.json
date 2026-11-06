@@ -3,10 +3,13 @@
   "version": "4.1.0",
   "description": "Run code snippets directly in your Discord server with the Evaluate bot!",
   "type": "module",
+  "imports": {
+    "#/*": "./src/*"
+  },
   "exports": {
     ".": {
       "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "types": "./src/index.ts"
     }
   },
   "scripts": {

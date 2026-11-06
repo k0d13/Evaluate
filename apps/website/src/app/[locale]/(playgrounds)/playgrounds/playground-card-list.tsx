@@ -17,9 +17,9 @@ import { useSay } from '@saykit/react/client';
 import { ArrowDownWideNarrowIcon, CircleDotIcon, SearchIcon, XIcon } from 'lucide-react';
 import type { Runtime } from 'piston.ts';
 import { useDeferredValue, useEffect, useMemo } from 'react';
-import { useHashFragment } from '~/hooks/hash-fragment';
-import { useLocalStorage } from '~/hooks/local-storage';
-import { useQueryParameter } from '~/hooks/query-parameter';
+import { useHashFragment } from '#/hooks/hash-fragment.ts';
+import { useLocalStorage } from '#/hooks/local-storage.ts';
+import { useQueryParameter } from '#/hooks/query-parameter.ts';
 import { PlaygroundCard } from './playground-card';
 
 export function PlaygroundCardList({

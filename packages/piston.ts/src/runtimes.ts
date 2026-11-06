@@ -1,14 +1,14 @@
 import Fuse from 'fuse.js';
 import z from 'zod';
-import { Callable } from './callable.js';
-import { type Client, FETCH } from './client.js';
+import { Callable } from './callable.ts';
+import { type Client, FETCH } from './client.ts';
 import {
   encodeRuntimeId,
   getRuntimeAliases,
   getRuntimeName,
   getRuntimePopularity,
   getRuntimeTags,
-} from './getters.js';
+} from './getters.ts';
 
 export const Runtime = z
   .object({

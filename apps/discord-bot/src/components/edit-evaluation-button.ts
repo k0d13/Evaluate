@@ -1,10 +1,10 @@
 import { Button, type ButtonInteraction, ButtonStyle } from '@buape/carbon';
 import type { View } from 'saykit';
-import { getEvaluateOptions } from '~/helpers/evaluate-helpers';
-import { resolveEmoji } from '~/helpers/resolve-emoji';
-import { getInteractionContext } from '~/helpers/session-context';
-import { withSay } from '~/i18n.js';
-import { captureEvent } from '~/services/posthog';
+import { getEvaluateOptions } from '#/helpers/evaluate-helpers.ts';
+import { resolveEmoji } from '#/helpers/resolve-emoji.ts';
+import { getInteractionContext } from '#/helpers/session-context.ts';
+import { withSay } from '#/i18n.ts';
+import { captureEvent } from '#/services/posthog.ts';
 import { EvaluateModalEdit } from './evaluate-modal';
 
 export class EditEvaluationButton extends withSay(Button) {

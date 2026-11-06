@@ -1,9 +1,9 @@
 import { Label, Modal, type ModalInteraction, TextInput, TextInputStyle } from '@buape/carbon';
 import type { View } from 'saykit';
-import { handleEvaluating } from '~/handlers/evaluate';
-import { getInteractionContext } from '~/helpers/session-context';
-import { withSay } from '~/i18n.js';
-import { captureEvent } from '~/services/posthog';
+import { handleEvaluating } from '#/handlers/evaluate.ts';
+import { getInteractionContext } from '#/helpers/session-context.ts';
+import { withSay } from '#/i18n.ts';
+import { captureEvent } from '#/services/posthog.ts';
 
 export class EvaluateModal extends withSay(Modal) {
   customId = 'evaluate,new';

@@ -12,7 +12,7 @@ import { LanguagesIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
-import { locales } from '~/config';
+import { locales } from '#/config.ts';
 
 export function LocaleSwitcher() {
   return (

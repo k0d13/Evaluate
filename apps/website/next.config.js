@@ -1,5 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: [
+    '@evaluate/components',
+    '@evaluate/hooks',
+    '@evaluate/logger',
+    'piston.ts',
+    'virtual-file-explorer-backend',
+  ],
   reactStrictMode: true,
   typescript: { ignoreBuildErrors: true },
 

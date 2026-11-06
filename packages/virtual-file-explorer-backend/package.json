@@ -7,16 +7,25 @@
     "url": "git+https://github.com/k0d13/evaluate.git",
     "directory": "packages/virtual-file-explorer-backend"
   },
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    }
+    ".": "./src/index.ts"
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      }
+    },
+    "access": "public"
   },
   "scripts": {
-    "build": "tsc",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "prepack": "tsc -p tsconfig.build.json"
   },
   "dependencies": {
     "eventemitter2": "^6.4.9"

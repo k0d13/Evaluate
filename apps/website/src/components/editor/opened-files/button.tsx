@@ -5,8 +5,8 @@ import { useSay } from '@saykit/react/client';
 import { XIcon } from 'lucide-react';
 import { useCallback, useMemo } from 'react';
 import type { File } from 'virtual-file-explorer-backend';
-import { useWatch } from '~/components/explorer/use';
-import { MaterialIcon } from '~/components/material-icon';
+import { useWatch } from '#/components/explorer/use.tsx';
+import { MaterialIcon } from '#/components/material-icon.tsx';
 
 export namespace OpenedFileButton {
   export interface Props {

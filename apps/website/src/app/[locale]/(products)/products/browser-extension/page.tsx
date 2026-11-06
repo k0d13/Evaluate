@@ -1,7 +1,7 @@
 import { Button } from '@evaluate/components/button';
 import { Say } from '@saykit/react';
 import Link from 'next/link';
-import { localeOf, withSay } from '~/i18n';
+import { localeOf, withSay } from '#/i18n.ts';
 import { ImageCarousel } from './image-carousel';
 
 function BrowserExtensionPlatformPage() {
