@@ -1,8 +1,8 @@
 'use client';
 
 import * as SheetPrimitive from '@radix-ui/react-dialog';
+import { cn } from 'cn';
 import { XIcon } from 'lucide-react';
-import { twMerge as cn } from 'tailwind-merge';
 
 function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
   return <SheetPrimitive.Root data-slot="sheet" {...props} />;

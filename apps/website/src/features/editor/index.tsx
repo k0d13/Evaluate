@@ -2,10 +2,10 @@
 
 import { Button } from '@evaluate/components/button';
 import { ScrollArea, ScrollBar } from '@evaluate/components/scroll-area';
+import { cn } from 'cn';
 import { FilesIcon, Share2Icon, TerminalIcon } from 'lucide-react';
 import type { Runtime } from 'piston.ts';
 import { useCallback, useEffect, useRef } from 'react';
-import { twMerge as cn } from 'tailwind-merge';
 import { useEventListener } from '#/hooks/event-listener.ts';
 import { ExecuteBar } from './execute-bar/index.tsx';
 import { useEditor } from './hooks.ts';

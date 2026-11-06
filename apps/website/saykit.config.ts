@@ -1,5 +1,5 @@
 import { defineConfig } from '@saykit/config';
-import po from '@saykit/format-po';
+import json from '@saykit/format-json';
 import js from '@saykit/transform-js';
 import jsx from '@saykit/transform-jsx';
 
@@ -10,7 +10,7 @@ export default defineConfig({
       include: ['src/**/*.{ts,tsx}'],
       exclude: ['src/**/*.d.*.ts', 'src/locales/**'],
       output: 'src/locales/{locale}.{extension}',
-      formatter: po(),
+      formatter: json(),
       transformer: [js(), jsx()],
     },
   ],

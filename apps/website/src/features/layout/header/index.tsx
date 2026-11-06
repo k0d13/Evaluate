@@ -3,12 +3,12 @@
 import { Button } from '@evaluate/components/button';
 import { Sheet, SheetBody, SheetTrigger } from '@evaluate/components/sheet';
 import { Say } from '@saykit/react';
+import { cn } from 'cn';
 import { MenuIcon } from 'lucide-react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import type React from 'react';
 import { Children, useCallback, useState } from 'react';
-import { twMerge as cn } from 'tailwind-merge';
 import { LocalisedLink } from '#/components/localised-link.tsx';
 import { useMediaQuery } from '#/hooks/media-query.ts';
 import { DiscordIcon } from './discord-icon.tsx';

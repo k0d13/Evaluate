@@ -1,7 +1,7 @@
 'use client';
 
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
-import { twMerge as cn } from 'tailwind-merge';
+import { cn } from 'cn';
 
 function ScrollArea({
   className,

@@ -1,4 +1,4 @@
-import { twMerge as cn } from 'tailwind-merge';
+import { cn } from 'cn';
 
 function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
   return (

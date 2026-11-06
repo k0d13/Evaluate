@@ -1,5 +1,5 @@
 import * as SeparatorPrimitive from '@radix-ui/react-separator';
-import { twMerge as cn } from 'tailwind-merge';
+import { cn } from 'cn';
 
 function Separator({
   className,

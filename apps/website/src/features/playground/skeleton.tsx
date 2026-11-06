@@ -1,5 +1,5 @@
 import { Skeleton } from '@evaluate/components/skeleton';
-import { twMerge as cn } from 'tailwind-merge';
+import { cn } from 'cn';
 
 export function EditorWrapperSkeleton({ className }: { className?: string }) {
   return (

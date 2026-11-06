@@ -1,5 +1,6 @@
 import type * as LabelPrimitive from '@radix-ui/react-label';
 import { Slot } from '@radix-ui/react-slot';
+import { cn } from 'cn';
 import * as React from 'react';
 import {
   Controller,
@@ -10,7 +11,6 @@ import {
   useFormContext,
   useFormState,
 } from 'react-hook-form';
-import { twMerge as cn } from 'tailwind-merge';
 import { Label } from './label.tsx';
 
 const Form: typeof FormProvider = FormProvider;

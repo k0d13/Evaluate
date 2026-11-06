@@ -1,8 +1,8 @@
 'use client';
 
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
+import { cn } from 'cn';
 import { ChevronDownIcon } from 'lucide-react';
-import { twMerge as cn } from 'tailwind-merge';
 
 function Accordion({ ...props }: React.ComponentProps<typeof AccordionPrimitive.Root>) {
   return <AccordionPrimitive.Root data-slot="accordion" {...props} />;

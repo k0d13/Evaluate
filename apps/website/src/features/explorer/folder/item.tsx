@@ -7,8 +7,8 @@ import {
   AccordionTrigger,
 } from '@evaluate/components/accordion';
 import { Button } from '@evaluate/components/button';
+import { cn } from 'cn';
 import { TextCursorInputIcon, Trash2Icon } from 'lucide-react';
-import { twMerge as cn } from 'tailwind-merge';
 import type { Folder } from 'virtual-file-explorer-backend';
 import { MaterialIcon } from '#/components/material-icon.tsx';
 import { ExplorerItemName } from '#/features/explorer/name.tsx';

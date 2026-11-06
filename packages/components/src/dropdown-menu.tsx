@@ -1,8 +1,8 @@
 'use client';
 
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
+import { cn } from 'cn';
 import { CheckIcon, ChevronRightIcon, CircleIcon } from 'lucide-react';
-import { twMerge as cn } from 'tailwind-merge';
 
 function DropdownMenu({ ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Root>) {
   return <DropdownMenuPrimitive.Root data-slot="dropdown-menu" {...props} />;

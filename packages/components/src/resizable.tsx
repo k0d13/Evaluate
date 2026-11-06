@@ -1,8 +1,8 @@
 'use client';
 
+import { cn } from 'cn';
 import { GripVerticalIcon } from 'lucide-react';
 import * as ResizablePrimitive from 'react-resizable-panels';
-import { twMerge as cn } from 'tailwind-merge';
 
 function ResizablePanelGroup({ className, ...props }: ResizablePrimitive.GroupProps) {
   return (

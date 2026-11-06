@@ -1,7 +1,7 @@
 'use client';
 
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
-import { twMerge as cn } from 'tailwind-merge';
+import { cn } from 'cn';
 
 function TooltipProvider({
   delayDuration = 0,

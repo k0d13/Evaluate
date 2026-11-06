@@ -1,6 +1,7 @@
 'use client';
 
 import * as SelectPrimitive from '@radix-ui/react-select';
+import { cn } from 'cn';
 import {
   CheckIcon,
   ChevronDownIcon,
@@ -8,7 +9,6 @@ import {
   ChevronUpIcon,
   type LucideIcon,
 } from 'lucide-react';
-import { twMerge as cn } from 'tailwind-merge';
 
 function Select({ ...props }: React.ComponentProps<typeof SelectPrimitive.Root>) {
   return <SelectPrimitive.Root data-slot="select" {...props} />;

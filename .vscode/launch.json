@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "website",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "pnpm --filter website dev --inspect",
+      "serverReadyAction": {
+        "pattern": "Local:\\s+(https?://\\S+)",
+        "uriFormat": "%s",
+        "action": "debugWithChrome",
+        "killOnServerStop": true,
+        "webRoot": "${workspaceFolder}/apps/website"
+      }
+    },
+    {
+      "name": "browser extension (chrome)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "pnpm --filter browser-extension dev:chrome"
+    }
+  ]
+}

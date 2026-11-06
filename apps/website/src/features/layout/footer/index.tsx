@@ -1,7 +1,7 @@
 'use client';
 
+import { cn } from 'cn';
 import { usePathname } from 'next/navigation';
-import { twMerge as cn } from 'tailwind-merge';
 import { LocalisedLink } from '#/components/localised-link.tsx';
 
 export function Footer(p: { className?: string }) {
