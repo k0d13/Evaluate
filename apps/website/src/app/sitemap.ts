@@ -19,9 +19,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return paths.map((path) => ({
     url: url(defaultLocale, path),
-    lastModified: new Date(),
-    changeFrequency: 'weekly',
-    priority: 0.7,
     alternates: {
       languages: Object.fromEntries(catalogue.locales.map((l) => [l, url(l, path)])),
     },

@@ -1,4 +1,13 @@
 import { format } from 'date-fns';
+import { generateBaseMetadata } from '#/lib/metadata.ts';
+
+export async function generateMetadata({ params }: PageProps<'/[locale]/policies/privacy-policy'>) {
+  const { locale } = await params;
+  return generateBaseMetadata(locale, '/policies/privacy-policy', (say) => ({
+    title: say`Privacy Policy | Evaluate`,
+    description: say`How Evaluate gathers, uses and protects information when you use the website, browser extension and Discord bot.`,
+  }));
+}
 
 export default function PrivacyPolicyPage() {
   const updatedAt = new Date('2025-02-17');

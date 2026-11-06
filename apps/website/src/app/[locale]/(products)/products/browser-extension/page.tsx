@@ -1,8 +1,20 @@
 import { Button } from '@evaluate/components/button';
 import { Say } from '@saykit/react';
 import Link from 'next/link';
+import { BrowserIcon } from '#/features/products/browser-icon.tsx';
 import { ImageCarousel } from '#/features/products/image-carousel.tsx';
 import { localeOf, withSay } from '#/i18n.ts';
+import { generateBaseMetadata } from '#/lib/metadata.ts';
+
+export async function generateMetadata({
+  params,
+}: PageProps<'/[locale]/products/browser-extension'>) {
+  const { locale } = await params;
+  return generateBaseMetadata(locale, '/products/browser-extension', (say) => ({
+    title: say`Browser Extension | Evaluate`,
+    description: say`Run code snippets on any website with the Evaluate browser extension, with over 70 supported languages.`,
+  }));
+}
 
 function BrowserExtensionPlatformPage() {
   return (
@@ -16,7 +28,7 @@ function BrowserExtensionPlatformPage() {
         <p className="mx-auto max-w-5xl text-sm text-balance md:text-base">
           <Say>
             When you stumble upon code snippets while browsing the web, wouldn't it be great to
-            execute them instantly? Look no further—the Evaluate extension is your solution, with
+            execute them instantly? Look no further, the Evaluate extension is your solution, with
             its over 70 supported languages and quick code execution capabilities.
           </Say>
         </p>
@@ -25,12 +37,7 @@ function BrowserExtensionPlatformPage() {
           <div className="flex items-center justify-center gap-2">
             <Button variant="secondary" className="flex items-center gap-2 rounded-full" asChild>
               <Link href="https://go.evaluate.run/chrome-extension" target="_blank">
-                {/** Biome-ignore lint/performance/noImgElement: Want to use img */}
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/1024px-Google_Chrome_icon_%28February_2022%29.svg.png"
-                  className="aspect-square w-6"
-                  alt="Chrome"
-                />
+                <BrowserIcon name="chrome" />
                 <span>
                   <Say>
                     Evaluate for <span className="font-bold">Chrome</span>
@@ -47,12 +54,7 @@ function BrowserExtensionPlatformPage() {
               asChild
             >
               <Link href="https://go.evaluate.run/chrome-extension?for=edge" target="_blank">
-                {/** Biome-ignore lint/performance/noImgElement: Want to use img */}
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Microsoft_Edge_logo_%282019%29.png"
-                  className="aspect-square w-6"
-                  alt="Edge"
-                />
+                <BrowserIcon name="edge" />
               </Link>
             </Button>
 
@@ -64,12 +66,7 @@ function BrowserExtensionPlatformPage() {
               asChild
             >
               <Link href="https://go.evaluate.run/chrome-extension?for=opera" target="_blank">
-                {/** Biome-ignore lint/performance/noImgElement: Want to use img */}
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Opera_2015_icon.svg/180px-Opera_2015_icon.svg.png"
-                  className="aspect-square w-6"
-                  alt="Opera"
-                />
+                <BrowserIcon name="opera" />
               </Link>
             </Button>
 
@@ -81,12 +78,7 @@ function BrowserExtensionPlatformPage() {
               asChild
             >
               <Link href="https://go.evaluate.run/chrome-extension?for=brave" target="_blank">
-                {/** Biome-ignore lint/performance/noImgElement: Want to use img */}
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Brave_lion_icon.svg"
-                  className="aspect-square w-6"
-                  alt="Brave"
-                />
+                <BrowserIcon name="brave" />
               </Link>
             </Button>
           </div>
@@ -95,12 +87,7 @@ function BrowserExtensionPlatformPage() {
         <div>
           <Button variant="secondary" className="flex items-center gap-2 rounded-full" asChild>
             <Link href="https://go.evaluate.run/firefox-extension" target="_blank">
-              {/** Biome-ignore lint/performance/noImgElement: Want to use img */}
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/800px-Firefox_logo%2C_2019.svg.png"
-                className="aspect-square w-6"
-                alt="Firefox"
-              />
+              <BrowserIcon name="firefox" />
               <span>
                 <Say>
                   Evaluate for <span className="font-bold">Firefox</span>
@@ -117,100 +104,5 @@ function BrowserExtensionPlatformPage() {
     </div>
   );
 }
-
-/*
-export default function BrowserExtensionPlatformContent() {
-  return (
-    <PageWrapper>
-      <div className="text-center pt-24 space-y-6">
-        <h1 className="text-3xl md:text-5xl font-bold tracking-tight">
-          The <span className="text-primary">Evaluate</span> Browser Extension
-        </h1>
-        <p className="mx-auto text-sm md:text-base text-balance max-w-5xl">
-          When you stumble upon code snippets while browsing the web, wouldn't
-          it be great to execute them instantly? Look no further—the Evaluate
-          extension is your solution, with its over 70 supported languages and
-          quick code execution capabilities.
-        </p>
-      </div>
-
-      <div className="flex items-center justify-center gap-2">
-        <Button
-          variant="secondary"
-          className="flex items-center rounded-full gap-2"
-          asChild
-        >
-          <Link href="https://go.evaluate.run/chrome-extension" target="_blank">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/1024px-Google_Chrome_icon_%28February_2022%29.svg.png"
-              className="w-6 aspect-square"
-              alt="Chrome Logo"
-            />
-            <span>
-              Evaluate for <span className="font-bold">Chrome</span>
-            </span>
-          </Link>
-        </Button>
-
-        <Button
-          size="icon"
-          variant="secondary"
-          className="flex items-center rounded-full gap-3"
-          asChild
-        >
-          <Link
-            href="https://go.evaluate.run/chrome-extension?for=edge"
-            target="_blank"
-          >
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Microsoft_Edge_logo_%282019%29.png"
-              className="w-6 aspect-square"
-              alt="Edge Logo"
-            />
-          </Link>
-        </Button>
-
-        <Button
-          size="icon"
-          variant="secondary"
-          className="flex items-center rounded-full gap-3"
-          asChild
-        >
-          <Link
-            href="https://go.evaluate.run/chrome-extension?for=opera"
-            target="_blank"
-          >
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Opera_2015_icon.svg/180px-Opera_2015_icon.svg.png"
-              className="w-6 aspect-square"
-              alt="Opera Logo"
-            />
-          </Link>
-        </Button>
-
-        <Button
-          size="icon"
-          variant="secondary"
-          className="flex items-center rounded-full gap-3"
-          asChild
-        >
-          <Link
-            href="https://go.evaluate.run/chrome-extension?for=brave"
-            target="_blank"
-          >
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Brave_lion_icon.svg"
-              className="w-6 aspect-square"
-              alt="Brave Logo"
-            />
-          </Link>
-        </Button>
-      </div>
-
-      <ImageCarousel />
-    </PageWrapper>
-  );
-}
-*/
 
 export default withSay(BrowserExtensionPlatformPage, localeOf);

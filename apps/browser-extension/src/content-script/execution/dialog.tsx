@@ -5,10 +5,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@evaluate/components/dialog';
+import { Logo } from '@evaluate/components/logo';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@evaluate/components/tabs';
 import type { ExecuteResult, Runtime } from 'piston.ts';
-import browser from 'webextension-polyfill';
-import { say } from '#/i18n.ts';
 import { ResultDialog } from './result';
 
 export function ExecutionDialog({
@@ -32,12 +31,7 @@ export function ExecutionDialog({
     <Dialog open={open} onOpenChange={onClose}>
       <DialogBody portalProps={{ container: portal }} className="border-2">
         <DialogHeader className="flex-row">
-          <img
-            src={browser.runtime.getURL('images/icon.png')}
-            alt={say`Evaluate logo`}
-            width={36}
-            height={36}
-          />
+          <Logo className="size-9 text-primary" />
           <DialogTitle className="text-primary" asChild>
             <a
               target="_blank"

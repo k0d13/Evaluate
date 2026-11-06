@@ -3,10 +3,11 @@ import { Editor } from '#/features/editor/index.tsx';
 import { Explorer } from '#/features/explorer/index.tsx';
 import { ExplorerProvider } from '#/features/explorer/use.tsx';
 import { EditorWrapper } from '#/features/playground/index.tsx';
+import { breadcrumbs, JsonLd } from '#/features/seo/json-ld.tsx';
 import { Terminal } from '#/features/terminal/index.tsx';
 import { TerminalProvider } from '#/features/terminal/use.tsx';
 import { localeOf, withSay } from '#/i18n.ts';
-import { generateBaseMetadata } from '#/lib/metadata.ts';
+import { generateBaseMetadata, localisedPath } from '#/lib/metadata.ts';
 import piston from '#/services/piston.ts';
 
 export async function generateStaticParams() {
@@ -21,20 +22,33 @@ export async function generateMetadata({
   const runtime = await piston.runtimes.get(decodeURIComponent(playground));
   if (!runtime) notFound();
 
-  return generateBaseMetadata(locale, `/playgrounds/${playground}`, (say) => ({
-    title: say`${runtime.name} Online Playground on Evaluate`,
-    description: say`Run ${runtime.name} and more code snippets online in your browser with Evaluate's code playground.`,
-    keywords: [runtime.name, ...runtime.aliases, ...runtime.tags].map((k) => k.toLowerCase()),
-  }));
+  return generateBaseMetadata(
+    locale,
+    `/playgrounds/${playground}`,
+    (say) => ({
+      title: say`${runtime.name} Online Playground on Evaluate`,
+      description: say`Run ${runtime.name} and more code snippets online in your browser with Evaluate's code playground.`,
+      keywords: [runtime.name, ...runtime.aliases, ...runtime.tags].map((k) => k.toLowerCase()),
+    }),
+    { defaultImage: false },
+  );
 }
 
 async function EditorPage({ params }: PageProps<'/[locale]/playgrounds/[playground]'>) {
-  const { playground } = await params;
+  const { locale, playground } = await params;
   const runtime = await piston.runtimes.get(decodeURIComponent(playground));
   if (!runtime) notFound();
+  const url = (path: `/${string}`) =>
+    new URL(localisedPath(locale, path), process.env.WEBSITE_URL!).href;
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbs([
+          { name: 'Evaluate', url: url('/playgrounds') },
+          { name: runtime.name, url: url(`/playgrounds/${playground}`) },
+        ])}
+      />
       <style>{`
         body{overflow-y:hidden!important;}
         body[data-scroll-locked]{margin-right:0px!important;}

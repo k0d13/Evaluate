@@ -11,7 +11,8 @@
     "check": "tsc --noEmit",
     "check:env": "varlock load",
     "dev": "varlock run -- next dev --turbo",
-    "extract": "saykit extract",
+    "generate:assets": "node scripts/generate-brand-assets.ts",
+    "generate:strings": "saykit extract",
     "prebuild": "saykit compile",
     "precheck": "saykit compile",
     "predev": "saykit compile",
@@ -66,6 +67,7 @@
     "@types/file-saver": "^2.0.7",
     "@types/react": "^19.3.0",
     "babel-plugin-saykit": "^0.12.0",
+    "sharp": "^0.34.4",
     "tailwindcss": "^4.3.4",
     "varlock": "^1.24.0"
   }

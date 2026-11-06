@@ -1,11 +1,11 @@
 'use client';
 
 import { Button } from '@evaluate/components/button';
+import { Logo } from '@evaluate/components/logo';
 import { Sheet, SheetBody, SheetTrigger } from '@evaluate/components/sheet';
 import { Say } from '@saykit/react';
 import { cn } from 'cn';
 import { MenuIcon } from 'lucide-react';
-import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import type React from 'react';
 import { Children, useCallback, useState } from 'react';
@@ -32,13 +32,7 @@ export function Header() {
     <header className={cn('h-14 w-full px-4', !isFullWidth && 'container')}>
       <Nav open={open} setOpen={setOpen}>
         <LocalisedLink href="/" className="flex items-center justify-center gap-1">
-          <Image
-            src="/images/icon.png"
-            alt="Evaluate Logo"
-            width={32}
-            height={32}
-            className="inline"
-          />
+          <Logo className="size-8 text-primary" />
           <span className="text-xl font-bold text-primary">Evaluate</span>
         </LocalisedLink>
 
@@ -49,12 +43,9 @@ export function Header() {
             </LocalisedLink>
           </Button>
 
-          <Button variant="ghost" onClick={closeByLink} className="relative" asChild>
+          <Button variant="ghost" onClick={closeByLink} asChild>
             <LocalisedLink href="/products/browser-extension">
               <Say>Browser Extension</Say>
-              <span className="absolute top-0 left-[5.8rem] text-xs text-primary">
-                <Say>new</Say>
-              </span>
             </LocalisedLink>
           </Button>
 

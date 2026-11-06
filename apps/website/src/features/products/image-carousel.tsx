@@ -9,6 +9,8 @@ import {
 } from '@evaluate/components/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import Image from 'next/image';
+import screenshot1 from './browser-extension-1.png';
+import screenshot2 from './browser-extension-2.png';
 
 export function ImageCarousel() {
   return (
@@ -22,19 +24,15 @@ export function ImageCarousel() {
           <CarouselItem className="flex items-center justify-center">
             <Image
               alt="Evaluate Browser Extension Screenshot 1"
-              src="/images/browser-extension-screenshot-1.png?v=2"
+              src={screenshot1}
               className="rounded-xl border"
-              width={640}
-              height={400}
             />
           </CarouselItem>
           <CarouselItem className="flex items-center justify-center">
             <Image
               alt="Evaluate Browser Extension Screenshot 2"
-              src="/images/browser-extension-screenshot-2.png?v=2"
+              src={screenshot2}
               className="rounded-xl border"
-              width={640}
-              height={400}
             />
           </CarouselItem>
         </CarouselContent>

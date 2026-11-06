@@ -19,6 +19,6 @@ It includes:
 - A browser extension that can detect and execute code on any webpage
 - A Discord bot that executes code through slash commands in chat
 
-Evaluate is designed to be lightweight, accessible, and instantly useful — no setup, just run code.
+Evaluate is designed to be lightweight, accessible, and instantly useful, no setup, just run code.
 
 ---

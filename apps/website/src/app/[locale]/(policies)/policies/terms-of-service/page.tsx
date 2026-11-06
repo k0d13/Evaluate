@@ -1,4 +1,15 @@
 import { format } from 'date-fns';
+import { generateBaseMetadata } from '#/lib/metadata.ts';
+
+export async function generateMetadata({
+  params,
+}: PageProps<'/[locale]/policies/terms-of-service'>) {
+  const { locale } = await params;
+  return generateBaseMetadata(locale, '/policies/terms-of-service', (say) => ({
+    title: say`Terms of Service | Evaluate`,
+    description: say`The terms that apply when you use the Evaluate website, browser extension and Discord bot.`,
+  }));
+}
 
 export default function TermsOfServicePage() {
   const updatedAt = new Date('2025-02-17');

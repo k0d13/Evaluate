@@ -7,10 +7,6 @@
     "message": "Your code execution exceeded the allotted time and was terminated. Consider optimising it for better performance.",
     "x-saykit-references": ["src/content-script/execution/result.tsx:23"]
   },
-  "6C9p6z": {
-    "message": "Evaluate logo",
-    "x-saykit-references": ["src/content-script/execution/dialog.tsx:37"]
-  },
   "6erVq8": {
     "message": "Could not determine runtime",
     "x-saykit-references": ["src/content-script/execution/index.tsx:22"]
@@ -32,16 +28,13 @@
     "x-saykit-references": ["src/content-script/execution/index.tsx:25"]
   },
   "extensionDescription": {
-    "message": "Execute any code snippet on any website with Evaluate.",
-    "description": "The extension's one-line description in the browser's extension store."
+    "message": "Execute any code snippet on any website with Evaluate."
   },
   "extensionName": {
-    "message": "Evaluate - Run Code Anytime, Anywhere",
-    "description": "The extension's name, shown in the browser's extension store and toolbar."
+    "message": "Evaluate - Run Code Anytime, Anywhere"
   },
   "extensionShortName": {
-    "message": "Evaluate",
-    "description": "A short version of the extension name, shown where space is limited."
+    "message": "Evaluate"
   },
   "gh06VD": {
     "message": "Output",

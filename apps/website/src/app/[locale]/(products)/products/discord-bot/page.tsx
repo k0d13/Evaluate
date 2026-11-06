@@ -2,6 +2,15 @@ import { Button } from '@evaluate/components/button';
 import { Say } from '@saykit/react';
 import Link from 'next/link';
 import { localeOf, withSay } from '#/i18n.ts';
+import { generateBaseMetadata } from '#/lib/metadata.ts';
+
+export async function generateMetadata({ params }: PageProps<'/[locale]/products/discord-bot'>) {
+  const { locale } = await params;
+  return generateBaseMetadata(locale, '/products/discord-bot', (say) => ({
+    title: say`Discord Bot | Evaluate`,
+    description: say`Run code snippets in over 70 programming languages directly from Discord with the Evaluate bot.`,
+  }));
+}
 
 function BrowserExtensionPlatformContent() {
   return (

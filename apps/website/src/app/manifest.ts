@@ -19,9 +19,14 @@ export default async function Manifest(): Promise<MetadataRoute.Manifest> {
     background_color: '#ffffff',
     scope: '/',
     start_url: '/',
+    id: '/',
+    display: 'standalone',
+    categories: ['developer tools', 'productivity', 'utilities'],
     icons: [
-      { src: '/images/icon/192.png', sizes: '192x192', type: 'image/png' },
-      { src: '/images/icon/512.png', sizes: '512x512', type: 'image/png' },
+      { src: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { src: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+      { src: '/icon-maskable.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+      { src: '/icon.svg', sizes: 'any', type: 'image/svg+xml' },
     ],
     shortcuts,
   };
